@@ -1,0 +1,26 @@
+rootProject.name = 'thecarbucks'
+include ':react-native-video'
+project(':react-native-video').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-video/android')
+include ':@react-native-community_art'
+project(':@react-native-community_art').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-community/art/android')
+include ':tipsi-stripe'
+project(':tipsi-stripe').projectDir = new File(rootProject.projectDir, '../node_modules/tipsi-stripe/android')
+include ':@react-native-async-storage_async-storage'
+project(':@react-native-async-storage_async-storage').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-async-storage/async-storage/android')
+include ':react-native-image-picker'
+project(':react-native-image-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-image-picker/android')
+include ':react-native-file-picker'
+project(':react-native-file-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-file-picker/android')
+include ':tipsi-stripe'
+project(':tipsi-stripe').projectDir = new File(rootProject.projectDir, '../node_modules/tipsi-stripe/android')
+
+include ':react-native-audio-recorder-player'
+project(':react-native-audio-recorder-player').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-audio-recorder-player/android')
+include ':react-native-cardview'
+project(':react-native-cardview').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-cardview/android')
+include ':react-native-cardview'
+project(':react-native-cardview').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-cardview/android')
+include ':react-native-linear-gradient'
+project(':react-native-linear-gradient').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-linear-gradient/android')
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
+include ':app'
