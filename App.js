@@ -11,6 +11,8 @@ import {primaryDark} from './source/common/constants/colors';
 import {NavigationContainer} from '@react-navigation/native';
 import {PersistGate} from 'redux-persist/integration/react';
 import {REGION, AWS_ACCESS_KEY, AWS_SECRET_KEY, STRIPE_KEY} from '@env';
+import Components from './Components';
+import MakingComponents from './MakingComponents';
 
 Text.defaultProps = Text.defaultProps || {};
 
@@ -46,7 +48,9 @@ const App = () => {
         <NavigationContainer>
           <StatusBar backgroundColor={primaryDark} />
           <MenuProvider>
-            <AppNavigation />
+            {/* <AppNavigation /> */}
+            {/* <Components /> */}
+            <MakingComponents />
           </MenuProvider>
         </NavigationContainer>
       </PersistGate>
