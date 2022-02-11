@@ -48,9 +48,9 @@ const App = () => {
         <NavigationContainer>
           <StatusBar backgroundColor={primaryDark} />
           <MenuProvider>
-            {/* <AppNavigation /> */}
+            <AppNavigation />
             {/* <Components /> */}
-            <MakingComponents />
+            {/* <MakingComponents /> */}
           </MenuProvider>
         </NavigationContainer>
       </PersistGate>

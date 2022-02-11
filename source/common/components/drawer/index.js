@@ -34,6 +34,7 @@ import AboutGrd from '../../../assets/svgs/aboutGrd.svg';
 import LogOutGrd from '../../../assets/svgs/logOutGrd.svg';
 import LogOutWhite from '../../../assets/svgs/logoutWhite.svg';
 import HomeGrd from '../../../assets/svgs/homeActive.svg';
+import UsersIcon from '../../../assets/svgs/users.svg';
 import Tab from './tab';
 import LinearGradient from 'react-native-linear-gradient';
 import {useNavigation} from '@react-navigation/core';
@@ -119,6 +120,12 @@ export default function Drawer() {
       activeIcon: JobManagmentWhite,
       text: t('jobManagement'),
       route: 'JobManagement',
+    },
+    {
+      icon: UsersIcon,
+      activeIcon: RatingWhite,
+      text: t('invite screen'),
+      route: 'invitescreen',
     },
     {
       icon: RatingGrd,

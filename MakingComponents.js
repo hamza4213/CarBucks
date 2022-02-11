@@ -4,6 +4,7 @@ import SmallImage from './source/common/components/ImagesComponents/SmallImage';
 import LargeImage from './source/common/components/ImagesComponents/LargeImage';
 import SmallImageForFlatlist from './source/common/components/ImagesComponents/SmallImageForFlatlist';
 import WorkShopDetails from './source/common/components/WorkshopDetailsComponent.js/WorkShopDetails';
+import AnalyticsComponent from './source/common/components/AnalyticsComponent/AnalyticsComponent';
 
 const MakingComponents = () => {
   return (
@@ -12,6 +13,7 @@ const MakingComponents = () => {
       <LargeImage />
       <SmallImageForFlatlist />
       <WorkShopDetails />
+      <AnalyticsComponent />
     </ScrollView>
   );
 };
