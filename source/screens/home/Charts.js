@@ -10,18 +10,21 @@ import {
   PieChart,
   ProgressChart,
 } from 'react-native-chart-kit';
-import {darKGrayBg, primaryLight} from '../../common/constants/colors';
+import {darKGrayBg, primaryLight, text} from '../../common/constants/colors';
 import styles from './chartStyles';
 
 const screenWidth = Dimensions.get('window').width;
 const chartConfig = {
-  backgroundGradientFrom: 'white',
-  backgroundGradientFromOpacity: 0,
-  backgroundGradientTo: 'white',
-  backgroundGradientToOpacity: 0.5,
-  color: (opacity = 1) => `rgba(163, 0, 0, ${opacity})`,
-  strokeWidth: 2,
-  barPercentage: 0.5,
+  backgroundColor: '#fff',
+  backgroundGradientFrom: '#fff',
+  backgroundGradientFromOpacity: 1,
+  backgroundGradientTo: '#fff',
+  backgroundGradientToOpacity: 1,
+  color: (opacity = 1) => `rgba(250, 0, 0, ${opacity})`,
+  labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+  decimalPlaces: 2, // optional, defaults to 2dp
+  // strokeWidth: 2,
+  // barPercentage: 10.5,
   useShadowColorFromDataset: false, // optional
 };
 
@@ -35,10 +38,10 @@ const data = {
 };
 
 const earningsData = {
-  labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  labels: ['0', '5', '10', '15', '20', '25', '30'],
   datasets: [
     {
-      data: [14, 20, 45, 28, 37, 21],
+      data: [0, 100, 200, 300, 400, 500],
     },
   ],
 };
@@ -63,59 +66,16 @@ export default function Charts() {
   return (
     <View style={styles.container}>
       {/* My Earnings */}
-      <CardView
-        cardElevation={2}
-        cornerRadius={15}
-        cardMaxElevation={2}
-        style={styles.myEarningsContainer}>
-        <Text style={[styles.title, styles.title3]}>{t('myEarnings')}</Text>
-        <LineChart
-          bezier
-          height={200}
-          yAxisLabel="$"
-          data={earningsData}
-          width={screenWidth - 30}
-          verticalLabelRotation={30}
-          chartConfig={chartConfig}
-        />
-      </CardView>
 
-      {/* Friends Invites */}
-      <View style={styles.friendsInviteContainer}>
-        <CardView
-          cardElevation={2}
-          cardMaxElevation={2}
-          cornerRadius={15}
-          style={styles.friendsInviteCard}>
-          <Text style={styles.title}>{t('friendsInvited')}</Text>
-          <ProgressChart
-            radius={40}
-            data={[0.6]}
-            height={100}
-            strokeWidth={12}
-            hideLegend={true}
-            width={screenWidth / 1.8}
-            chartConfig={chartConfig}
-          />
-          <Text style={[styles.title, styles.title2]}>12 Total Invites</Text>
-        </CardView>
-        <CardView
-          cardElevation={2}
-          cardMaxElevation={2}
-          cornerRadius={15}
-          style={styles.friendsInviteCard}>
-          <Text style={styles.title}>{t('invitesEarnings')}</Text>
-          <BarChart
-            data={data}
-            height={120}
-            yAxisLabel=""
-            hideLegend={true}
-            width={screenWidth / 2}
-            chartConfig={chartConfig}
-            verticalLabelRotation={0}
-          />
-        </CardView>
-      </View>
+      <LineChart
+        bezier
+        height={200}
+        yAxisLabel="$"
+        data={earningsData}
+        width={screenWidth - 30}
+        // verticalLabelRotation={30}
+        chartConfig={chartConfig}
+      />
     </View>
   );
 }

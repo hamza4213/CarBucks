@@ -7,7 +7,7 @@ import {
 } from '../../../common/constants/colors';
 const InviteStatus = props => {
   const {item} = props;
-  console.log(item);
+  // console.log(item);
   return (
     <View
       style={{
