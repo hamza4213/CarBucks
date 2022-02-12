@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, ScrollView} from 'react-native';
+import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
 import Charts from '../home/Charts';
 import Header from '../../common/components/header';
 import styles from './styles';
@@ -8,6 +8,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {primaryDark, primaryLight, text} from '../../common/constants/colors';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 import AnalyticsComponent from '../../common/components/AnalyticsComponent/AnalyticsComponent';
+import AnalyticsComponentForPRoducts from '../../common/components/AnalyticsComponent/AnalyticsComponentForPRoducts';
 const Data = [
   {earnings: '1200', type: 'Total Wallet Balance'},
   {earnings: '1300', type: 'Total Earnings'},
@@ -15,6 +16,43 @@ const Data = [
   {earnings: '2000', type: 'Total Wallet Balance'},
 ];
 export default function Analytics({navigation}) {
+  const data = [
+    {
+      img: require('../../assets/pngs/girlProfile.png'),
+      company: 'Comapny Name',
+      description: 'Lorem Ipsum is simply dummy text of the printing.',
+      price: '50',
+      date: new Date(),
+    },
+    {
+      img: require('../../assets/pngs/girlProfile.png'),
+      company: 'Comapny Name',
+      description: 'Lorem Ipsum is simply dummy text of the printing.',
+      price: '50',
+      date: new Date(),
+    },
+    {
+      img: require('../../assets/pngs/girlProfile.png'),
+      company: 'Comapny Name',
+      description: 'Lorem Ipsum is simply dummy text of the printing.',
+      price: '50',
+      date: new Date(),
+    },
+    {
+      img: require('../../assets/pngs/girlProfile.png'),
+      company: 'Comapny Name',
+      description: 'Lorem Ipsum is simply dummy text of the printing.',
+      price: '50',
+      date: new Date(),
+    },
+    {
+      img: require('../../assets/pngs/girlProfile.png'),
+      company: 'Comapny Name',
+      description: 'Lorem Ipsum is simply dummy text of the printing.',
+      price: '50',
+      date: new Date(),
+    },
+  ];
   return (
     // <ScrollView>
     //   <Header title="Analytics" small />
@@ -31,26 +69,64 @@ export default function Analytics({navigation}) {
         <Text style={styles.text}>Analytics</Text>
       </View>
       <View style={styles.secondContainer}>
-        <View style={{height: 15}}></View>
-        <Text>My Earnings</Text>
-        {/* <View style={{height: 15}}></View> */}
-        <View
-          style={{
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            justifyContent: 'space-between',
-          }}>
-          {Data.map((item, index) => {
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={{height: 15}}></View>
+          <Text style={{fontWeight: 'bold'}}>My Earnings</Text>
+
+          {/* <View style={{height: 15}}></View> */}
+          <View
+            style={{
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              justifyContent: 'space-between',
+            }}>
+            {Data.map((item, index) => {
+              return (
+                <>
+                  <AnalyticsComponent item={item} index={index} />
+                </>
+              );
+            })}
+          </View>
+          <View style={{height: 15}}></View>
+          <View
+            style={{
+              width: '90%',
+              justifyContent: 'space-between',
+              flexDirection: 'row',
+            }}>
+            <Text style={{fontWeight: 'bold'}}>Total Earnings</Text>
+            <Text style={{fontWeight: 'bold'}}>January</Text>
+          </View>
+          <Charts />
+          <View style={{height: 15}}></View>
+          <View
+            style={{
+              width: '90%',
+              height: 50,
+              // backgroundColor: '#000',
+              alignSelf: 'center',
+              justifyContent: 'space-between',
+              flexDirection: 'row',
+            }}>
+            <Text style={{fontWeight: 'bold'}}>Buy Products</Text>
+            <TouchableOpacity>
+              <Text
+                style={{color: primaryLight, fontSize: 17, fontWeight: 'bold'}}>
+                View All
+              </Text>
+            </TouchableOpacity>
+          </View>
+          {data.map((item, index) => {
             return (
               <>
-                <AnalyticsComponent item={item} index={index} />
+                <View style={{height: 15}}></View>
+                <AnalyticsComponentForPRoducts item={item} />
               </>
             );
           })}
-        </View>
-        <View style={{height: 15}}></View>
-        <Text>Total Earnings</Text>
-        <Charts />
+          <View style={{height: 15, marginTop: 40}}></View>
+        </ScrollView>
       </View>
     </LinearGradient>
   );

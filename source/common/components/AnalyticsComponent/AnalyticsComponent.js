@@ -3,6 +3,7 @@ import React from 'react';
 import colors, {
   primaryDark,
   primaryLight,
+  darkOrange,
   text,
 } from '../../../common/constants/colors';
 const AnalyticsComponent = props => {
@@ -36,11 +37,26 @@ const AnalyticsComponent = props => {
             height: 10,
             width: 10,
             borderRadius: 20,
-            backgroundColor: colors.completedGreenLight,
+            backgroundColor:
+              index === 0 ? colors.completedGreenLight : darkOrange,
           }}></View>
-        <Text style={{fontSize: 18, color: colors.completedGreenLight}}>
-          $ {item.earnings}
-        </Text>
+        {index === 0 || index === 1 ? (
+          <Text
+            style={{
+              fontSize: 18,
+              color: index === 0 ? colors.completedGreenLight : darkOrange,
+            }}>
+            $ {item.earnings}
+          </Text>
+        ) : (
+          <Text
+            style={{
+              fontSize: 18,
+              color: index === 0 ? colors.completedGreenLight : darkOrange,
+            }}>
+            {item.earnings}
+          </Text>
+        )}
       </View>
       <Text style={{alignSelf: 'center'}}>Total Wallet Balance</Text>
     </View>
