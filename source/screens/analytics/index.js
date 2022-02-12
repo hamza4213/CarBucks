@@ -71,7 +71,7 @@ export default function Analytics({navigation}) {
       <View style={styles.secondContainer}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={{height: 15}}></View>
-          <Text style={{fontWeight: 'bold'}}>My Earnings</Text>
+          <Text style={{fontWeight: 'bold', marginLeft: 20}}>My Earnings</Text>
 
           {/* <View style={{height: 15}}></View> */}
           <View
@@ -79,6 +79,8 @@ export default function Analytics({navigation}) {
               flexDirection: 'row',
               flexWrap: 'wrap',
               justifyContent: 'space-between',
+              width: '90%',
+              alignSelf: 'center',
             }}>
             {Data.map((item, index) => {
               return (
@@ -94,6 +96,7 @@ export default function Analytics({navigation}) {
               width: '90%',
               justifyContent: 'space-between',
               flexDirection: 'row',
+              alignSelf: 'center',
             }}>
             <Text style={{fontWeight: 'bold'}}>Total Earnings</Text>
             <Text style={{fontWeight: 'bold'}}>January</Text>

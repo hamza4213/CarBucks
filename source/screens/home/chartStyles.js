@@ -6,6 +6,7 @@ const {height} = Dimensions.get('window');
 export default StyleSheet.create({
   container: {
     marginTop: 15,
+    alignSelf: 'center',
   },
   myEarningsContainer: {
     paddingVertical: 10,

@@ -35,6 +35,7 @@ import LogOutGrd from '../../../assets/svgs/logOutGrd.svg';
 import LogOutWhite from '../../../assets/svgs/logoutWhite.svg';
 import HomeGrd from '../../../assets/svgs/homeActive.svg';
 import UsersIcon from '../../../assets/svgs/users.svg';
+import AnalyticsIcon from '../../../assets/svgs/analyticsicon.svg';
 import Tab from './tab';
 import LinearGradient from 'react-native-linear-gradient';
 import {useNavigation} from '@react-navigation/core';
@@ -91,8 +92,8 @@ export default function Drawer() {
       route: 'Profile',
     },
     {
-      icon: ProfileGrd,
-      activeIcon: ProfileWhite,
+      icon: AnalyticsIcon,
+      activeIcon: AnalyticsIcon,
       text: t('analytics'),
       route: 'Analytics',
     },
