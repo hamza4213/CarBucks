@@ -8,14 +8,16 @@ import colors, {
   text,
 } from '../../../common/constants/colors';
 import LinearGradientWrapper from '../../../../source/common/components/LinearGradientWrapper/index';
+import {useNavigation} from '@react-navigation/native';
 const InsuranceComponent = props => {
+  const navigation = useNavigation();
   return (
     <View
       style={{
-        width: '90%',
+        width: '100%',
         height: 120,
         backgroundColor: '#fff',
-        marginTop: 20,
+        // marginTop: 20,
         // alignItems: 'center',
         alignSelf: 'center',
         borderRadius: 10,
@@ -57,6 +59,7 @@ const InsuranceComponent = props => {
           Lorem Ipsum is simply dummy text of the printing.
         </Text>
         <View style={{height: 10}}></View>
+
         <LinearGradientWrapper
           style={{
             width: '50%',
@@ -69,6 +72,7 @@ const InsuranceComponent = props => {
           }}
           right={true}>
           <TouchableOpacity
+            onPress={() => navigation.navigate('InsuranceComprehensive')}
             style={{
               height: '100%',
               width: '100%',
@@ -76,7 +80,7 @@ const InsuranceComponent = props => {
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-            <Text style={{color: 'white'}}>Explore Now</Text>
+            <Text style={{color: 'white', fontSize: 12}}>Explore Now</Text>
           </TouchableOpacity>
         </LinearGradientWrapper>
       </View>

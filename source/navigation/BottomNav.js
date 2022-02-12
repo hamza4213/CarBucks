@@ -73,6 +73,7 @@ import Disputes from '../screens/disputes';
 import DisputesDetails from '../screens/disputeDetails';
 import Analytics from '../screens/analytics';
 import InviteScreen from '../screens/InviteScreen/index';
+import InsuranceComprehensive from '../screens/InsuranceComprehensive/InsuranceComprehensive';
 
 const HomeStack = createStackNavigator();
 const ChatStack = createStackNavigator();
@@ -135,6 +136,10 @@ const HomeNav = () => (
       component={TermsAndConditions}
     />
     <HomeStack.Screen name="invitescreen" component={InviteScreen} />
+    <HomeStack.Screen
+      name="InsuranceComprehensive"
+      component={InsuranceComprehensive}
+    />
     <HomeStack.Screen name="Ratings" component={Ratings} />
   </HomeStack.Navigator>
 );
