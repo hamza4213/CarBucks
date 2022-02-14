@@ -42,7 +42,6 @@ const BuyInsuranceScreen = ({navigation}) => {
           row={true}
           Data={CarBrand}
         />
-        <View style={{height: 25, marginTop: 20}}></View>
         <LinearGradientWrapper
           style={{
             width: '90%',
@@ -65,6 +64,7 @@ const BuyInsuranceScreen = ({navigation}) => {
             </Text>
           </TouchableOpacity>
         </LinearGradientWrapper>
+        <View style={{height: 25, marginTop: 20}}></View>
       </ScrollView>
     </View>
   );
