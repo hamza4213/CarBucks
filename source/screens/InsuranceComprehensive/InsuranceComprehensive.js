@@ -10,6 +10,8 @@ import React, {useState} from 'react';
 import Header from '../../common/components/header';
 import LinearGradientWrapper from '../../common/components/LinearGradientWrapper';
 import {primaryDark, primaryLight} from '../../common/constants/colors';
+import InsuranceOpendownComponent from '../../common/components/InsuranceComponent/InsuranceOpendownComponent';
+import InsuranceBuyButton from '../../common/components/InsuranceComponent/InsuranceBuyButton';
 
 const InsuranceComprehensive = props => {
   const [activeTab, setActiveTab] = useState(0);
@@ -82,8 +84,16 @@ const InsuranceComprehensive = props => {
           }}>
           Tag Aig Insurances
         </Text>
-        <View style={{height: 20, marginTop: 30}}></View>
+        <View style={{height: 15}}></View>
+
+        <InsuranceOpendownComponent />
+        <View style={{height: 15}}></View>
+        <InsuranceOpendownComponent />
+        <View style={{height: 15}}></View>
+
+        <View style={{height: 80, marginTop: 30}}></View>
       </ScrollView>
+      <InsuranceBuyButton />
     </View>
   );
 };

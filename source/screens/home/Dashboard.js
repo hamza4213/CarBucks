@@ -170,7 +170,7 @@ export default function Home() {
 
         <View style={styles.productsContainer}>
           <LatoText padding={10} />
-          {activeTab?.title === 'Insurance' ? (
+          {activeTab?.description === 'insurance' ? (
             <InsuranceComponent />
           ) : activeTab?.type === 'product' ? (
             <ProductsCatagories data={filteredData} />
