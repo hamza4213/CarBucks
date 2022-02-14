@@ -12,6 +12,7 @@ import LinearGradientWrapper from '../../common/components/LinearGradientWrapper
 import {primaryDark, primaryLight} from '../../common/constants/colors';
 import InsuranceOpendownComponent from '../../common/components/InsuranceComponent/InsuranceOpendownComponent';
 import InsuranceBuyButton from '../../common/components/InsuranceComponent/InsuranceBuyButton';
+import InsuranceDescriptionComponent from '../../common/components/InsuranceComponent/InsuranceDescriptionComponent';
 
 const InsuranceComprehensive = ({navigation}) => {
   const [activeTab, setActiveTab] = useState(0);
@@ -66,6 +67,7 @@ const InsuranceComprehensive = ({navigation}) => {
           </TouchableOpacity>
         </LinearGradientWrapper>
         <View style={{height: '10%'}}></View>
+
         <Image
           source={require('../../assets/pngs/buyCarImage.jpg')}
           style={{
@@ -85,15 +87,24 @@ const InsuranceComprehensive = ({navigation}) => {
           Tag Aig Insurances
         </Text>
         <View style={{height: 15}}></View>
-
-        <InsuranceOpendownComponent />
-        <View style={{height: 15}}></View>
-        <InsuranceOpendownComponent />
-        <View style={{height: 15}}></View>
-
+        {activeTab === 0 ? (
+          <>
+            <InsuranceOpendownComponent />
+            <View style={{height: 15}}></View>
+            <InsuranceOpendownComponent />
+            <View style={{height: 15}}></View>
+          </>
+        ) : activeTab === 1 ? (
+          <>
+            <View style={{height: 15}}></View>
+            <InsuranceDescriptionComponent />
+          </>
+        ) : null}
         <View style={{height: 80, marginTop: 30}}></View>
       </ScrollView>
       <InsuranceBuyButton
+        desc={activeTab === 0 ? 'But this policy' : 'Book Now'}
+        payment={activeTab === 0 ? '100' : '50'}
         onPress={() => navigation.navigate('BuyInsuranceScreen')}
       />
     </View>

@@ -11,7 +11,7 @@ const InsuranceBuyButton = props => {
         width: '100%',
         flexDirection: 'row',
         height: 80,
-        // backgroundColor: '#000',
+        // backgroundColor: 'teal',
         justifyContent: 'space-evenly',
         alignItems: 'center',
       }}>
@@ -31,7 +31,7 @@ const InsuranceBuyButton = props => {
             justifyContent: 'space-between',
           }}>
           <Text style={{fontSize: 19, fontWeight: 'bold', color: primaryLight}}>
-            $ 100
+            $ {props.payment}
           </Text>
           <Text style={{color: text, marginTop: 3, fontSize: 17}}>/year</Text>
         </View>
@@ -46,7 +46,7 @@ const InsuranceBuyButton = props => {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <Text style={{fontSize: 17, color: '#fff'}}>Buy this Policy</Text>
+          <Text style={{fontSize: 17, color: '#fff'}}>{props.desc}</Text>
         </TouchableOpacity>
       </LinearGradientWrapper>
     </View>

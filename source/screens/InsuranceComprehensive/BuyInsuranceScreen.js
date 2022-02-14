@@ -9,7 +9,7 @@ import React from 'react';
 import Header from '../../common/components/header';
 import InsuranceTextandDropdownInput from '../../common/components/InsuranceComponent/InsuranceTextandDropdownInput';
 import LinearGradientWrapper from '../../common/components/LinearGradientWrapper/index';
-const BuyInsuranceScreen = () => {
+const BuyInsuranceScreen = ({navigation}) => {
   const CarBrand = ['XLI', 'GLI', 'GMC', 'Grande', 'Rolse Royce'];
   return (
     <View>
@@ -53,6 +53,7 @@ const BuyInsuranceScreen = () => {
             borderRadius: 10,
           }}>
           <TouchableOpacity
+            onPress={() => navigation.navigate('InsuranceDocuments')}
             style={{
               height: '100%',
               width: '100%',
