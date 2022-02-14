@@ -13,7 +13,7 @@ import {primaryDark, primaryLight} from '../../common/constants/colors';
 import InsuranceOpendownComponent from '../../common/components/InsuranceComponent/InsuranceOpendownComponent';
 import InsuranceBuyButton from '../../common/components/InsuranceComponent/InsuranceBuyButton';
 
-const InsuranceComprehensive = props => {
+const InsuranceComprehensive = ({navigation}) => {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
@@ -93,7 +93,9 @@ const InsuranceComprehensive = props => {
 
         <View style={{height: 80, marginTop: 30}}></View>
       </ScrollView>
-      <InsuranceBuyButton />
+      <InsuranceBuyButton
+        onPress={() => navigation.navigate('BuyInsuranceScreen')}
+      />
     </View>
   );
 };

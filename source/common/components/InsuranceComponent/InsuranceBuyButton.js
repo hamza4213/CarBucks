@@ -2,7 +2,7 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import LinearGradientWrapper from '../LinearGradientWrapper';
 import colors, {primaryDark, primaryLight, text} from '../../constants/colors';
-const InsuranceBuyButton = () => {
+const InsuranceBuyButton = props => {
   return (
     <View
       style={{
@@ -39,6 +39,7 @@ const InsuranceBuyButton = () => {
       <LinearGradientWrapper
         style={{width: '50%', height: '70%', borderRadius: 20}}>
         <TouchableOpacity
+          onPress={props.onPress}
           style={{
             width: '100%',
             height: '100%',
