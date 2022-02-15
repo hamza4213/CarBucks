@@ -76,6 +76,7 @@ import InviteScreen from '../screens/InviteScreen/index';
 import InsuranceComprehensive from '../screens/InsuranceComprehensive/InsuranceComprehensive';
 import BuyInsuranceScreen from '../screens/InsuranceComprehensive/BuyInsuranceScreen';
 import InsuranceDocuments from '../screens/InsuranceComprehensive/InsuranceDocuments';
+import ServiceDetailCaetagories from '../screens/serviceDetail/ServiceDetailCaetagories';
 
 const HomeStack = createStackNavigator();
 const ChatStack = createStackNavigator();
@@ -113,6 +114,10 @@ const HomeNav = () => (
     <HomeStack.Screen name="ClientProfile" component={ClientProfile} />
     <HomeStack.Screen name="ClientProfile2" component={ClientProfile2} />
     <HomeStack.Screen name="ServiceDetails" component={ServiceDetails} />
+    <HomeStack.Screen
+      name="ServiceDetailCaetagories"
+      component={ServiceDetailCaetagories}
+    />
     <HomeStack.Screen name="PickADate" component={PickADate} />
     <HomeStack.Screen name="Wallet" component={Wallet} />
     <HomeStack.Screen name="TransactionDetail" component={TransactionDetail} />

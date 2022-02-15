@@ -5,12 +5,13 @@ const SmallImage = () => {
   return (
     <View
       style={{
-        width: '35%',
+        width: '30%',
         // backgroundColor: 'teal',
         alignItems: 'center',
+        marginTop: 10,
       }}>
       <CarWash />
-      <Text>Car Wash Service</Text>
+      <Text style={{fontSize: 12}}>Car Wash Service</Text>
     </View>
   );
 };

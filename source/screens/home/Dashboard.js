@@ -39,14 +39,15 @@ import RentCar from '../rentCar';
 import ProductsCatagories from './Products';
 import ServicesCatagories from './Services';
 import styles from './style';
-
+import SmallImage from '../../common/components/ImagesComponents/SmallImage';
+import LargeImage from '../../common/components/ImagesComponents/LargeImage';
 const catagories = [
   {title: 'Services', screen: 'ServicesCatagories', available: 60},
   {title: 'Accessories', screen: 'ProductsCatagories', available: 635},
   {title: 'Rent Cars', screen: 'RentCar', available: 420},
   {title: 'Buy Cars', screen: 'BuyCar', available: 1050},
 ];
-
+const caetagoriesIndex = [0, 1, 2, 3, 4, 5];
 export default function Home() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -179,7 +180,83 @@ export default function Home() {
           ) : activeTab?.type === 'product' ? (
             <ProductsCatagories data={filteredData} />
           ) : activeTab?.type === 'service' ? (
-            <ServicesCatagories data={filteredData} />
+            <>
+              <View
+                style={{
+                  width: '100%',
+                  height: 30,
+                  // backgroundColor: '#000',
+                  justifyContent: 'space-between',
+                  flexDirection: 'row',
+                }}>
+                <Text style={{fontWeight: '600'}}>Car Services Catagories</Text>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate('ServiceDetailCaetagories')
+                  }>
+                  <Text style={{fontWeight: '600'}}>View All</Text>
+                </TouchableOpacity>
+              </View>
+              <View
+                style={{
+                  width: '100%',
+                  flexDirection: 'row',
+                  flexWrap: 'wrap',
+                  justifyContent: 'space-evenly',
+                }}>
+                {caetagoriesIndex.map((item, index) => (
+                  <SmallImage />
+                ))}
+              </View>
+              <View style={{height: 15}}></View>
+              <View
+                style={{
+                  width: '100%',
+                  height: 30,
+                  // backgroundColor: '#000',
+                  justifyContent: 'space-between',
+                  flexDirection: 'row',
+                }}>
+                <Text style={{fontWeight: '600'}}>Services Packages</Text>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate('ServiceDetailCaetagories')
+                  }>
+                  <Text style={{fontWeight: '600'}}>View All</Text>
+                </TouchableOpacity>
+              </View>
+              <View
+                style={{
+                  width: '100%',
+                  flexDirection: 'row',
+                  flexWrap: 'wrap',
+                  justifyContent: 'space-evenly',
+                }}>
+                {caetagoriesIndex.map((item, index) => (
+                  <LargeImage />
+                ))}
+              </View>
+              <View style={{height: 15}}></View>
+              <View
+                style={{
+                  width: '100%',
+                  height: 30,
+                  // backgroundColor: '#000',
+                  justifyContent: 'space-between',
+                  flexDirection: 'row',
+                }}>
+                <Text style={{fontWeight: '600'}}>
+                  Workshop for luxury cars
+                </Text>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate('ServiceDetailCaetagories')
+                  }>
+                  <Text style={{fontWeight: '600'}}>View All</Text>
+                </TouchableOpacity>
+              </View>
+              <ServicesCatagories data={filteredData} />
+            </>
           ) : null}
         </View>
       </View>
