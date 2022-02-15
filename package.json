@@ -12,6 +12,7 @@
     "lint": "eslint .",
     "pod": "cd ios && pod install && cd ..",
     "apk": "npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && cd android && ./gradlew assembleDebug && cd ..",
+    "bundle-android": "react-native bundle --entry-file index.js  --platform android --dev false --bundle-output ./android/app/src/main/assets/index.android.bundle --assets-dest ./android/app/src/main/res",
     "clean": "cd android && ./gradlew clean && cd ..",
     "postinstall": "patch-package",
     "releaseWindow": "yarn react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/build/intermediates/res/merged/release/ && del android/app/src/main/res/drawable-* && del android/app/src/main/res/raw/* && cd android && ./gradlew assembleRelease && cd ..",
