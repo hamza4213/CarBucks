@@ -21,6 +21,8 @@ import redBanner from '../../assets/pngs/redBanner.jpg';
 import Menu from '../../assets/svgs/menu.svg';
 import NotificationWhite from '../../assets/svgs/notificationWhite.svg';
 import Button from '../../common/components/button';
+import AccessoryCard from '../../common/components/cards/accessoryCard';
+import AccessoriesComponent from '../../common/components/cards/accessoryCard/AccessoriesComponent';
 import InsuranceComponent from '../../common/components/InsuranceComponent/InsuranceComponent';
 import LatoText from '../../common/components/LatoText';
 import LinearGradientWrapper from '../../common/components/LinearGradientWrapper';
@@ -91,7 +93,7 @@ export default function Home() {
   const onCategoryPress = item => {
     setActiveTab(item);
     console.log('activeTabis', activeTab);
-    // console.log('consoling active tab', activeTab?.type, subCategories[0]);
+    console.log('consoling active tab', activeTab?.type, subCategories[0]);
 
     setFilteredData(subCategories.filter(i => i?.parent === item._id));
   };
@@ -126,7 +128,7 @@ export default function Home() {
         </View>
       </LinearGradient>
 
-      <View style={[styles.contentContainer, {}]}>
+      <View style={[styles.contentContainer]}>
         <SearchInput />
 
         {/* <View style={styles.catagoryContainer}>
@@ -172,6 +174,8 @@ export default function Home() {
           <LatoText padding={10} />
           {activeTab?.description === 'insurance' ? (
             <InsuranceComponent />
+          ) : activeTab?.title === 'Accesories' ? (
+            <AccessoriesComponent />
           ) : activeTab?.type === 'product' ? (
             <ProductsCatagories data={filteredData} />
           ) : activeTab?.type === 'service' ? (
