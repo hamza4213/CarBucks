@@ -1,6 +1,7 @@
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import colors, {primaryDark, text} from '../../../constants/colors';
+import LinearGradientWrapper from '../../LinearGradientWrapper';
 const AccessoriesComponent = () => {
   const Images = [
     require('../../../../assets/pngs/accessoryImg.png'),
@@ -79,6 +80,31 @@ const AccessoriesComponent = () => {
               <Image source={item} style={{height: '80%', width: '80%'}} />
             </View>
           ))}
+        </View>
+        <View
+          style={{
+            width: '40%',
+            height: '60%',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <LinearGradientWrapper
+            style={{
+              height: '100%',
+              width: '70%',
+              alignSelf: 'center',
+              borderRadius: 20,
+            }}>
+            <TouchableOpacity
+              style={{
+                width: '100%',
+                height: '100%',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Text style={{color: '#fff', fontSize: 12}}>Explore Now</Text>
+            </TouchableOpacity>
+          </LinearGradientWrapper>
         </View>
       </View>
     </View>
