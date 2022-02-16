@@ -37,7 +37,7 @@ import EditAddress from '../../assets/svgs/editAddress.svg';
 import ProfileImage from '../../assets/pngs/profileImage.png';
 import mapImage from '../../assets/pngs/map.png';
 import RatingButton from '../../common/components/button/ratingButton';
-
+import LinearGradientWrapper from '../../common/components/LinearGradientWrapper';
 const audioRecorderPlayer = new AudioRecorderPlayer();
 
 export default function BookingForm() {
@@ -140,17 +140,17 @@ export default function BookingForm() {
         <View style={styles.profileDetailsContainer}>
           <View style={styles.entryWrapper}>
             <Text style={styles.service}>Service</Text>
-            <Text style={styles.role}> {params?.title || '-'}</Text>
+            <Text style={styles.role}> params?.title || '-'</Text>
           </View>
           <View style={styles.entryWrapper}>
             <Text style={styles.service}>Machanic</Text>
             <Text style={styles.role}>
-              {params?.vendor?.firstName || '-'} {params?.vendor?.lastName}
+              params?.vendor?.firstName || '-' params?.vendor?.lastName
             </Text>
           </View>
           <View style={styles.entryWrapper}>
             <Text style={styles.service}>Phone</Text>
-            <Text style={styles.role}>{params?.vendor?.phone || '-'}</Text>
+            <Text style={styles.role}>params?.vendor?.phone || '-'</Text>
           </View>
         </View>
         <TouchableOpacity
@@ -188,6 +188,7 @@ export default function BookingForm() {
             <TextInput
               onChangeText={e => setMessage(e)}
               placeholder="Write a message.."
+              placeholderTextColor={'#000'}
               style={styles.detailTitil}
             />
             <View style={styles.notesIconsContiner}>
@@ -210,26 +211,26 @@ export default function BookingForm() {
             </Text>
           )}
         </View>
-
-        <TouchableOpacity
-          style={styles.bookNowButton}
-          onPress={() =>
-            navigation.navigate('Checkout', {
-              paramData: {
-                ...params,
-                name: name,
-                model: model,
-                color: color,
-                shipping_address: {city: address, country: 'Pakistan'},
-                date: date,
-                message: message,
-                qty: 1,
-              },
-              paramType: 'service',
-            })
-          }>
-          <Text style={styles.bookNow}>Submit</Text>
-        </TouchableOpacity>
+        <LinearGradientWrapper style={styles.bookNowButton}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('Checkout', {
+                paramData: {
+                  ...params,
+                  name: name,
+                  model: model,
+                  color: color,
+                  shipping_address: {city: address, country: 'Pakistan'},
+                  date: date,
+                  message: message,
+                  qty: 1,
+                },
+                paramType: 'service',
+              })
+            }>
+            <Text style={styles.bookNow}>Proceed Payment</Text>
+          </TouchableOpacity>
+        </LinearGradientWrapper>
       </View>
       {show && (
         <DateTimePicker
@@ -263,9 +264,9 @@ export default function BookingForm() {
           }}>
           <View style={{flex: 2}}>
             <Text style={styles.name} numberOfLines={1}>
-              {params.vendor?.firstName} {params.vendor?.lastName}{' '}
+              params.vendor?.firstName params.vendor?.lastName
             </Text>
-            <Text style={styles.occupation}>{params?.title || 'Vendor'}</Text>
+            <Text style={styles.occupation}>params?.title || 'Vendor'</Text>
             <RatingButton
               type="gradiant"
               title="Chat"

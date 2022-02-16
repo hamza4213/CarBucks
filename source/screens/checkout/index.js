@@ -106,7 +106,6 @@ export default function Checkout() {
         headers: headersList,
         data,
       };
-     
 
       const response = await axios.request(reqOptions);
       showToast(response?.data?.status);

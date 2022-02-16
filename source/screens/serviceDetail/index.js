@@ -28,6 +28,8 @@ import AvailableCheck from '../../assets/svgs/availableCheck.svg';
 import RatingButton from '../../common/components/button/ratingButton';
 import {capitalizeFirstLetter} from '../../common/utils/strings';
 import {ChatApi} from '../../redux/apis';
+import Video from 'react-native-video';
+
 const chatApi = new ChatApi();
 
 export default function ServiceDetails({}) {
@@ -85,7 +87,6 @@ export default function ServiceDetails({}) {
       const {
         data: {status, result},
       } = res;
-    
 
       navigation.navigate('ChatHistory', {
         screen: 'Chat',
@@ -178,7 +179,7 @@ export default function ServiceDetails({}) {
           }}>
           <View style={{flex: 2}}>
             <Text style={styles.name} numberOfLines={1}>
-              {params?.item?.vendor?.firstName} {params?.item?.vendor?.lastName}{' '}
+              params?.item?.vendor?.firstName params?.item?.vendor?.lastName
             </Text>
             <Text style={styles.occupation}>{params?.item?.title}</Text>
             <RatingButton
@@ -201,6 +202,7 @@ export default function ServiceDetails({}) {
           </View>
         </View>
       </View>
+      <Text>Hello Video</Text>
     </ScrollView>
   );
 }

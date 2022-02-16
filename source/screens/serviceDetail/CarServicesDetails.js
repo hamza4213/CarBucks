@@ -12,7 +12,7 @@ import Map from '../../assets/svgs/Map.svg';
 import ServiceCard from '../../common/components/serviceCard';
 import CardComponent from '../../common/components/ServiceComponents/CardComponent';
 import CardComponentHorizontal from '../../common/components/ServiceComponents/CardComponentHorizontal';
-const CarServicesDetails = () => {
+const CarServicesDetails = ({navigation}) => {
   const caetagories = [0, 1, 2, 3, 4];
   return (
     <View>
@@ -46,7 +46,8 @@ const CarServicesDetails = () => {
             flexDirection: 'row',
           }}>
           <Text style={{fontWeight: 'bold'}}>Popular Car Wash Service</Text>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('PopularCarWashService')}>
             <Text style={{fontWeight: 'bold'}}>View More</Text>
           </TouchableOpacity>
         </View>
