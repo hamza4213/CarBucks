@@ -144,30 +144,33 @@ export default function Home() {
           )}
         </View> */}
 
-        <LinearGradientWrapper style={{marginTop: 20, borderRadius: 20}}>
+        <LinearGradientWrapper
+          style={{
+            marginTop: 20,
+            borderRadius: 20,
+            width: '100%',
+            height: 50,
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 5,
+          }}>
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
             style={{flexGrow: 0}}>
-            <CardView
-              elevation={2}
-              cardElevation={2}
-              cornerRadius={20}
-              style={styles.tabs}>
-              {categories.map(item => (
-                <TouchableOpacity
-                  key={item._id}
-                  onPress={() => onCategoryPress(item)}
-                  style={[styles.tab, activeTab === item && styles.focusedTab]}>
-                  <Text
-                    style={
-                      activeTab === item ? styles.ActiveTabText : styles.tabText
-                    }>
-                    {item.title}
-                  </Text>
-                </TouchableOpacity>
-              ))}
-            </CardView>
+            {categories.map(item => (
+              <TouchableOpacity
+                key={item._id}
+                onPress={() => onCategoryPress(item)}
+                style={[styles.tab, activeTab === item && styles.focusedTab]}>
+                <Text
+                  style={
+                    activeTab === item ? styles.ActiveTabText : styles.tabText
+                  }>
+                  {item.title}
+                </Text>
+              </TouchableOpacity>
+            ))}
           </ScrollView>
         </LinearGradientWrapper>
 

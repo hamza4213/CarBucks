@@ -11,7 +11,7 @@ const InsuranceBuyButton = props => {
         width: '100%',
         flexDirection: 'row',
         height: 80,
-        // backgroundColor: 'teal',
+        backgroundColor: '#fff',
         justifyContent: 'space-evenly',
         alignItems: 'center',
       }}>

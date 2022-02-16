@@ -93,6 +93,10 @@ const InsuranceComprehensive = ({navigation}) => {
             <View style={{height: 15}}></View>
             <InsuranceOpendownComponent />
             <View style={{height: 15}}></View>
+            <InsuranceOpendownComponent />
+            <View style={{height: 15}}></View>
+            <InsuranceOpendownComponent />
+            <View style={{height: 15}}></View>
           </>
         ) : activeTab === 1 ? (
           <>
@@ -100,7 +104,7 @@ const InsuranceComprehensive = ({navigation}) => {
             <InsuranceDescriptionComponent />
           </>
         ) : null}
-        <View style={{height: 80, marginTop: 30}}></View>
+        <View style={{height: 250, marginTop: 30}}></View>
       </ScrollView>
       <InsuranceBuyButton
         desc={activeTab === 0 ? 'But this policy' : 'Book Now'}
