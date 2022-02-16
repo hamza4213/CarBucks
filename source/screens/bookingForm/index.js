@@ -22,7 +22,7 @@ import AudioRecorderPlayer from 'react-native-audio-recorder-player';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import ImagePicker from 'react-native-image-crop-picker';
 import {capitalizeFirstLetter} from '../../common/utils/strings';
-import {primaryDark} from '../../common/constants/colors';
+import {primaryDark, text, primaryLight} from '../../common/constants/colors';
 // icons
 import Car from '../../assets/svgs/car.svg';
 import Files from '../../assets/svgs/files.svg';
@@ -61,6 +61,7 @@ export default function BookingForm() {
   const [audioStats, setAudioStats] = useState(null);
   const [country, setCountry] = useState('Pakistan');
   const [countryCode, setCountryCode] = useState('PK');
+  const [selected, setSelected] = useState('Online');
 
   const onSelect = country => {
     setCountry(country.name);
@@ -181,6 +182,87 @@ export default function BookingForm() {
 
         {/* time selector */}
         <TimePickerComp activeTime={activeTime} setActiveTime={setActiveTime} />
+        <View style={{height: 15}}></View>
+        <View>
+          <View style={{flexDirection: 'row'}}>
+            <Text style={{color: text, fontWeight: 'bold'}}>
+              Pay Online to get
+            </Text>
+            <Text style={{color: primaryDark, fontWeight: 'bold'}}> 10%</Text>
+            <Text style={{color: text, fontWeight: 'bold'}}> Discount</Text>
+          </View>
+          <View style={{height: 15}}></View>
+          <View
+            style={{
+              width: '100%',
+              height: 80,
+              // backgroundColor: '#000',
+            }}>
+            <TouchableOpacity
+              onPress={() => setSelected('Online')}
+              style={{
+                flexDirection: 'row',
+                width: '30%',
+                // height: '30%',
+                // justifyContent: 'space-between',
+                alignItems: 'center',
+              }}>
+              <View
+                style={{
+                  height: 15,
+                  width: 15,
+                  borderRadius: 60,
+                  borderWidth: 2,
+                  borderColor: selected === 'Online' ? primaryDark : '#000',
+
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <View
+                  style={{
+                    height: '80%',
+                    width: '80%',
+                    borderRadius: 60,
+                    backgroundColor:
+                      selected === 'Online' ? primaryDark : '#000',
+                  }}></View>
+              </View>
+              <View style={{width: 10}}></View>
+              <Text style={{color: text, fontWeight: 'bold'}}>Pay Online</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => setSelected('Cash')}
+              style={{
+                flexDirection: 'row',
+                // width: '30%',
+                height: '30%',
+                // justifyContent: 'space-between',
+                alignItems: 'center',
+              }}>
+              <View
+                style={{
+                  height: 15,
+                  width: 15,
+                  borderRadius: 60,
+                  borderWidth: 2,
+                  borderColor: selected === 'Cash' ? primaryDark : '#000',
+
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <View
+                  style={{
+                    height: '80%',
+                    width: '80%',
+                    borderRadius: 60,
+                    backgroundColor: selected === 'Cash' ? primaryDark : '#000',
+                  }}></View>
+              </View>
+              <View style={{width: 10}}></View>
+              <Text style={{color: text, fontWeight: 'bold'}}>Pay Cash</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
         <View style={styles.detailContainer}>
           <Text style={styles.detailHeading}>Leave Note (if any)</Text>
 
