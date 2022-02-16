@@ -1,9 +1,13 @@
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
+import {useNavigation} from '@react-navigation/native';
 
 const LargeImage = () => {
+  const navigation = useNavigation();
+
   return (
-    <View
+    <TouchableOpacity
+      onPress={() => navigation.navigate('ServiceDetails')}
       style={{
         width: '40%',
         height: 160,
@@ -20,8 +24,8 @@ const LargeImage = () => {
           borderTopRightRadius: 30,
         }}
       />
-      <Text>LargeImage</Text>
-    </View>
+      <Text style={{fontWeight: '600'}}>Basic Service</Text>
+    </TouchableOpacity>
   );
 };
 

@@ -1,9 +1,13 @@
-import {View, Text} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import CarWash from '../../../assets/svgs/Carwash.svg';
+import {useNavigation} from '@react-navigation/native';
+
 const SmallImage = () => {
+  const navigation = useNavigation();
   return (
-    <View
+    <TouchableOpacity
+      onPress={() => navigation.navigate('ServiceDetails')}
       style={{
         width: '30%',
         // backgroundColor: 'teal',
@@ -12,7 +16,7 @@ const SmallImage = () => {
       }}>
       <CarWash />
       <Text style={{fontSize: 12}}>Car Wash Service</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

@@ -195,7 +195,9 @@ export default function Home() {
                 <Text style={{fontWeight: '600'}}>Car Services Catagories</Text>
                 <TouchableOpacity
                   onPress={() =>
-                    navigation.navigate('ServiceDetailCaetagories')
+                    navigation.navigate('ServiceDetailCaetagories', {
+                      renderscreenfor: 'small',
+                    })
                   }>
                   <Text style={{fontWeight: '600'}}>View All</Text>
                 </TouchableOpacity>
@@ -223,7 +225,9 @@ export default function Home() {
                 <Text style={{fontWeight: '600'}}>Services Packages</Text>
                 <TouchableOpacity
                   onPress={() =>
-                    navigation.navigate('ServiceDetailCaetagories')
+                    navigation.navigate('ServiceDetailCaetagories', {
+                      renderscreenfor: 'large',
+                    })
                   }>
                   <Text style={{fontWeight: '600'}}>View All</Text>
                 </TouchableOpacity>
@@ -253,7 +257,9 @@ export default function Home() {
                 </Text>
                 <TouchableOpacity
                   onPress={() =>
-                    navigation.navigate('ServiceDetailCaetagories')
+                    navigation.navigate('ServiceDetailCaetagories', {
+                      renderscreenfor: 'large',
+                    })
                   }>
                   <Text style={{fontWeight: '600'}}>View All</Text>
                 </TouchableOpacity>
