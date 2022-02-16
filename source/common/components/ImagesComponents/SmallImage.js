@@ -7,7 +7,7 @@ const SmallImage = () => {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('ServiceDetails')}
+      onPress={() => navigation.navigate('CarServicesDetails')}
       style={{
         width: '30%',
         // backgroundColor: 'teal',

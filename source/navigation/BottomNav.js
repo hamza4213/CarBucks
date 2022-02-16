@@ -77,6 +77,7 @@ import InsuranceComprehensive from '../screens/InsuranceComprehensive/InsuranceC
 import BuyInsuranceScreen from '../screens/InsuranceComprehensive/BuyInsuranceScreen';
 import InsuranceDocuments from '../screens/InsuranceComprehensive/InsuranceDocuments';
 import ServiceDetailCaetagories from '../screens/serviceDetail/ServiceDetailCaetagories';
+import CarServicesDetails from '../screens/serviceDetail/CarServicesDetails';
 
 const HomeStack = createStackNavigator();
 const ChatStack = createStackNavigator();
@@ -114,6 +115,10 @@ const HomeNav = () => (
     <HomeStack.Screen name="ClientProfile" component={ClientProfile} />
     <HomeStack.Screen name="ClientProfile2" component={ClientProfile2} />
     <HomeStack.Screen name="ServiceDetails" component={ServiceDetails} />
+    <HomeStack.Screen
+      name="CarServicesDetails"
+      component={CarServicesDetails}
+    />
     <HomeStack.Screen
       name="ServiceDetailCaetagories"
       component={ServiceDetailCaetagories}
