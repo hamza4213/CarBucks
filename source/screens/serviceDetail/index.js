@@ -29,7 +29,7 @@ import RatingButton from '../../common/components/button/ratingButton';
 import {capitalizeFirstLetter} from '../../common/utils/strings';
 import {ChatApi} from '../../redux/apis';
 import Video from 'react-native-video';
-
+import SplashFile from '../../assets/splash.mp4';
 const chatApi = new ChatApi();
 
 export default function ServiceDetails({}) {
@@ -39,7 +39,7 @@ export default function ServiceDetails({}) {
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  const [selected, setSelected] = useState('Basic');
   const stars = rating => {
     let stars = [];
     for (let i = 0; i < rating; i++) {
@@ -105,6 +105,14 @@ export default function ServiceDetails({}) {
       <Header title="Services Detail" />
       <View style={styles.contentContainer}>
         <View style={styles.contentWrapper}>
+          <View style={{height: 15}}></View>
+          <Video
+            repeat
+            resizeMode="cover"
+            fullscreen
+            source={SplashFile}
+            style={{height: 150, width: '100%', borderRadius: 10}}
+          />
           <View style={styles.profile}>
             <View style={styles.reviewCountWrapper}>
               <View style={styles.starWrapper}>
@@ -134,7 +142,74 @@ export default function ServiceDetails({}) {
               ))}
             </View>
           </View>
-
+          <View style={styles.availableServices}>
+            <Text style={styles.desHeading}>Select Service Packages</Text>
+            <View style={{height: 15}}></View>
+            <View style={{width: '100%', height: 110, backgroundColor: '#fff'}}>
+              <View
+                style={{
+                  width: '100%',
+                  flexDirection: 'row',
+                }}>
+                <View style={{width: '60%', flexDirection: 'row'}}>
+                  <View
+                    style={{
+                      height: 30,
+                      width: 30,
+                      borderRadius: 60,
+                      borderWidth: 1,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <TouchableOpacity
+                      onPress={() => setSelected('Basic')}
+                      style={{
+                        height: 20,
+                        width: 20,
+                        borderRadius: 20,
+                        backgroundColor: selected === 'Basic' ? 'yellow' : null,
+                      }}></TouchableOpacity>
+                  </View>
+                  <Text style={{marginLeft: 5}}>Basic Service</Text>
+                </View>
+                <View style={{width: '40%', alignItems: 'center'}}>
+                  <Text>$ 100</Text>
+                </View>
+              </View>
+              <View style={{height: 5}}></View>
+              <View
+                style={{
+                  width: '100%',
+                  flexDirection: 'row',
+                }}>
+                <View style={{width: '60%', flexDirection: 'row'}}>
+                  <View
+                    style={{
+                      height: 30,
+                      width: 30,
+                      borderRadius: 60,
+                      borderWidth: 1,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <TouchableOpacity
+                      onPress={() => setSelected('Premium')}
+                      style={{
+                        height: 20,
+                        width: 20,
+                        borderRadius: 20,
+                        backgroundColor:
+                          selected === 'Premium' ? 'yellow' : null,
+                      }}></TouchableOpacity>
+                  </View>
+                  <Text style={{marginLeft: 5}}>Premium Service</Text>
+                </View>
+                <View style={{width: '40%', alignItems: 'center'}}>
+                  <Text>$ 100</Text>
+                </View>
+              </View>
+            </View>
+          </View>
           <RatingButton
             type="gradiant"
             title="Book Now"
