@@ -80,6 +80,7 @@ import ServiceDetailCaetagories from '../screens/serviceDetail/ServiceDetailCaet
 import CarServicesDetails from '../screens/serviceDetail/CarServicesDetails';
 import PopularCarWashService from '../screens/serviceDetail/PopularCarWashService';
 import AccessoriesDetails from '../screens/accessoriesProducts/AccessoriesDetails';
+import MultipleAccessories from '../screens/accessoriesProducts/MultipleAccessories';
 
 const HomeStack = createStackNavigator();
 const ChatStack = createStackNavigator();
@@ -107,6 +108,10 @@ const HomeNav = () => (
     <HomeStack.Screen
       name="AccessoriesDetails"
       component={AccessoriesDetails}
+    />
+    <HomeStack.Screen
+      name="MultipleAccessories"
+      component={MultipleAccessories}
     />
     <HomeStack.Screen name="Cart" component={Cart} />
     <HomeStack.Screen name="Dispute" component={Dispute} />
