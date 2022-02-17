@@ -2,7 +2,9 @@ import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import colors, {primaryDark, text} from '../../../constants/colors';
 import LinearGradientWrapper from '../../LinearGradientWrapper';
+import {useNavigation} from '@react-navigation/native';
 const AccessoriesComponent = () => {
+  const navigation = useNavigation();
   const Images = [
     require('../../../../assets/pngs/accessoryImg.png'),
     require('../../../../assets/pngs/accessoryImg.png'),
@@ -96,6 +98,7 @@ const AccessoriesComponent = () => {
               borderRadius: 20,
             }}>
             <TouchableOpacity
+              onPress={() => navigation.navigate('Accessories')}
               style={{
                 width: '100%',
                 height: '100%',

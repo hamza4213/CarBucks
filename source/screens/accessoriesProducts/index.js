@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, ScrollView, FlatList} from 'react-native';
+import {View, Text, ScrollView, FlatList, TouchableOpacity} from 'react-native';
 import Header from '../../common/components/header';
 import styles from './styles';
 import AccessoryCard from '../../common/components/cards/accessoryCard';
@@ -8,7 +8,11 @@ import {getAccessories, resetAccessories} from '../../redux/actions/products';
 import {useDispatch, useSelector} from 'react-redux';
 import {useRoute} from '@react-navigation/core';
 import NotFound from '../../common/components/notFound';
-
+import BottomWhite from '../../assets/svgs/BottomWhite.svg';
+import WhiteBell from '../../assets/svgs/WhiteBell.svg';
+import SearchInput from '../../common/components/searchInput';
+import LinearGradientWrapper from '../../common/components/LinearGradientWrapper';
+import CompanyAccessoryComponent from '../../common/components/cards/accessoryCard/CompanyAccessoryComponent';
 export default function AccessoriesProducts() {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
@@ -19,6 +23,8 @@ export default function AccessoriesProducts() {
   ]);
   const {products} = useSelector(state => state.products);
   const params = useRoute().params;
+  const categories = ['All', 'Tyres', 'Wipers', 'Car Oils', 'Carpets'];
+  const [activeTab, setActiveTab] = useState('All');
 
   // console.log('params on accessory Product', params);
   const dispatch = useDispatch();
@@ -37,23 +43,90 @@ export default function AccessoriesProducts() {
 
   return (
     <View style={styles.container}>
-      <Header title="Accessories Products" />
-
-      <View style={styles.contentContainer}>
-        <View style={{marginTop: -50}}>
-          <FlatList
-            data={products}
-            numColumns={2}
-            renderItem={renderAccessory}
-            showsVerticalScrollIndicator={false}
-          />
-          {products && products.length ? null : (
-            <View style={{marginTop: 100}}>
-              <NotFound text="No Accessories Available." />
-            </View>
-          )}
+      <Header
+        title="Car Mart Products"
+        rightComponent={
+          <View
+            style={{
+              height: 45,
+              // backgroundColor: 'white',
+              width: '40%',
+              alignItems: 'center',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}>
+            <TouchableOpacity
+              style={{
+                borderRadius: 10,
+                borderWidth: 1,
+                borderColor: '#fff',
+                height: 25,
+                width: '60%',
+                // marginTop: 10,
+                justifyContent: 'space-evenly',
+                alignItems: 'center',
+                flexDirection: 'row',
+              }}>
+              <Text style={{color: 'white'}}>Filter</Text>
+              <BottomWhite />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <WhiteBell />
+            </TouchableOpacity>
+          </View>
+        }>
+        <View style={{width: '90%', alignSelf: 'center', height: 60}}>
+          <SearchInput />
         </View>
-      </View>
+      </Header>
+
+      <ScrollView style={styles.contentContainer}>
+        <LinearGradientWrapper
+          style={{
+            marginTop: 20,
+            borderRadius: 20,
+            width: '90%',
+            height: 45,
+            alignItems: 'center',
+            justifyContent: 'center',
+            alignSelf: 'center',
+            padding: 5,
+          }}>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={{flexGrow: 0}}>
+            {categories.map(item => (
+              <TouchableOpacity
+                key={item._id}
+                onPress={() => setActiveTab(item)}
+                style={[styles.tab, activeTab === item && styles.focusedTab]}>
+                <Text
+                  style={
+                    activeTab === item ? styles.ActiveTabText : styles.tabText
+                  }>
+                  {item}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </LinearGradientWrapper>
+        <View style={{height: 15}}></View>
+        <Text style={{fontWeight: '600', marginLeft: 15}}>Tires</Text>
+        <View
+          style={{
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between',
+            width: '90%',
+            alignSelf: 'center',
+          }}>
+          <CompanyAccessoryComponent />
+          <CompanyAccessoryComponent />
+          <CompanyAccessoryComponent />
+        </View>
+        <View style={{height: 15, marginTop: 30}}></View>
+      </ScrollView>
     </View>
   );
 }
