@@ -195,7 +195,8 @@ export default function Checkout() {
           type="gradiant"
           style={styles.payButton}
           textStyle={styles.textStyle}
-          onPress={onCheckoutPressed}
+          // onPress={onCheckoutPressed}
+          onPress={() => navigation.navigate('ThankYou')}
         />
       </View>
     </ScrollView>

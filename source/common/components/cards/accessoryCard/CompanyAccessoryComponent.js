@@ -29,7 +29,7 @@ const CompanyAccessoryComponent = () => {
           marginTop: 5,
         }}>
         <Image
-          source={require('../../../../assets/pngs/buyCarImage.jpg')}
+          source={require('../../../../assets/pngs/tyre.png')}
           style={{height: '100%', width: '40%'}}
         />
         <View
@@ -38,7 +38,14 @@ const CompanyAccessoryComponent = () => {
             width: '60%',
             // backgroundColor: 'yellow',
           }}>
-          <Text style={{alignSelf: 'flex-end', color: primaryDark}}>$ 50</Text>
+          <Text
+            style={{
+              alignSelf: 'flex-end',
+              color: primaryDark,
+              fontWeight: 'bold',
+            }}>
+            $ 50
+          </Text>
           <Text style={{alignSelf: 'flex-end'}}>Company</Text>
         </View>
       </View>

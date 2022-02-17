@@ -154,26 +154,32 @@ export default function ServiceDetails({}) {
                 <View style={{width: '60%', flexDirection: 'row'}}>
                   <View
                     style={{
-                      height: 30,
-                      width: 30,
+                      height: 20,
+                      width: 20,
                       borderRadius: 60,
                       borderWidth: 1,
+                      borderColor: primaryLight,
                       justifyContent: 'center',
                       alignItems: 'center',
                     }}>
                     <TouchableOpacity
                       onPress={() => setSelected('Basic')}
                       style={{
-                        height: 20,
-                        width: 20,
+                        height: 15,
+                        width: 15,
                         borderRadius: 20,
-                        backgroundColor: selected === 'Basic' ? 'yellow' : null,
+                        backgroundColor:
+                          selected === 'Basic' ? primaryLight : null,
                       }}></TouchableOpacity>
                   </View>
                   <Text style={{marginLeft: 5}}>Basic Service</Text>
                 </View>
-                <View style={{width: '40%', alignItems: 'center'}}>
-                  <Text>$ 100</Text>
+                <View
+                  style={{
+                    width: '40%',
+                    alignItems: 'center',
+                  }}>
+                  <Text style={{color: primaryLight}}>$ 100</Text>
                 </View>
               </View>
               <View style={{height: 5}}></View>
@@ -185,27 +191,28 @@ export default function ServiceDetails({}) {
                 <View style={{width: '60%', flexDirection: 'row'}}>
                   <View
                     style={{
-                      height: 30,
-                      width: 30,
+                      height: 20,
+                      width: 20,
                       borderRadius: 60,
                       borderWidth: 1,
+                      borderColor: primaryLight,
                       justifyContent: 'center',
                       alignItems: 'center',
                     }}>
                     <TouchableOpacity
                       onPress={() => setSelected('Premium')}
                       style={{
-                        height: 20,
-                        width: 20,
+                        height: 15,
+                        width: 15,
                         borderRadius: 20,
                         backgroundColor:
-                          selected === 'Premium' ? 'yellow' : null,
+                          selected === 'Premium' ? primaryLight : null,
                       }}></TouchableOpacity>
                   </View>
                   <Text style={{marginLeft: 5}}>Premium Service</Text>
                 </View>
                 <View style={{width: '40%', alignItems: 'center'}}>
-                  <Text>$ 100</Text>
+                  <Text style={{color: primaryLight}}>$ 100</Text>
                 </View>
               </View>
             </View>

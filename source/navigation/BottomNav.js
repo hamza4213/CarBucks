@@ -81,6 +81,7 @@ import CarServicesDetails from '../screens/serviceDetail/CarServicesDetails';
 import PopularCarWashService from '../screens/serviceDetail/PopularCarWashService';
 import AccessoriesDetails from '../screens/accessoriesProducts/AccessoriesDetails';
 import MultipleAccessories from '../screens/accessoriesProducts/MultipleAccessories';
+import AddNewAddress from '../screens/accessoriesProducts/AddNewAddress';
 
 const HomeStack = createStackNavigator();
 const ChatStack = createStackNavigator();
@@ -113,6 +114,7 @@ const HomeNav = () => (
       name="MultipleAccessories"
       component={MultipleAccessories}
     />
+    <HomeStack.Screen name="AddNewAddress" component={AddNewAddress} />
     <HomeStack.Screen name="Cart" component={Cart} />
     <HomeStack.Screen name="Dispute" component={Dispute} />
     <HomeStack.Screen name="Disputes" component={Disputes} />
