@@ -23,6 +23,7 @@ import {
 import {baseURL} from '../../utils/endPoint';
 import showToast from '../../common/components/toast/simpleToast';
 import axios from 'axios';
+import colors, {text} from '../../common/constants/colors';
 
 export default function Checkout() {
   const [card, setCard] = useState({
@@ -134,13 +135,15 @@ export default function Checkout() {
 
         <CreditCard card={card} />
 
-        <CardView cornerRadius={20} elevation={5} style={styles.cardView}>
+        <View style={styles.cardView}>
           <View style={styles.inputView}>
             <Text style={styles.label}>Cradit Card Number</Text>
             <TextInput
               maxLength={16}
+              placeholder="Enter Credit Card Number"
+              placeholderTextColor={text}
               secureTextEntry
-              value={card.number}
+              // value={card.number}
               keyboardType="numeric"
               style={[styles.input, styles.centeredInput]}
               onChangeText={val => handleChange('number', val)}
@@ -150,7 +153,9 @@ export default function Checkout() {
             <Text style={styles.label}>Card Card Name</Text>
             <TextInput
               maxLength={48}
-              value={card.name}
+              // value={card.name}
+              placeholder="Enter Credit Card Name"
+              placeholderTextColor={text}
               style={styles.input}
               keyboardType="default"
               onChangeText={val => handleChange('name', val)}
@@ -163,6 +168,8 @@ export default function Checkout() {
                 <TextInput
                   maxLength={4}
                   style={styles.input}
+                  placeholder="Date"
+                  placeholderTextColor={text}
                   keyboardType="numeric"
                   value={parseInt(card.expiry)}
                   onChangeText={val => handleChange('expiry', val)}
@@ -174,6 +181,8 @@ export default function Checkout() {
                 <Text style={styles.label}>CVV</Text>
                 <TextInput
                   maxLength={5}
+                  placeholder="Cvv"
+                  placeholderTextColor={text}
                   style={styles.input}
                   keyboardType="numeric"
                   value={parseInt(card.cvc)}
@@ -187,7 +196,7 @@ export default function Checkout() {
               Save the card for further transactions
             </Text>
           </TouchableOpacity>
-        </CardView>
+        </View>
 
         <RatingButton
           isLoading={loading}

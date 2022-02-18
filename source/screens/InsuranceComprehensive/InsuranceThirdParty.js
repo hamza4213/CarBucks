@@ -14,15 +14,58 @@ import InsuranceOpendownComponent from '../../common/components/InsuranceCompone
 import InsuranceBuyButton from '../../common/components/InsuranceComponent/InsuranceBuyButton';
 import InsuranceDescriptionComponent from '../../common/components/InsuranceComponent/InsuranceDescriptionComponent';
 import SearchInput from '../../common/components/searchInput';
-const InsuranceComprehensive = ({navigation}) => {
+
+const InsuranceThirdParty = ({navigation}) => {
+  const [activeTab, setActiveTab] = useState(0);
   return (
     <View>
       <Header small title="Tata Aig Insurance" />
       <ScrollView style={styles.contentContainer}>
         <View style={{height: 15}}></View>
-        <View style={{width: '95%', alignSelf: 'center'}}>
-          <SearchInput />
-        </View>
+        <LinearGradientWrapper
+          style={{
+            height: 40,
+            width: '95%',
+            alignSelf: 'center',
+            borderRadius: 15,
+            justifyContent: 'space-evenly',
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}>
+          <TouchableOpacity
+            onPress={() => setActiveTab(0)}
+            style={[styles.tab, activeTab === 0 && styles.focusedTab]}>
+            <Text
+              style={{
+                color: activeTab === 0 ? primaryLight : 'white',
+                fontWeight: activeTab === 0 ? 'bold' : 'normal',
+              }}>
+              Comprehensive
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => setActiveTab(1)}
+            style={[styles.tab, activeTab === 1 && styles.focusedTab]}>
+            <Text
+              style={{
+                color: activeTab === 1 ? primaryLight : 'white',
+                fontWeight: activeTab === 1 ? 'bold' : 'normal',
+              }}>
+              Third Party
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => setActiveTab(2)}
+            style={[styles.tab, activeTab === 2 && styles.focusedTab]}>
+            <Text
+              style={{
+                color: activeTab === 2 ? primaryLight : 'white',
+                fontWeight: activeTab === 2 ? 'bold' : 'normal',
+              }}>
+              Basic
+            </Text>
+          </TouchableOpacity>
+        </LinearGradientWrapper>
         <View style={{height: 10}}></View>
 
         <Image
@@ -44,39 +87,15 @@ const InsuranceComprehensive = ({navigation}) => {
           Tag Aig Insurances
         </Text>
         <View style={{height: 15}}></View>
-        <>
-          <InsuranceOpendownComponent />
-          <View style={{height: 15}}></View>
-          <InsuranceOpendownComponent />
-          <View style={{height: 15}}></View>
-          <InsuranceOpendownComponent />
-          <View style={{height: 15}}></View>
-          <InsuranceOpendownComponent />
-          <View style={{height: 15}}></View>
-        </>
-        <View style={{height: '5%'}}></View>
-        <LinearGradientWrapper
-          style={{
-            width: '90%',
-            height: 60,
-            borderRadius: 10,
-            alignSelf: 'center',
-          }}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('InsuranceThirdParty')}
-            style={{
-              height: '100%',
-              width: '100%',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Text style={{fontWeight: '600', fontSize: 17, color: '#fff'}}>
-              View Package
-            </Text>
-          </TouchableOpacity>
-        </LinearGradientWrapper>
+        <InsuranceDescriptionComponent />
+
         <View style={{height: 250, marginTop: 30}}></View>
       </ScrollView>
+      <InsuranceBuyButton
+        desc={'But this policy'}
+        payment={activeTab === 0 ? '100' : '50'}
+        onPress={() => navigation.navigate('BuyInsuranceScreen')}
+      />
     </View>
   );
 };
@@ -87,7 +106,7 @@ const styles = StyleSheet.create({
     marginTop: -18,
     borderTopLeftRadius: 18,
     borderTopRightRadius: 18,
-    // paddingHorizontal: 20,
+    paddingHorizontal: 20,
   },
   focusedTab: {
     backgroundColor: 'white',
@@ -101,4 +120,5 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
 });
-export default InsuranceComprehensive;
+
+export default InsuranceThirdParty;

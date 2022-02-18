@@ -74,6 +74,7 @@ import DisputesDetails from '../screens/disputeDetails';
 import Analytics from '../screens/analytics';
 import InviteScreen from '../screens/InviteScreen/index';
 import InsuranceComprehensive from '../screens/InsuranceComprehensive/InsuranceComprehensive';
+import InsuranceThirdParty from '../screens/InsuranceComprehensive/InsuranceThirdParty';
 import BuyInsuranceScreen from '../screens/InsuranceComprehensive/BuyInsuranceScreen';
 import InsuranceDocuments from '../screens/InsuranceComprehensive/InsuranceDocuments';
 import ServiceDetailCaetagories from '../screens/serviceDetail/ServiceDetailCaetagories';
@@ -167,6 +168,10 @@ const HomeNav = () => (
     <HomeStack.Screen
       name="InsuranceComprehensive"
       component={InsuranceComprehensive}
+    />
+    <HomeStack.Screen
+      name="InsuranceThirdParty"
+      component={InsuranceThirdParty}
     />
     <HomeStack.Screen
       name="BuyInsuranceScreen"

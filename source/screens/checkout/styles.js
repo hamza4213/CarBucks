@@ -16,7 +16,12 @@ export default StyleSheet.create({
   cardView: {
     marginTop: 30,
     padding: 20,
-    // borderRadius: 20,
+    borderRadius: 20,
+    shadowOffset: {width: 100, height: 50},
+    shadowColor: '#000',
+    shadowOpacity: 1,
+    elevation: 15,
+    backgroundColor: '#fff',
   },
   addCardWrapper: {
     marginTop: 40,
