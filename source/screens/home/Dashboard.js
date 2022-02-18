@@ -98,7 +98,24 @@ export default function Home() {
 
     setFilteredData(subCategories.filter(i => i?.parent === item._id));
   };
-
+  const carservicedata = [
+    {img: require('../../assets/pngs/FirstCar.png'), desc: 'Car Wash Service'},
+    {img: require('../../assets/pngs/SecondCar.png'), desc: 'Ac Repairing'},
+    {img: require('../../assets/pngs/ThirdCar.png'), desc: 'Engine Tuning'},
+    {img: require('../../assets/pngs/FourthCar.png'), desc: 'Paint Car'},
+    {img: require('../../assets/pngs/FifthCar.png'), desc: 'Full Tuning'},
+    {img: require('../../assets/pngs/FirstCar.png'), desc: 'Car Wash Service'},
+  ];
+  const ServicePackagesdata = [
+    {
+      img: require('../../assets/pngs/AcService.png'),
+      desc: 'Regular AC Serivce',
+    },
+    {
+      img: require('../../assets/pngs/CoolingCoil.png'),
+      desc: 'Cooling Coil Replacement',
+    },
+  ];
   return (
     <ScrollView style={{height: '100%', backgroundColor: '#FFF'}}>
       <LinearGradient
@@ -197,6 +214,7 @@ export default function Home() {
                   onPress={() =>
                     navigation.navigate('ServiceDetailCaetagories', {
                       renderscreenfor: 'small',
+                      data: {carservicedata},
                     })
                   }>
                   <Text style={{fontWeight: '600'}}>View All</Text>
@@ -209,8 +227,16 @@ export default function Home() {
                   flexWrap: 'wrap',
                   justifyContent: 'space-evenly',
                 }}>
-                {caetagoriesIndex.map((item, index) => (
-                  <SmallImage />
+                {carservicedata.map((item, index) => (
+                  <View
+                    style={{
+                      width: '30%',
+                      height: 120,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    <SmallImage item={item} />
+                  </View>
                 ))}
               </View>
               <View style={{height: 15}}></View>
@@ -227,6 +253,7 @@ export default function Home() {
                   onPress={() =>
                     navigation.navigate('ServiceDetailCaetagories', {
                       renderscreenfor: 'large',
+                      data: {ServicePackagesdata},
                     })
                   }>
                   <Text style={{fontWeight: '600'}}>View All</Text>
@@ -239,8 +266,8 @@ export default function Home() {
                   flexWrap: 'wrap',
                   justifyContent: 'space-evenly',
                 }}>
-                {caetagoriesIndex.map((item, index) => (
-                  <LargeImage />
+                {ServicePackagesdata.map((item, index) => (
+                  <LargeImage item={item} />
                 ))}
               </View>
               <View style={{height: 15}}></View>
@@ -259,6 +286,7 @@ export default function Home() {
                   onPress={() =>
                     navigation.navigate('ServiceDetailCaetagories', {
                       renderscreenfor: 'large',
+                      data: {ServicePackagesdata},
                     })
                   }>
                   <Text style={{fontWeight: '600'}}>View All</Text>

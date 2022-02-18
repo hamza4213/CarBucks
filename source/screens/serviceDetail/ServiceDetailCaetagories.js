@@ -11,7 +11,8 @@ import Map from '../../assets/svgs/Map.svg';
 import SmallImage from '../../common/components/ImagesComponents/SmallImage';
 import LargeImage from '../../common/components/ImagesComponents/LargeImage';
 const ServiceDetailCaetagories = ({route}) => {
-  const {renderscreenfor} = route.params;
+  const {renderscreenfor, data} = route.params;
+  console.log('Data at service', data);
   console.log(renderscreenfor);
   const caetagoriesIndex = [0, 1, 2, 3];
   return (
@@ -26,21 +27,23 @@ const ServiceDetailCaetagories = ({route}) => {
           <>
             <View
               style={{
-                width: '100%',
+                width: '90%',
                 flexDirection: 'row',
                 flexWrap: 'wrap',
                 justifyContent: 'space-between',
-                // alignSelf: 'center',
+
+                alignSelf: 'center',
                 // backgroundColor: 'teal',
               }}>
-              {caetagoriesIndex.map((item, index) => (
+              {data.carservicedata.map((item, index) => (
                 <View
                   style={{
-                    width: '50%',
+                    width: '45%',
+                    height: 150,
                     alignItems: 'center',
                     justifyContent: 'center',
                   }}>
-                  <SmallImage />
+                  <SmallImage item={item} />
                 </View>
               ))}
             </View>
@@ -49,35 +52,38 @@ const ServiceDetailCaetagories = ({route}) => {
           <>
             <View
               style={{
-                width: '100%',
+                width: '90%',
                 flexDirection: 'row',
                 flexWrap: 'wrap',
                 justifyContent: 'space-between',
-                // alignSelf: 'center',
+                alignSelf: 'center',
                 // backgroundColor: 'teal',
               }}>
-              {caetagoriesIndex.map((item, index) => (
-                <LargeImage />
+              {data.ServicePackagesdata.map((item, index) => (
+                <LargeImage item={item} />
               ))}
             </View>
             <View style={{height: 15}}></View>
-            <Text style={{fontWeight: '600'}}>Brake Maintenance</Text>
+            <Text style={{fontWeight: '600', marginRight: 10}}>
+              Brake Maintenance
+            </Text>
             <View style={{height: 15}}></View>
             <View
               style={{
-                width: '100%',
+                width: '90%',
                 flexDirection: 'row',
                 flexWrap: 'wrap',
                 justifyContent: 'space-between',
-                // alignSelf: 'center',
+                alignSelf: 'center',
                 // backgroundColor: 'teal',
               }}>
-              {caetagoriesIndex.map((item, index) => (
-                <LargeImage />
+              {data.ServicePackagesdata.map((item, index) => (
+                <LargeImage item={item} />
               ))}
             </View>
           </>
         )}
+        <View style={{height: 95, marginTop: 20}}></View>
       </ScrollView>
     </View>
   );
@@ -86,10 +92,11 @@ const styles = StyleSheet.create({
   contentContainer: {
     height: '100%',
     backgroundColor: 'white',
+
     marginTop: -18,
     borderTopLeftRadius: 18,
     borderTopRightRadius: 18,
-    paddingHorizontal: 20,
+    // paddingHorizontal: 20,
   },
   focusedTab: {
     backgroundColor: 'white',

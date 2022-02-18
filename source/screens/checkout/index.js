@@ -122,9 +122,7 @@ export default function Checkout() {
       // setloading false
     }
   };
-  const carservicedata = [
-    // {img: require('../../assets/pngs/car0.png'), desc: 'Car Wash Service'},
-  ];
+
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <Header small title="Checkout" />
