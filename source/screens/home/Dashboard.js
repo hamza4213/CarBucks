@@ -39,8 +39,7 @@ import RentCar from '../rentCar';
 import ProductsCatagories from './Products';
 import ServicesCatagories from './Services';
 import styles from './style';
-import SmallImage from '../../common/components/ImagesComponents/SmallImage';
-import LargeImage from '../../common/components/ImagesComponents/LargeImage';
+
 const catagories = [
   {title: 'Services', screen: 'ServicesCatagories', available: 60},
   {title: 'Accessories', screen: 'ProductsCatagories', available: 635},
@@ -59,7 +58,7 @@ export default function Home() {
   const [filteredData, setFilteredData] = useState([]);
   const {promotions} = useSelector(state => state.promotions);
   const {t, i18n} = useTranslation();
-  const [activeTab, setActiveTab] = useState(null);
+  const [activeTab, setActiveTab] = useState('Services');
   const pickerItems = [
     {label: 'Stuck In acc', value: 'stuck-in-traffic'},
     {label: 'Vehicle Crashed', value: 'vehicle-crashed'},
@@ -94,9 +93,9 @@ export default function Home() {
   const onCategoryPress = item => {
     setActiveTab(item);
     console.log('activeTabis', activeTab);
-    console.log('consoling active tab', activeTab?.type, subCategories[0]);
-
-    setFilteredData(subCategories.filter(i => i?.parent === item._id));
+    // console.log('consoling active tab', activeTab?.type, subCategories[0]);
+    // console.table(activeTab?.type, subCategories[0]);
+    // setFilteredData(subCategories.filter(i => i?.parent === item._id));
   };
   const carservicedata = [
     {img: require('../../assets/pngs/FirstCar.png'), desc: 'Car Wash Service'},
@@ -115,6 +114,14 @@ export default function Home() {
       img: require('../../assets/pngs/CoolingCoil.png'),
       desc: 'Cooling Coil Replacement',
     },
+  ];
+  const FileCaetagories = [
+    'Services',
+    'Accessories',
+    'Products',
+    'RentCar',
+    'BuyCar',
+    'Insurance',
   ];
   return (
     <ScrollView style={{height: '100%', backgroundColor: '#FFF'}}>
@@ -175,16 +182,17 @@ export default function Home() {
             horizontal
             showsHorizontalScrollIndicator={false}
             style={{flexGrow: 0}}>
-            {categories.map(item => (
+            {/* changin caetagories as FileCaetagories */}
+            {FileCaetagories.map(item => (
               <TouchableOpacity
-                key={item._id}
+                key={item}
                 onPress={() => onCategoryPress(item)}
                 style={[styles.tab, activeTab === item && styles.focusedTab]}>
                 <Text
                   style={
                     activeTab === item ? styles.ActiveTabText : styles.tabText
                   }>
-                  {item.title}
+                  {item}
                 </Text>
               </TouchableOpacity>
             ))}
@@ -193,108 +201,25 @@ export default function Home() {
 
         <View style={styles.productsContainer}>
           <LatoText padding={10} />
-          {activeTab?.description === 'insurance' ? (
+          {activeTab === 'Insurance' ? (
             <InsuranceComponent />
-          ) : activeTab?.title === 'Accesories' ? (
+          ) : activeTab === 'Accessories' ? (
             <AccessoriesComponent />
-          ) : activeTab?.type === 'product' ? (
+          ) : activeTab === 'Products' ? (
             <ProductsCatagories data={filteredData} />
-          ) : activeTab?.type === 'service' ? (
+          ) : activeTab === 'Services' ? (
             <>
-              <View
-                style={{
-                  width: '100%',
-                  height: 30,
-                  // backgroundColor: '#000',
-                  justifyContent: 'space-between',
-                  flexDirection: 'row',
-                }}>
-                <Text style={{fontWeight: '600'}}>Car Services Catagories</Text>
-                <TouchableOpacity
-                  onPress={() =>
-                    navigation.navigate('ServiceDetailCaetagories', {
-                      renderscreenfor: 'small',
-                      data: {carservicedata},
-                    })
-                  }>
-                  <Text style={{fontWeight: '600'}}>View All</Text>
-                </TouchableOpacity>
-              </View>
-              <View
-                style={{
-                  width: '100%',
-                  flexDirection: 'row',
-                  flexWrap: 'wrap',
-                  justifyContent: 'space-evenly',
-                }}>
-                {carservicedata.map((item, index) => (
-                  <View
-                    style={{
-                      width: '30%',
-                      height: 120,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                    <SmallImage item={item} />
-                  </View>
-                ))}
-              </View>
-              <View style={{height: 15}}></View>
-              <View
-                style={{
-                  width: '100%',
-                  height: 30,
-                  // backgroundColor: '#000',
-                  justifyContent: 'space-between',
-                  flexDirection: 'row',
-                }}>
-                <Text style={{fontWeight: '600'}}>Services Packages</Text>
-                <TouchableOpacity
-                  onPress={() =>
-                    navigation.navigate('ServiceDetailCaetagories', {
-                      renderscreenfor: 'large',
-                      data: {ServicePackagesdata},
-                    })
-                  }>
-                  <Text style={{fontWeight: '600'}}>View All</Text>
-                </TouchableOpacity>
-              </View>
-              <View
-                style={{
-                  width: '100%',
-                  flexDirection: 'row',
-                  flexWrap: 'wrap',
-                  justifyContent: 'space-evenly',
-                }}>
-                {ServicePackagesdata.map((item, index) => (
-                  <LargeImage item={item} />
-                ))}
-              </View>
-              <View style={{height: 15}}></View>
-              <View
-                style={{
-                  width: '100%',
-                  height: 30,
-                  // backgroundColor: '#000',
-                  justifyContent: 'space-between',
-                  flexDirection: 'row',
-                }}>
-                <Text style={{fontWeight: '600'}}>
-                  Workshop for luxury cars
-                </Text>
-                <TouchableOpacity
-                  onPress={() =>
-                    navigation.navigate('ServiceDetailCaetagories', {
-                      renderscreenfor: 'large',
-                      data: {ServicePackagesdata},
-                    })
-                  }>
-                  <Text style={{fontWeight: '600'}}>View All</Text>
-                </TouchableOpacity>
-              </View>
-              <ServicesCatagories data={filteredData} />
+              <ServicesCatagories
+                data={filteredData}
+                carservicedata={carservicedata}
+                ServicePackagesdata={ServicePackagesdata}
+              />
             </>
-          ) : null}
+          ) : activeTab?.description === 'RentCar' ? (
+            <RentCar />
+          ) : (
+            <BuyCar />
+          )}
         </View>
       </View>
 
