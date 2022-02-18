@@ -59,7 +59,7 @@ export default function Home() {
   const [filteredData, setFilteredData] = useState([]);
   const {promotions} = useSelector(state => state.promotions);
   const {t, i18n} = useTranslation();
-  const [activeTab, setActiveTab] = useState('Services');
+  const [activeTab = 'Services', setActiveTab] = useState();
   const pickerItems = [
     {label: 'Stuck In acc', value: 'stuck-in-traffic'},
     {label: 'Vehicle Crashed', value: 'vehicle-crashed'},

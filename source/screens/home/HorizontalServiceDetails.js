@@ -1,5 +1,5 @@
 import {View, Text, Image, TouchableOpacity, ScrollView} from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import LinearGradientWrapper from '../../common/components/LinearGradientWrapper';
 import styles from './style';
 import {useNavigation} from '@react-navigation/native';
@@ -14,17 +14,28 @@ const HorizontalServiceDetails = props => {
     'BuyCar',
     'Insurance',
   ];
-  const onCategoryPress = item => {
-    if (item === 'BuyCar' || item === 'RentCar') {
-      navigation.navigate(item);
-    }
-    setActiveTab(item);
-    console.log('activeTabis', activeTab);
+  useEffect(() => {
+    setActiveTab(activeTab);
+  }, [activeTab]);
 
-    // console.log('consoling active tab', activeTab?.type, subCategories[0]);
-    // console.table(activeTab?.type, subCategories[0]);
-    // setFilteredData(subCategories.filter(i => i?.parent === item._id));
-  };
+  const onCategoryPress = useCallback(
+    item => {
+      if (item === 'BuyCar' || item === 'RentCar') {
+        setActiveTab(item);
+        console.log('activeTabis', activeTab);
+        navigation.navigate(item);
+      } else {
+        setActiveTab(item);
+        navigation.navigate('Home');
+        console.log('activeTabis', activeTab);
+      }
+      // console.log('consoling active tab', activeTab?.type, subCategories[0]);
+      // console.table(activeTab?.type, subCategories[0]);
+      // setFilteredData(subCategories.filter(i => i?.parent === item._id));
+    },
+    [activeTab],
+  );
+
   return (
     <LinearGradientWrapper
       style={{

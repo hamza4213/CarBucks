@@ -1,49 +1,36 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-  Alert,
-  TouchableWithoutFeedback,
-  TouchableNativeFeedback,
-  TouchableHighlight,
-} from 'react-native';
-import Header from '../../common/components/header';
-import COLOR from '../../assets/svgs/cartsGray.svg';
-import COLOR_ACTIVE from '../../assets/svgs/carts.svg';
+import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
+
 import styles from './styles';
-import CardView from 'react-native-cardview';
+
 import RatingButton from '../../common/components/button/ratingButton';
-import {text} from '../../common/constants/colors';
+
 import Tag from '../../common/components/tag';
 import TagWithImg from '../../common/components/tagWithImg';
-import Car1 from '../../assets/svgs/car1.svg';
-import Car2 from '../../assets/svgs/car2.svg';
-import Car3 from '../../assets/svgs/car3.svg';
+
 import Thumb from './slider/thumb';
 import Rail from './slider/rail';
 import Notch from './slider/notch';
+import COLOR from '../../assets/svgs/cartsGray.svg';
+import COLOR_ACTIVE from '../../assets/svgs/carts.svg';
 import RailSelected from './slider/railSelected';
 import {useNavigation} from '@react-navigation/native';
 import RangeSlider from 'rn-range-slider';
 import Label from './slider/label';
+import {useDispatch, useSelector} from 'react-redux';
 import {
   fetchMakes,
+  getCarsbyFilters,
   getModalsByFilter,
   getversionsByModalId,
 } from '../../redux/actions/metaData';
-import {useDispatch, useSelector} from 'react-redux';
+import metaData from '../../redux/reducers/metaData';
+import Header from '../../common/components/header';
 import AuthInput from '../../common/components/input/authInput';
 import {t} from 'i18next';
 import DropDownPicker from 'react-native-dropdown-picker';
-
-// import RangeSlider from 'rn-range-slider';
-
-// const renderThumb = useCallback(() => <Thumb />, []);
-// const renderRail = useCallback(() => <Rail />, []);
-// const renderRailSelected = useCallback(() => <RailSelected />, []);
+import {text, primaryLight, primaryDark} from '../../common/constants/colors';
+import HorizontalServiceDetails from '../home/HorizontalServiceDetails';
 
 const bodyTypeData = [
   {name: 'Sedan', id: 1},
@@ -56,20 +43,21 @@ const bodyTypeData = [
 
 const transmissionTypeData = [
   {name: 'automatic', id: 1},
-  // {name: 'Sami-Automatic', id: 2},
   {name: 'Manual', id: 3},
 ];
 
 const fuelTypes = [
   {name: 'Petrol', id: 1},
   {name: 'Diesel', id: 2},
-  // {name: 'Electric', id: 3},
 ];
 
-export default function BuyCar() {
+export default function RentCar() {
+  const dispatch = useDispatch();
+  const [activeTab, setActiveTab] = useState('RentCar');
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [openYear, setOpenYear] = useState(false);
+  const [cartype, setDeliver] = useState('New Car');
 
   const [lowPrice, setLowPrice] = useState(0);
   const [highPrice, setHighPrice] = useState(0);
@@ -78,16 +66,16 @@ export default function BuyCar() {
   const [highMilage, setHighMilage] = useState(0);
 
   const [carCompanyIndex, setcarCompanyIndex] = useState(-1);
-   
   const [carCompanyName, setCarCompanyName] = useState('');
 
+  const [carModelIndex, setcarModelIndex] = useState(-1);
   const [carModalName, setcarModalName] = useState('');
 
+  const [carModelYearIndex, setcarModelYearIndex] = useState(-1);
   const [carModalYear, setCarModalYear] = useState('');
 
   const [bodyTypeIndex, setBodyTypeIndex] = useState(-1);
   const [bodyType, setBodyType] = useState('');
-  const [bodyColor, setBodyColor] = useState('');
 
   const [transmissionTypeIndex, setTransmissionTypeIndex] = useState(-1);
   const [transmissionType, setTransmissionType] = useState('');
@@ -95,17 +83,17 @@ export default function BuyCar() {
   const [fuelTypeIndex, setFuelTypeIndex] = useState(-1);
   const [fuelType, setFuelType] = useState('');
 
+  const [yearRange, setYearRange] = useState([]);
+  const [bodyColor, setBodyColor] = useState('');
+
   const [carMakes, setCarMakes] = useState([]);
   const [carModals, setCarModals] = useState([]);
-
-  const [yearRange, setYearRange] = useState([]);
-
-  const CATEGORY_ID = '6192a1bdb915fe44dca1a4e3';
 
   const navigation = useNavigation();
   const renderThumb = useCallback(() => <Thumb />, []);
   const renderRail = useCallback(() => <Rail />, []);
   const renderRailSelected = useCallback(() => <RailSelected />, []);
+
   const renderLabel = useCallback(
     (value, lable, isOnEnd) => (
       <Label label={lable} text={value} isOnEnd={isOnEnd} />
@@ -113,36 +101,28 @@ export default function BuyCar() {
     [],
   );
   const renderNotch = useCallback(() => <Notch />, []);
-  const dispatch = useDispatch();
-  const {makes, modals} = useSelector(({metaData}) => metaData);
 
   const handleFilter = () => {
     navigation.navigate('BuyFilterResult', {
-      lowPrice: lowPrice,
-      highPrice: highPrice,
-      carCompanyName: carCompanyName,
-      carModalName: carModalName,
-      carModalYear: carModalYear,
-      bodyType: bodyType,
-      transmissionType: transmissionType,
-      fuelType: fuelType,
+      lowPrice,
+      highPrice,
+      carCompanyName,
+      carModalName,
+      carModalYear,
+      bodyType,
+      transmissionType,
+      fuelType,
       color: bodyColor,
       lowMilage,
       highMilage,
     });
   };
 
-  const handleValueChange = useCallback((low, high) => {
-    setLowPrice(low);
-    setHighPrice(high);
-  }, []);
+  const onComapnyTabPressed = filterName => {
+    dispatch(getModalsByFilter());
+  };
 
-  const handleMilageChange = useCallback((low, high) => {
-    setLowMilage(low);
-    setHighMilage(high);
-  }, []);
-
- 
+  const {makes, modals} = useSelector(state => state.metaData);
 
   useEffect(() => {
     let years = [];
@@ -189,16 +169,96 @@ export default function BuyCar() {
     setcarCompanyIndex(makeID?.make_id);
   };
 
+  const handleValueChange = useCallback((low, high) => {
+    setLowPrice(low);
+    setHighPrice(high);
+  }, []);
+
+  const handleMilageChange = useCallback((low, high) => {
+    setLowMilage(low);
+    setHighMilage(high);
+  }, []);
+
   return (
-    <ScrollView>
-      <View
-        style={styles.contentContainer}
+    <View>
+      <Header small title={'Buy Car'} menu />
+      <ScrollView
+        style={styles.ScrollView}
         showsVerticalScrollIndicator={false}>
-        <Text style={styles.headingTxt}>{t('carCompany')}</Text>
-        <DropDownPicker
+        <HorizontalServiceDetails
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+        />
+        <View style={{height: 15}}></View>
+        <View
+          style={{
+            height: 50,
+            width: '100%',
+            alignSelf: 'center',
+            // backgroundColor: 'lightgrey',
+            marginTop: 5,
+            flexDirection: 'row',
+            justifyContent: 'space-evenly',
+            borderRadius: 10,
+            alignItems: 'center',
+          }}>
+          <TouchableOpacity
+            onPress={() => setDeliver('New Car')}
+            style={{
+              backgroundColor: cartype === 'New Car' ? primaryLight : '#fff',
+              width: '40%',
+              height: '100%',
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: 10,
+              shadowOffset: {width: 100, height: 50},
+              shadowColor: '#000',
+              shadowOpacity: 1,
+              elevation: 15,
+            }}>
+            <Text
+              style={{
+                color: cartype === 'New Car' ? 'white' : 'black',
+                fontSize: 17,
+                fontWeight: '600',
+              }}>
+              New Car
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => setDeliver('Used')}
+            style={{
+              backgroundColor: cartype === 'Used' ? primaryLight : '#fff',
+              width: '40%',
+              height: '100%',
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: 10,
+              shadowOffset: {width: 100, height: 50},
+              shadowColor: '#000',
+              shadowOpacity: 1,
+              elevation: 15,
+            }}>
+            <Text
+              style={{
+                color: cartype === 'Used' ? 'white' : 'black',
+                fontSize: 17,
+                fontWeight: '600',
+              }}>
+              Used
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{height: 15}}></View>
+        <Tag
+          carData={carMakes}
+          setName={setCarCompanyName}
+          title={'Car Company'}
+        />
+        {/* <DropDownPicker
           placeholder="Car Company"
-          open={open}
-          setOpen={setOpen}
+          open={openModal}
+          setOpen={setOpenModal}
           items={carMakes}
           setItems={setCarMakes}
           value={carCompanyName}
@@ -211,9 +271,25 @@ export default function BuyCar() {
             zIndex: 99,
           }}
           style={{borderColor: text}}
+        /> */}
+        {carCompanyName.length > 0 && carModals.length > 0 && (
+          <Tag
+            carData={carModals}
+            // index={carCompanyName}
+            // setIndex={setCarCompanyName}
+            // setName={setCarMakes}
+            title={'Car Model'}
+          />
+        )}
+        <Tag
+          carData={yearRange}
+          // index={carCompanyName}
+          // setIndex={setCarCompanyName}
+          setName={setCarModalYear}
+          title={'Car Modal Year'}
         />
 
-        {carModals.length > 0 && (
+        {/* {carModals.length > 0 && (
           <>
             <Text style={styles.headingTxt}>{t('carModal')}</Text>
             <DropDownPicker
@@ -229,8 +305,8 @@ export default function BuyCar() {
               style={{zIndex: 10, borderColor: text}}
             />
           </>
-        )}
-        <Text style={styles.headingTxt}>{t('carModalYear')}</Text>
+        )} */}
+        {/* <Text style={styles.headingTxt}>{t('carModalYear')}</Text>
         <DropDownPicker
           placeholder="Car Modal Year"
           open={openYear}
@@ -242,44 +318,12 @@ export default function BuyCar() {
           searchPlaceholder="Search year..."
           listMode="SCROLLVIEW"
           style={{zIndex: 10, borderColor: text}}
-        />
+        /> */}
 
-        <Text style={styles.headingTxt}>{t('transmissionType')}</Text>
-        <Tag
-          index={transmissionTypeIndex}
-          setIndex={setTransmissionTypeIndex}
-          carData={transmissionTypeData}
-          setName={setTransmissionType}
-        />
-        <Text style={styles.headingTxt}>{t('fuelType')}</Text>
-        <Tag
-          index={fuelTypeIndex}
-          setIndex={setFuelTypeIndex}
-          carData={fuelTypes}
-          setName={setFuelType}
-        />
-        <Text style={styles.headingTxt}>{t('bodyType')}</Text>
-        <Tag
-          carData={bodyTypeData}
-          index={bodyTypeIndex}
-          setIndex={setBodyTypeIndex}
-          setName={setBodyType}
-        />
-        <Text style={styles.headingTxt}>{t('carColor')}</Text>
-        <AuthInput
-          value={bodyColor}
-          onChangeText={setBodyColor}
-          placeholder={t('carColor')}
-          RightIcon={<COLOR />}
-          RightIconActive={<COLOR_ACTIVE />}
-        />
-
-        <Text style={[styles.headingTxt, styles.mt15]}>
-          Milage <Text style={styles.lightText}>(km)</Text>
-        </Text>
-        <View style={styles.range}>
-          <Text style={styles.rangeNum}>0 km</Text>
-          <Text style={styles.rangeNum}>300000 km</Text>
+        {/* <Text style={styles.headingTxt}>{t('bodyType')}</Text> */}
+        <View style={{flexDirection: 'row'}}>
+          <Text>Price Range</Text>
+          <Text style={{color: text}}>(hourly)</Text>
         </View>
         <RangeSlider
           style={{width: '95%', marginTop: -30}}
@@ -296,35 +340,64 @@ export default function BuyCar() {
           renderRailSelected={renderRailSelected}
           onValueChanged={handleMilageChange}
         />
+        <View style={{height: 15}}></View>
+        <Tag carData={bodyTypeData} setName={setBodyType} title={'Body Type'} />
+        <View style={{height: 15}}></View>
+        <Tag
+          carData={transmissionTypeData}
+          setName={setTransmissionType}
+          title={'Transmission Type'}
+        />
+        <Tag title={'Fuel Type'} carData={fuelTypes} setName={setFuelType} />
 
-        <Text style={styles.headingTxt}>Price Range</Text>
+        {/* <Text style={styles.headingTxt}>{t('carColor')}</Text>
+        <AuthInput
+          value={bodyColor}
+          onChangeText={setBodyColor}
+          placeholder={t('carColor')}
+          RightIcon={<COLOR />}
+          RightIconActive={<COLOR_ACTIVE />}
+        /> */}
+
+        {/* <Text style={[styles.headingTxt, styles.mt15]}>
+          {t('milage')} <Text style={styles.lightText}>(km)</Text>
+        </Text>
         <View style={styles.range}>
-          <Text style={styles.rangeNum}>4000 AED</Text>
-          <Text style={styles.rangeNum}>80000 AED</Text>
+          <Text style={styles.rangeNum}>0 km</Text>
+          <Text style={styles.rangeNum}>300000 km</Text>
+        </View>
+
+        <Text style={styles.headingTxt}>
+          {t('priceRange')}{' '}
+          <Text style={styles.lightText}>({t('hourly')})</Text>
+        </Text>
+        <View style={styles.range}>
+          <Text style={styles.rangeNum}>0 AED</Text>
+          <Text style={styles.rangeNum}>9000 AED</Text>
         </View>
         <RangeSlider
           style={{width: '95%', marginTop: -30}}
           gravity={'center'}
-          min={4000}
-          max={80000}
-          step={500}
+          min={0}
+          max={9000}
+          step={100}
           allowLabelOverflow
           selectionColor="#F8C6C6"
           blankColor="#f8c6c6"
           renderThumb={renderThumb}
           renderRail={renderRail}
-          renderLabel={txt => renderLabel(txt, 'AED', true)}
           renderRailSelected={renderRailSelected}
+          renderLabel={renderLabel}
           onValueChanged={handleValueChange}
-        />
-
+        /> */}
         <RatingButton
-          title={t('applyFilter')}
+          title={'Apply Filters'}
           type="gradiant"
           onPress={handleFilter}
           style={styles.filterBtn}
         />
-      </View>
-    </ScrollView>
+        <View style={{height: 50, marginTop: 40}}></View>
+      </ScrollView>
+    </View>
   );
 }

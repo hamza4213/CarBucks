@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {View, Text, ScrollView} from 'react-native';
+import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
 
 import styles from './styles';
 
@@ -29,7 +29,7 @@ import Header from '../../common/components/header';
 import AuthInput from '../../common/components/input/authInput';
 import {t} from 'i18next';
 import DropDownPicker from 'react-native-dropdown-picker';
-import {text} from '../../common/constants/colors';
+import {text, primaryLight, primaryDark} from '../../common/constants/colors';
 import HorizontalServiceDetails from '../home/HorizontalServiceDetails';
 
 const bodyTypeData = [
@@ -57,6 +57,7 @@ export default function RentCar() {
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [openYear, setOpenYear] = useState(false);
+  const [cartype, setDeliver] = useState('New Car');
 
   const [lowPrice, setLowPrice] = useState(0);
   const [highPrice, setHighPrice] = useState(0);
@@ -188,10 +189,76 @@ export default function RentCar() {
           activeTab={activeTab}
           setActiveTab={setActiveTab}
         />
-        <DropDownPicker
+        <View style={{height: 15}}></View>
+        <View
+          style={{
+            height: 50,
+            width: '100%',
+            alignSelf: 'center',
+            // backgroundColor: 'lightgrey',
+            marginTop: 5,
+            flexDirection: 'row',
+            justifyContent: 'space-evenly',
+            borderRadius: 10,
+            alignItems: 'center',
+          }}>
+          <TouchableOpacity
+            onPress={() => setDeliver('New Car')}
+            style={{
+              backgroundColor: cartype === 'New Car' ? primaryLight : '#fff',
+              width: '40%',
+              height: '100%',
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: 10,
+              shadowOffset: {width: 100, height: 50},
+              shadowColor: '#000',
+              shadowOpacity: 1,
+              elevation: 15,
+            }}>
+            <Text
+              style={{
+                color: cartype === 'New Car' ? 'white' : 'black',
+                fontSize: 17,
+                fontWeight: '600',
+              }}>
+              New Car
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => setDeliver('Used')}
+            style={{
+              backgroundColor: cartype === 'Used' ? primaryLight : '#fff',
+              width: '40%',
+              height: '100%',
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: 10,
+              shadowOffset: {width: 100, height: 50},
+              shadowColor: '#000',
+              shadowOpacity: 1,
+              elevation: 15,
+            }}>
+            <Text
+              style={{
+                color: cartype === 'Used' ? 'white' : 'black',
+                fontSize: 17,
+                fontWeight: '600',
+              }}>
+              Used
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{height: 15}}></View>
+        <Tag
+          carData={carMakes}
+          setName={setCarCompanyName}
+          title={'Car Company'}
+        />
+        {/* <DropDownPicker
           placeholder="Car Company"
-          open={open}
-          setOpen={setOpen}
+          open={openModal}
+          setOpen={setOpenModal}
           items={carMakes}
           setItems={setCarMakes}
           value={carCompanyName}
@@ -204,9 +271,25 @@ export default function RentCar() {
             zIndex: 99,
           }}
           style={{borderColor: text}}
+        /> */}
+        {carCompanyName.length > 0 && carModals.length > 0 && (
+          <Tag
+            carData={carModals}
+            // index={carCompanyName}
+            // setIndex={setCarCompanyName}
+            // setName={setCarMakes}
+            title={'Car Model'}
+          />
+        )}
+        <Tag
+          carData={yearRange}
+          // index={carCompanyName}
+          // setIndex={setCarCompanyName}
+          setName={setCarModalYear}
+          title={'Car Modal Year'}
         />
 
-        {carModals.length > 0 && (
+        {/* {carModals.length > 0 && (
           <>
             <Text style={styles.headingTxt}>{t('carModal')}</Text>
             <DropDownPicker
@@ -222,8 +305,8 @@ export default function RentCar() {
               style={{zIndex: 10, borderColor: text}}
             />
           </>
-        )}
-        <Text style={styles.headingTxt}>{t('carModalYear')}</Text>
+        )} */}
+        {/* <Text style={styles.headingTxt}>{t('carModalYear')}</Text>
         <DropDownPicker
           placeholder="Car Modal Year"
           open={openYear}
@@ -235,45 +318,12 @@ export default function RentCar() {
           searchPlaceholder="Search year..."
           listMode="SCROLLVIEW"
           style={{zIndex: 10, borderColor: text}}
-        />
+        /> */}
 
-        <Text style={styles.headingTxt}>{t('bodyType')}</Text>
-        <Tag
-          carData={bodyTypeData}
-          index={bodyTypeIndex}
-          setIndex={setBodyTypeIndex}
-          setName={setBodyType}
-        />
-        <Text style={styles.headingTxt}>{t('transmissionType')}</Text>
-        <Tag
-          index={transmissionTypeIndex}
-          setIndex={setTransmissionTypeIndex}
-          carData={transmissionTypeData}
-          setName={setTransmissionType}
-        />
-        <Text style={styles.headingTxt}>{t('fuelType')}</Text>
-        <Tag
-          index={fuelTypeIndex}
-          setIndex={setFuelTypeIndex}
-          carData={fuelTypes}
-          setName={setFuelType}
-        />
-
-        <Text style={styles.headingTxt}>{t('carColor')}</Text>
-        <AuthInput
-          value={bodyColor}
-          onChangeText={setBodyColor}
-          placeholder={t('carColor')}
-          RightIcon={<COLOR />}
-          RightIconActive={<COLOR_ACTIVE />}
-        />
-
-        <Text style={[styles.headingTxt, styles.mt15]}>
-          {t('milage')} <Text style={styles.lightText}>(km)</Text>
-        </Text>
-        <View style={styles.range}>
-          <Text style={styles.rangeNum}>0 km</Text>
-          <Text style={styles.rangeNum}>300000 km</Text>
+        {/* <Text style={styles.headingTxt}>{t('bodyType')}</Text> */}
+        <View style={{flexDirection: 'row'}}>
+          <Text>Price Range</Text>
+          <Text style={{color: text}}>(hourly)</Text>
         </View>
         <RangeSlider
           style={{width: '95%', marginTop: -30}}
@@ -290,6 +340,32 @@ export default function RentCar() {
           renderRailSelected={renderRailSelected}
           onValueChanged={handleMilageChange}
         />
+        <View style={{height: 15}}></View>
+        <Tag carData={bodyTypeData} setName={setBodyType} title={'Body Type'} />
+        <View style={{height: 15}}></View>
+        <Tag
+          carData={transmissionTypeData}
+          setName={setTransmissionType}
+          title={'Transmission Type'}
+        />
+        <Tag title={'Fuel Type'} carData={fuelTypes} setName={setFuelType} />
+
+        {/* <Text style={styles.headingTxt}>{t('carColor')}</Text>
+        <AuthInput
+          value={bodyColor}
+          onChangeText={setBodyColor}
+          placeholder={t('carColor')}
+          RightIcon={<COLOR />}
+          RightIconActive={<COLOR_ACTIVE />}
+        /> */}
+
+        {/* <Text style={[styles.headingTxt, styles.mt15]}>
+          {t('milage')} <Text style={styles.lightText}>(km)</Text>
+        </Text>
+        <View style={styles.range}>
+          <Text style={styles.rangeNum}>0 km</Text>
+          <Text style={styles.rangeNum}>300000 km</Text>
+        </View>
 
         <Text style={styles.headingTxt}>
           {t('priceRange')}{' '}
@@ -313,14 +389,14 @@ export default function RentCar() {
           renderRailSelected={renderRailSelected}
           renderLabel={renderLabel}
           onValueChanged={handleValueChange}
-        />
+        /> */}
         <RatingButton
-          title={t('applyFilter')}
+          title={'Apply Filters'}
           type="gradiant"
           onPress={handleFilter}
           style={styles.filterBtn}
         />
-        <View style={{height: 50, marginTop: 200}}></View>
+        <View style={{height: 50, marginTop: 40}}></View>
       </ScrollView>
     </View>
   );

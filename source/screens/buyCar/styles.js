@@ -2,6 +2,14 @@ import {StyleSheet} from 'react-native';
 import {headingText, tagText, textDark} from '../../common/constants/colors';
 
 export default StyleSheet.create({
+  ScrollView: {
+    height: '100%',
+    backgroundColor: 'white',
+    marginTop: -18,
+    borderTopLeftRadius: 18,
+    borderTopRightRadius: 18,
+    paddingHorizontal: 20,
+  },
   contentContainer: {
     backgroundColor: 'white',
     borderTopLeftRadius: 18,
