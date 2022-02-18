@@ -36,6 +36,7 @@ import {
 import {wp} from '../../utils/helper';
 import BuyCar from '../buyCar';
 import RentCar from '../rentCar';
+import HorizontalServiceDetails from './HorizontalServiceDetails';
 import ProductsCatagories from './Products';
 import ServicesCatagories from './Services';
 import styles from './style';
@@ -76,7 +77,7 @@ export default function Home() {
 
   const loadInitialData = async () => {
     let res = await dispatch(getCategories());
-    if (!!res?.length) onCategoryPress(res[0]);
+    // if (!!res?.length) onCategoryPress(res[0]);
     dispatch(getSubCategoryById());
     dispatch(getPromotions());
   };
@@ -90,13 +91,6 @@ export default function Home() {
     }
   };
 
-  const onCategoryPress = item => {
-    setActiveTab(item);
-    console.log('activeTabis', activeTab);
-    // console.log('consoling active tab', activeTab?.type, subCategories[0]);
-    // console.table(activeTab?.type, subCategories[0]);
-    // setFilteredData(subCategories.filter(i => i?.parent === item._id));
-  };
   const carservicedata = [
     {img: require('../../assets/pngs/FirstCar.png'), desc: 'Car Wash Service'},
     {img: require('../../assets/pngs/SecondCar.png'), desc: 'Ac Repairing'},
@@ -115,14 +109,7 @@ export default function Home() {
       desc: 'Cooling Coil Replacement',
     },
   ];
-  const FileCaetagories = [
-    'Services',
-    'Accessories',
-    'Products',
-    'RentCar',
-    'BuyCar',
-    'Insurance',
-  ];
+
   return (
     <ScrollView style={{height: '100%', backgroundColor: '#FFF'}}>
       <LinearGradient
@@ -156,49 +143,10 @@ export default function Home() {
       <View style={[styles.contentContainer]}>
         <SearchInput />
 
-        {/* <View style={styles.catagoryContainer}>
-          <Text style={styles.title}>{t('category')}</Text>
-
-          {categories && categories.length ? (
-            categories.map((category, index) => {
-              return <CatagoryCard item={category} key={index} />;
-            })
-          ) : (
-            <NotFound text="No Categories Found." />
-          )}
-        </View> */}
-
-        <LinearGradientWrapper
-          style={{
-            marginTop: 20,
-            borderRadius: 20,
-            width: '100%',
-            height: 50,
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: 5,
-          }}>
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            style={{flexGrow: 0}}>
-            {/* changin caetagories as FileCaetagories */}
-            {FileCaetagories.map(item => (
-              <TouchableOpacity
-                key={item}
-                onPress={() => onCategoryPress(item)}
-                style={[styles.tab, activeTab === item && styles.focusedTab]}>
-                <Text
-                  style={
-                    activeTab === item ? styles.ActiveTabText : styles.tabText
-                  }>
-                  {item}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-        </LinearGradientWrapper>
-
+        <HorizontalServiceDetails
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+        />
         <View style={styles.productsContainer}>
           <LatoText padding={10} />
           {activeTab === 'Insurance' ? (
@@ -215,11 +163,7 @@ export default function Home() {
                 ServicePackagesdata={ServicePackagesdata}
               />
             </>
-          ) : activeTab?.description === 'RentCar' ? (
-            <RentCar />
-          ) : (
-            <BuyCar />
-          )}
+          ) : null}
         </View>
       </View>
 

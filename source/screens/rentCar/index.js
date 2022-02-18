@@ -30,6 +30,7 @@ import AuthInput from '../../common/components/input/authInput';
 import {t} from 'i18next';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {text} from '../../common/constants/colors';
+import HorizontalServiceDetails from '../home/HorizontalServiceDetails';
 
 const bodyTypeData = [
   {name: 'Sedan', id: 1},
@@ -52,7 +53,7 @@ const fuelTypes = [
 
 export default function RentCar() {
   const dispatch = useDispatch();
-
+  const [activeTab, setActiveTab] = useState('RentCar');
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [openYear, setOpenYear] = useState(false);
@@ -179,12 +180,14 @@ export default function RentCar() {
 
   return (
     <View>
-      {/* <Header small title={t('carRental')} /> */}
-
-      <View
-        style={styles.contentContainer}
+      <Header small title={'Rent Car'} menu />
+      <ScrollView
+        style={styles.ScrollView}
         showsVerticalScrollIndicator={false}>
-        <Text style={styles.headingTxt}>{t('carCompany')}</Text>
+        <HorizontalServiceDetails
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+        />
         <DropDownPicker
           placeholder="Car Company"
           open={open}
@@ -317,7 +320,8 @@ export default function RentCar() {
           onPress={handleFilter}
           style={styles.filterBtn}
         />
-      </View>
+        <View style={{height: 50, marginTop: 200}}></View>
+      </ScrollView>
     </View>
   );
 }
