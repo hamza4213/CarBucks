@@ -1,43 +1,51 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { View, Text, TouchableOpacity, Alert } from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+  Keyboard,
+} from 'react-native';
 import ChatScreenHeader from '../../common/components/header/chatScreenHeader';
 import styles from './styles';
-import { useDispatch, useSelector } from 'react-redux';
-import { GiftedChat } from 'react-native-gifted-chat';
+import {useDispatch, useSelector} from 'react-redux';
+import {GiftedChat} from 'react-native-gifted-chat';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 import {
   emptyRoom,
   sendMessage,
   getRoomMessages,
 } from '../../redux/actions/chat';
-import { socket } from '../../navigation';
-import { useRoute } from '@react-navigation/native';
+import {socket} from '../../navigation';
+import {useRoute} from '@react-navigation/native';
 import Files from '../../assets/svgs/files.svg';
 import ImagePicker from 'react-native-image-crop-picker';
-import { PutObjectCommand } from '@aws-sdk/client-s3';
+import {PutObjectCommand} from '@aws-sdk/client-s3';
 import {
   TextractClient,
   DetectDocumentTextCommand,
   AnalyzeDocumentCommand,
 } from '@aws-sdk/client-textract';
-import { client, s3Client } from '../../../App';
+import {client, s3Client} from '../../../App';
 
 export default function ChatScreen() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
 
   const {
-    params: { roomId },
+    params: {roomId},
   } = useRoute();
 
   const giftedChatRef = useRef();
-  const { user } = useSelector(({ auth }) => auth);
-  const { messages } = useSelector(({ chat }) => chat);
-
+  const {user} = useSelector(({auth}) => auth);
+  const {messages} = useSelector(({chat}) => chat);
 
   useEffect(() => {
     dispatch(getRoomMessages(roomId));
 
-    socket.emit('join', { user, roomId }, res => {
+    socket.emit('join', {user, roomId}, res => {
       console.log('Joined: ', res);
     });
 
@@ -64,8 +72,8 @@ export default function ChatScreen() {
       },
     };
 
-    socket.emit('sendMessage', { message: text }, roomId, res => {
-      console.log('text msg in socket.emit', { msg, res });
+    socket.emit('sendMessage', {message: text}, roomId, res => {
+      console.log('text msg in socket.emit', {msg, res});
     });
     dispatch(sendMessage(msg));
   };
@@ -95,7 +103,7 @@ export default function ChatScreen() {
       await s3Client.send(new PutObjectCommand(options));
 
       let s3ImageLink = `https://s3.amazonaws.com/cdn.carbucks.com/${imageName}`;
-      console.log({ s3ImageLink });
+      console.log({s3ImageLink});
 
       // const text = message.length ? message[0].text : '';
 
@@ -109,11 +117,9 @@ export default function ChatScreen() {
         },
       };
 
-      socket.emit('sendMessage', { file: s3ImageLink }, roomId, res => {
-        console.log('msg in socket.emit', { msg, res });
+      socket.emit('sendMessage', {file: s3ImageLink}, roomId, res => {
+        console.log('msg in socket.emit', {msg, res});
       });
-
-
 
       dispatch(sendMessage(msg));
 
@@ -123,26 +129,43 @@ export default function ChatScreen() {
     } catch (error) {
       // setLoading(false);
 
-      console.log({ sendImageError: error });
+      console.log({sendImageError: error});
       Alert.alert(
         'ERROR',
         error?.message || 'Error occured while sending image.',
       );
     }
   };
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      () => {
+        setKeyboardVisible(true); // or some other action
+      },
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => {
+        setKeyboardVisible(false); // or some other action
+      },
+    );
 
+    return () => {
+      keyboardDidHideListener.remove();
+      keyboardDidShowListener.remove();
+    };
+  }, []);
   return (
     <View>
-      <ChatScreenHeader user={user} >
-
-      </ChatScreenHeader>
+      <ChatScreenHeader user={user}></ChatScreenHeader>
       <View style={styles.contentContainer}>
         <GiftedChat
-          audio={true}
-          inverted={false}
+          // audio={true}
+          // inverted={false}
+
           ref={giftedChatRef}
           renderUsernameOnMessage={true}
-          // renderMessageImage
           messages={messages}
           onSend={sendHandler}
           user={{
@@ -160,6 +183,7 @@ export default function ChatScreen() {
             </TouchableOpacity>
           )}
         />
+        {isKeyboardVisible ? <KeyboardAwareScrollView /> : null}
       </View>
     </View>
   );

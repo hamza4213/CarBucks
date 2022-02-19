@@ -42,7 +42,8 @@ const Settings = () => {
               setItems={setItems}
               placeholder={t('languages')}
               onChangeValue={language => {
-                i18n.changeLanguage(language);
+                // changeLanguage(language);
+                console.log(language);
               }}
               style={{
                 borderWidth: 0,

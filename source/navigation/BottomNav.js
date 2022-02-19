@@ -244,7 +244,8 @@ export default function BottomNav() {
     <>
       {loading ? <AppLoader textContent="Please wait..." /> : null}
       <Tab.Navigator
-        tabBarOptions={{showLabel: false}}
+        // keyboardHidesTabBar={true}
+        tabBarOptions={{showLabel: false, keyboardHidesTabBar: true}}
         screenOptions={({route}) => ({
           headerShown: false,
           tabBarIcon: ({focused, color, size}) => {

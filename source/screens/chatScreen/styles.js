@@ -10,7 +10,7 @@ export default StyleSheet.create({
     borderTopLeftRadius: 18,
     borderTopRightRadius: 18,
     height: height - 160,
-    justifyContent: 'center',
+    // justifyContent: 'center',
   },
   chatSection: {
     paddingHorizontal: 20,

@@ -30,6 +30,11 @@ export default StyleSheet.create({
     marginVertical: 20,
     paddingVertical: 10,
     paddingHorizontal: 20,
+    backgroundColor: '#FFF',
+    shadowOffset: {width: 100, height: 50},
+    shadowColor: '#000',
+    shadowOpacity: 1,
+    elevation: 15,
   },
   settingEntery: {
     // padding: 5,
