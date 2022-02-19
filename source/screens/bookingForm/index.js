@@ -354,17 +354,20 @@ export default function BookingForm() {
               title="Chat"
               style={styles.chatWrapper}
               onPress={() =>
-                navigation.navigate('ChatHistory', {screen: 'Chat'})
+                // navigation.navigate('ChatHistory', {screen: 'Chat'})
+                console.log('Chat pressed')
               }
             />
           </View>
           <View style={styles.viewProfileContainer}>
             <TouchableOpacity
-              onPress={() =>
-                navigation.navigate('VendorProfile', {
-                  vendorData: params?.vendor,
-                })
-              }>
+              // onPress={() =>
+              //   navigation.navigate('VendorProfile', {
+              //     // vendorData: params?.vendor,
+              //     vendorData: {firstName: 'Hamza', lastName: 'Shabbir'},
+              //   })
+              // }
+              onPress={() => navigation.navigate('ClientProfile')}>
               <Text style={styles.viewProfileText}>View Profile</Text>
             </TouchableOpacity>
           </View>

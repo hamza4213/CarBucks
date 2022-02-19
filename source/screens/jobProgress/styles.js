@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 import {
   border,
   lightPlaceHolder,
@@ -23,7 +23,7 @@ export default StyleSheet.create({
     marginTop: 50,
     padding: 20,
     marginBottom: 10,
-    backgroundColor: "#FFF"
+    backgroundColor: '#FFF',
   },
   cardTopView: {
     flexDirection: 'row',
@@ -78,6 +78,7 @@ export default StyleSheet.create({
     marginTop: 10,
     paddingVertical: 3,
     width: 100,
+    height: 40,
   },
   textStyle: {
     fontSize: 10,

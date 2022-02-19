@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -15,20 +15,19 @@ import RatingButton from '../../common/components/button/ratingButton';
 import CalenderIcon from '../../assets/svgs/calenderIcon.svg';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
-import { useNavigation } from '@react-navigation/native';
-import { useRoute } from '@react-navigation/core';
-import { useDispatch } from 'react-redux';
-import { cancelOrder, completeService } from '../../redux/actions/services';
-import { t } from 'i18next';
-import DatePicker from 'react-native-date-picker'
-import { currencySymbol } from '../../utils/helper';
+import {useNavigation} from '@react-navigation/native';
+import {useRoute} from '@react-navigation/core';
+import {useDispatch} from 'react-redux';
+import {cancelOrder, completeService} from '../../redux/actions/services';
+import {t} from 'i18next';
+import DatePicker from 'react-native-date-picker';
+import {currencySymbol} from '../../utils/helper';
 
 export default function JobProgress() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const { params } = useRoute();
-
+  const {params} = useRoute();
 
   const [date, setDate] = useState(null);
   const [time, setTime] = useState(null);
@@ -59,16 +58,16 @@ export default function JobProgress() {
   };
 
   const sendOrderCancelRequest = () => {
-    dispatch(cancelOrder({ orderId: params.id, reason }));
+    dispatch(cancelOrder({orderId: params.id, reason}));
   };
 
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
-      style={{ height: '100%', backgroundColor: 'white' }}>
+      style={{height: '100%', backgroundColor: 'white'}}>
       <Header title={t('jobProgress')} />
       <View style={styles.container}>
-        <View style={{ marginTop: -120 }}>
+        <View style={{marginTop: -120}}>
           <CardView cardElevation={5} cornerRadius={15} style={styles.card}>
             <View style={styles.cardTopView}>
               <Image style={styles.image} source={profilePic} />
@@ -99,9 +98,9 @@ export default function JobProgress() {
                 </TouchableOpacity>
                 <RatingButton
                   type="gradient"
-                  style={[styles.cancelBtn, { alignSelf: "flex-end" }]}
+                  style={[styles.cancelBtn, {alignSelf: 'flex-end'}]}
                   textStyle={styles.textStyle}
-                  title={t('cancelService')}
+                  title={'cancelService'}
                   onPress={() => setCancelView(!cancelView)}
                 />
               </View>
@@ -114,7 +113,7 @@ export default function JobProgress() {
           </CardView>
 
           <RatingButton
-            title={t('markAsCompleted')}
+            title={'Mark As Completed'}
             type="gradient"
             style={styles.sendButton}
             onPress={onPressCompleted}
@@ -132,7 +131,7 @@ export default function JobProgress() {
                 onChangeText={setReason}
               />
               <RatingButton
-                title={t('send')}
+                title={'Send'}
                 type="gradient"
                 style={styles.sendButton}
                 onPress={sendOrderCancelRequest}
@@ -154,13 +153,13 @@ export default function JobProgress() {
             modal
             open={show}
             date={(mode === 'date' ? date : time) || new Date()}
-            onConfirm={(date) => {
-              onChange("", date)
+            onConfirm={date => {
+              onChange('', date);
             }}
             mode="datetime"
             // onChange={() =>  }
             onCancel={() => {
-              setShow(false)
+              setShow(false);
             }}
           />
         </View>

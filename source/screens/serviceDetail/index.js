@@ -231,15 +231,21 @@ export default function ServiceDetails({}) {
               title="Chat"
               style={styles.chatWrapper}
               onPress={goToChat}
+              // onPress={() => navigation.navigate('Chat')}
             />
           </View>
           <View style={styles.viewProfileContainer}>
             <TouchableOpacity
-              onPress={() =>
-                navigation.navigate('VendorProfile', {
-                  vendorData: params.item.vendor,
-                })
-              }>
+              // onPress={() =>
+              //   navigation.navigate('VendorProfile', {
+              //     // vendorData: params.item.vendor,
+              //     vendorData: {
+              //       firstName: 'Hamza',
+              //       lastName: 'Shabbir',
+              //     },
+              //   })
+              // }
+              onPress={() => navigation.navigate('ClientProfile')}>
               <Text style={styles.viewProfileText}>View Profile</Text>
             </TouchableOpacity>
           </View>
