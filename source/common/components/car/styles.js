@@ -5,6 +5,11 @@ export default StyleSheet.create({
     padding: 20,
     borderRadius: 20,
     marginVertical: 10,
+    backgroundColor: '#FFF',
+    shadowOffset: {width: 100, height: 50},
+    shadowColor: '#000',
+    shadowOpacity: 1,
+    elevation: 3,
   },
 
   Carfooter: {
@@ -29,9 +34,8 @@ export default StyleSheet.create({
   },
   carImg: {
     marginVertical: 10,
-    marginHorizontal: 'auto',
     height: 130,
-    width: '100%',
+    width: '90%',
   },
   carPrice: {
     color: '#A90000',

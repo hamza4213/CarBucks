@@ -44,10 +44,11 @@ export default function RentCarDetail() {
       <Header small title="Car Details Page" />
       <View style={styles.contentContainer}>
         <Image
-          source={{uri: carData?.details?.image[0]}}
+          // source={{uri: carData?.details?.image[0]}}
+          source={{uri: 'https://i.ibb.co/mcBzrBx/yellowcar.png'}}
           style={{
             height: 100,
-            width: 200,
+            width: '100%',
             marginVertical: 10,
             marginLeft: 'auto',
             marginRight: 'auto',
@@ -149,7 +150,10 @@ export default function RentCarDetail() {
               onPress={() => callNumber(carData?.vendor?.phone || '')}>
               <PhoneP height={19} width={19} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.ProfileIcon} onPress={gotoChat}>
+            <TouchableOpacity
+              style={styles.ProfileIcon}
+              //  onPress={gotoChat}
+            >
               <Message height={19} width={19} />
             </TouchableOpacity>
           </View>

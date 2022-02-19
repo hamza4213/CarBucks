@@ -13,6 +13,8 @@ import AudioIcon from '../../assets/svgs/audioIcon.svg';
 import {launchImageLibrary} from 'react-native-image-picker';
 import AudioRecorderPlayer from 'react-native-audio-recorder-player';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import TimePickerComp from '../bookingForm/timePicker';
+import {text} from '../../common/constants/colors';
 
 export default function PickADate() {
   const navigation = useNavigation();
@@ -21,6 +23,7 @@ export default function PickADate() {
   const [endDate, setEndDate] = useState(null);
   const [selectedDates, setSelectedDate] = useState(null);
   const [note, setNote] = useState('');
+  const [activeTime, setActiveTime] = useState(-1);
   const [mode, setMode] = useState('date');
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
@@ -30,7 +33,7 @@ export default function PickADate() {
   const [passportImage, setPassportImage] = useState(null);
   const [audioStats, setAudioStats] = useState(null);
   const [isStartTime, setIsStartTime] = useState(false);
-
+  const [showCalendar, setShowCalendar] = useState(false);
   const [pickupLocation, setPickupLocation] = useState('');
   const [dropLocation, setDropLocation] = useState('');
 
@@ -131,7 +134,6 @@ export default function PickADate() {
       recordSecs: 0,
     });
   };
-
   return (
     <ScrollView>
       <Header title="Pickup time" />
@@ -143,9 +145,7 @@ export default function PickADate() {
           markingType={'period'}
           markedDates={selectedDates}
           monthFormat={'yyyy MMMM'}
-          onMonthChange={month => {
-           
-          }}
+          onMonthChange={month => {}}
           hideExtraDays={true}
           disableMonthChange={true}
           firstDay={1}
@@ -157,11 +157,18 @@ export default function PickADate() {
 
         <View style={styles.DateInText}>
           <View style={styles.timeDateFrom}>
-            <View>
+            <TouchableOpacity onPress={() => setShowCalendar(true)}>
               <Text style={styles.dateHeading}>From</Text>
               <Text style={styles.textDate}>{startDate || 'yyyy-mm-dd'}</Text>
-            </View>
-            <TouchableOpacity
+
+              {/* <Text style={styles.textDate}>{startDate.toDateString()}</Text> */}
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setShowCalendar(true)}>
+              <Text style={styles.dateHeading}>To</Text>
+              <Text style={styles.textDate}>{endDate || 'yyyy-mm-dd'}</Text>
+              {/* <Text style={styles.textDate}>{endDate.toDateString()}</Text> */}
+            </TouchableOpacity>
+            {/* <TouchableOpacity
               onPress={() => {
                 setIsStartTime(true);
                 setShow(true);
@@ -171,14 +178,14 @@ export default function PickADate() {
               <Text style={styles.textDate}>
                 {startTime ? moment(startTime).format('hh:mm A') : 'hh-mm'}
               </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
           <View style={styles.timeDataTo}>
             <View>
-              <Text style={styles.dateHeading}>To</Text>
-              <Text style={styles.textDate}>{endDate || 'yyyy-mm-dd'}</Text>
+              {/* <Text style={styles.dateHeading}>To</Text>
+              <Text style={styles.textDate}>{endDate || 'yyyy-mm-dd'}</Text> */}
             </View>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               onPress={() => {
                 setIsStartTime(false);
                 setShow(true);
@@ -188,27 +195,31 @@ export default function PickADate() {
               <Text style={styles.textDate}>
                 {endTime ? moment(endTime).format('hh:mm A') : 'hh-mm'}
               </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
+            <TimePickerComp
+              activeTime={activeTime}
+              setActiveTime={setActiveTime}
+            />
           </View>
         </View>
-        <View style={styles.detailInnerContainer}>
+        {/* <View style={styles.detailInnerContainer}>
           <TextInput
             value={pickupLocation}
             onChangeText={setPickupLocation}
             placeholder="Enter Pickup Location"
             style={styles.detailTitil}
           />
-        </View>
-        <View style={styles.detailInnerContainer}>
+        </View> */}
+        {/* <View style={styles.detailInnerContainer}>
           <TextInput
             value={dropLocation}
             onChangeText={setDropLocation}
             placeholder="Enter Drop Location"
             style={styles.detailTitil}
           />
-        </View>
+        </View> */}
 
-        <View style={styles.detailInnerContainer}>
+        {/* <View style={styles.detailInnerContainer}>
           <TextInput
             value={note}
             onChangeText={setNote}
@@ -221,18 +232,18 @@ export default function PickADate() {
               style={{marginRight: 5}}>
               <Files height={25} width={25} />
             </TouchableOpacity>
-            {/* <TouchableOpacity onPress={selectFile}>
+            <TouchableOpacity onPress={selectFile}>
                 <Files height={25} width={25} />
-              </TouchableOpacity> */}
+              </TouchableOpacity>
             <TouchableOpacity
               onLongPress={onStartRecord}
               onPressOut={onStopRecord}>
               <AudioIcon height={25} width={25} />
             </TouchableOpacity>
           </View>
-        </View>
+        </View> */}
 
-        <View style={styles.btnContainer}>
+        {/* <View style={styles.btnContainer}>
           <RatingButton
             onPress={() => selectImage('passportImage')}
             style={styles.addressBtn}
@@ -245,7 +256,20 @@ export default function PickADate() {
             textStyle={styles.addressTxt}
             title="Upload License"
           />
-        </View>
+        </View> */}
+        <View style={{height: 15}}></View>
+        <Text>Note</Text>
+        <TextInput
+          style={{
+            backgroundColor: 'lightgrey',
+            width: '100%',
+            height: 50,
+            borderRadius: 10,
+            opacity: 0.7,
+          }}
+          placeholder="Type Here"
+          placeholderTextColor={text}
+        />
         <RatingButton
           title="Next"
           type="gradiant"
@@ -264,7 +288,7 @@ export default function PickADate() {
           }
         />
       </View>
-      {show && (
+      {/* {show && (
         <DateTimePicker
           mode={'time'}
           is24Hour={false}
@@ -273,7 +297,8 @@ export default function PickADate() {
           testID="dateTimePicker"
           value={isStartTime ? startTime || new Date() : endTime || new Date()}
         />
-      )}
+      )} */}
+      <View style={{header: 15, marginTop: 30}}></View>
     </ScrollView>
   );
 }

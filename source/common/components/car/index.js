@@ -14,15 +14,13 @@ export default function Car({
 }) {
   const navigation = useNavigation();
   return (
-    <CardView cornerRadius={16} style={styles.carContainer}>
+    <View cornerRadius={16} style={styles.carContainer}>
       <Text style={styles.carTag}>near {distance}</Text>
       <View style={styles.ImgContainter}>
         <Image
-          height={100}
-          width="100%"
-          source={{uri: img}}
+          source={{uri: 'https://i.ibb.co/mcBzrBx/yellowcar.png'}}
           // source={img}
-          style={styles.carImg}
+          style={{height: 100, width: '100%'}}
         />
       </View>
       <View style={styles.Carfooter}>
@@ -40,6 +38,6 @@ export default function Car({
           <Text style={styles.lightText}>({numberOfReviews} Reviews)</Text>
         </Text>
       </View>
-    </CardView>
+    </View>
   );
 }

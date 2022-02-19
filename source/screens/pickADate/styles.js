@@ -23,6 +23,8 @@ export default StyleSheet.create({
   timeDateFrom: {
     marginRight: 20,
     flexDirection: 'row',
+    width: '50%',
+    justifyContent: 'space-between',
   },
   timeDataTo: {
     marginTop: 10,

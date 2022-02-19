@@ -48,23 +48,33 @@ export default function RentFilterResult() {
           <Text style={styles.mainHeading}>Nearby You</Text>
           <Text style={styles.filter}>Filter</Text>
         </View>
-        {filteredCars.map((item, index) => (
-          <TouchableOpacity
-            activeOpacity={1}
-            key={index}
-            onPress={() =>
-              navigation.navigate('RentCarDetail', {carData: item})
-            }>
-            <Car
-              img={item?.details?.image[0]}
-              distance="2km"
-              name={item.title}
-              rentPerHour={item.details.price}
-              numberOfReviews={56}
-              reviewsPercentage={item.score}
-            />
-          </TouchableOpacity>
-        ))}
+        {/* {filteredCars.map((item, index) => (
+         
+        ))} */}
+        {/* Changing Map function and rendering single entity */}
+        <TouchableOpacity
+          activeOpacity={1}
+          // key={index}
+          onPress={() =>
+            navigation.navigate('RentCarDetail', {
+              carData: {
+                distance: '2km',
+                name: 'item.title',
+                rentPerHour: 'item.details.price',
+                numberOfReviews: 56,
+                reviewsPercentage: 'item.score',
+              },
+            })
+          }>
+          <Car
+            // img={item?.details?.image[0]}
+            distance="2km"
+            name={'item.title'}
+            rentPerHour={'item.details.price'}
+            numberOfReviews={56}
+            reviewsPercentage={'item.score'}
+          />
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
