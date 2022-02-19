@@ -1,8 +1,11 @@
 import {StyleSheet, Dimensions} from 'react-native';
-import {lightPlaceHolder, primaryLight} from '../../common/constants/colors';
+import colors, {
+  lightPlaceHolder,
+  primaryLight,
+  text,
+} from '../../common/constants/colors';
 
 const {height} = Dimensions.get('window');
-
 export default StyleSheet.create({
   container: {
     backgroundColor: 'white',
@@ -106,7 +109,7 @@ export default StyleSheet.create({
   },
   nextBtn: {
     height: 50,
-    marginTop: height * 0.22,
+    marginTop: 10,
   },
   textStyle: {
     fontSize: 24,
@@ -129,7 +132,8 @@ export default StyleSheet.create({
     fontWeight: '500',
   },
   detailText: {
-    fontSize: 12,
+    fontSize: 14,
+    color: text,
   },
   service: {
     fontWeight: '400',

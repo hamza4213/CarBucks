@@ -30,6 +30,8 @@ import {capitalizeFirstLetter} from '../../common/utils/strings';
 import {ChatApi} from '../../redux/apis';
 import Video from 'react-native-video';
 import SplashFile from '../../assets/splash.mp4';
+import DirectionIcon from '../../assets/svgs/directionicon.svg';
+import ImagesInRow from '../../common/components/ServiceComponents/ImagesInRow';
 const chatApi = new ChatApi();
 
 export default function ServiceDetails({}) {
@@ -113,10 +115,17 @@ export default function ServiceDetails({}) {
             source={SplashFile}
             style={{height: 150, width: '100%', borderRadius: 10}}
           />
+          <View style={{height: 15}}></View>
+          <ImagesInRow />
           <View style={styles.profile}>
             <View style={styles.reviewCountWrapper}>
               <View style={styles.starWrapper}>
-                {stars(params?.item?.score)}
+                {/* {stars(params?.item?.score)} */}
+                {/* Changing the upper line */}
+                <YellowStar style={styles.star} />
+                <YellowStar style={styles.star} />
+                <YellowStar style={styles.star} />
+                <YellowStar style={styles.star} />
               </View>
               <Text style={styles.reviewCount}>(4.2K)</Text>
             </View>
@@ -124,10 +133,15 @@ export default function ServiceDetails({}) {
 
           <View style={styles.detailWrapper}>
             <Text style={styles.desHeading}>Description</Text>
+            {/* Changing Description for now */}
             <Text style={styles.detailText}>
-              {params?.item?.details?.description
+              {/* {params?.item?.details?.description
                 ? params.item.details.description
-                : 'N/A'}
+                : 'N/A'} */}
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's Lorem Ipsum is
+              simply dummy text of the printing and typesetting industry. Lorem
+              Ipsum has been the industry's
             </Text>
           </View>
 
@@ -142,81 +156,28 @@ export default function ServiceDetails({}) {
               ))}
             </View>
           </View>
-          <View style={styles.availableServices}>
-            <Text style={styles.desHeading}>Select Service Packages</Text>
-            <View style={{height: 15}}></View>
-            <View style={{width: '100%', height: 110, backgroundColor: '#fff'}}>
-              <View
-                style={{
-                  width: '100%',
-                  flexDirection: 'row',
-                }}>
-                <View style={{width: '60%', flexDirection: 'row'}}>
-                  <View
-                    style={{
-                      height: 20,
-                      width: 20,
-                      borderRadius: 60,
-                      borderWidth: 1,
-                      borderColor: primaryLight,
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>
-                    <TouchableOpacity
-                      onPress={() => setSelected('Basic')}
-                      style={{
-                        height: 15,
-                        width: 15,
-                        borderRadius: 20,
-                        backgroundColor:
-                          selected === 'Basic' ? primaryLight : null,
-                      }}></TouchableOpacity>
-                  </View>
-                  <Text style={{marginLeft: 5}}>Basic Service</Text>
-                </View>
-                <View
-                  style={{
-                    width: '40%',
-                    alignItems: 'center',
-                  }}>
-                  <Text style={{color: primaryLight}}>$ 100</Text>
-                </View>
-              </View>
-              <View style={{height: 5}}></View>
-              <View
-                style={{
-                  width: '100%',
-                  flexDirection: 'row',
-                }}>
-                <View style={{width: '60%', flexDirection: 'row'}}>
-                  <View
-                    style={{
-                      height: 20,
-                      width: 20,
-                      borderRadius: 60,
-                      borderWidth: 1,
-                      borderColor: primaryLight,
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>
-                    <TouchableOpacity
-                      onPress={() => setSelected('Premium')}
-                      style={{
-                        height: 15,
-                        width: 15,
-                        borderRadius: 20,
-                        backgroundColor:
-                          selected === 'Premium' ? primaryLight : null,
-                      }}></TouchableOpacity>
-                  </View>
-                  <Text style={{marginLeft: 5}}>Premium Service</Text>
-                </View>
-                <View style={{width: '40%', alignItems: 'center'}}>
-                  <Text style={{color: primaryLight}}>$ 100</Text>
-                </View>
-              </View>
-            </View>
-          </View>
+          <View style={{height: 15}}></View>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('SelectServicePackages')}
+            style={{
+              width: '90%',
+              height: 45,
+              borderRadius: 10,
+              backgroundColor: '#fff',
+              alignSelf: 'center',
+              flexDirection: 'row',
+              paddingHorizontal: 15,
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              shadowOffset: {width: 100, height: 50},
+              shadowColor: '#000',
+              shadowOpacity: 1,
+              elevation: 15,
+            }}>
+            <Text>Select Service Packages</Text>
+            <DirectionIcon />
+          </TouchableOpacity>
+          <View style={{height: 15}}></View>
           <RatingButton
             type="gradiant"
             title="Book Now"

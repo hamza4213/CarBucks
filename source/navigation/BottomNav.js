@@ -83,6 +83,7 @@ import PopularCarWashService from '../screens/serviceDetail/PopularCarWashServic
 import AccessoriesDetails from '../screens/accessoriesProducts/AccessoriesDetails';
 import MultipleAccessories from '../screens/accessoriesProducts/MultipleAccessories';
 import AddNewAddress from '../screens/accessoriesProducts/AddNewAddress';
+import SelectServicePackages from '../screens/serviceDetail/SelectServicePackages';
 
 const HomeStack = createStackNavigator();
 const ChatStack = createStackNavigator();
@@ -129,6 +130,10 @@ const HomeNav = () => (
     <HomeStack.Screen name="ClientProfile" component={ClientProfile} />
     <HomeStack.Screen name="ClientProfile2" component={ClientProfile2} />
     <HomeStack.Screen name="ServiceDetails" component={ServiceDetails} />
+    <HomeStack.Screen
+      name="SelectServicePackages"
+      component={SelectServicePackages}
+    />
     <HomeStack.Screen
       name="CarServicesDetails"
       component={CarServicesDetails}

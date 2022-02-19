@@ -169,10 +169,12 @@ export default function Home() {
 
       <View style={styles.imageView}>
         <SliderBox
-          onCurrentImagePressed={index =>
-            navigation.navigate('SingleProductDetail', {
-              promotion: promotions[index],
-            })
+          onCurrentImagePressed={
+            // index =>
+            // navigation.navigate('SingleProductDetail', {
+            //   promotion: promotions[index],
+            // })
+            () => console.log('Car Pressed')
           }
           parentWidth={wp(90)}
           images={getImage()}

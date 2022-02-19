@@ -190,66 +190,7 @@ export default function RentCar() {
           setActiveTab={setActiveTab}
         />
         <View style={{height: 15}}></View>
-        <View
-          style={{
-            height: 50,
-            width: '100%',
-            alignSelf: 'center',
-            // backgroundColor: 'lightgrey',
-            marginTop: 5,
-            flexDirection: 'row',
-            justifyContent: 'space-evenly',
-            borderRadius: 10,
-            alignItems: 'center',
-          }}>
-          <TouchableOpacity
-            onPress={() => setDeliver('New Car')}
-            style={{
-              backgroundColor: cartype === 'New Car' ? primaryLight : '#fff',
-              width: '40%',
-              height: '100%',
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderRadius: 10,
-              shadowOffset: {width: 100, height: 50},
-              shadowColor: '#000',
-              shadowOpacity: 1,
-              elevation: 15,
-            }}>
-            <Text
-              style={{
-                color: cartype === 'New Car' ? 'white' : 'black',
-                fontSize: 17,
-                fontWeight: '600',
-              }}>
-              New Car
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => setDeliver('Used')}
-            style={{
-              backgroundColor: cartype === 'Used' ? primaryLight : '#fff',
-              width: '40%',
-              height: '100%',
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderRadius: 10,
-              shadowOffset: {width: 100, height: 50},
-              shadowColor: '#000',
-              shadowOpacity: 1,
-              elevation: 15,
-            }}>
-            <Text
-              style={{
-                color: cartype === 'Used' ? 'white' : 'black',
-                fontSize: 17,
-                fontWeight: '600',
-              }}>
-              Used
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={{height: 15}}></View>
+
         <Tag
           carData={carMakes}
           setName={setCarCompanyName}
