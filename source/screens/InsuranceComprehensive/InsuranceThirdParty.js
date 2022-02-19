@@ -94,7 +94,8 @@ const InsuranceThirdParty = ({navigation}) => {
       <InsuranceBuyButton
         desc={'But this policy'}
         payment={activeTab === 0 ? '100' : '50'}
-        onPress={() => navigation.navigate('BuyInsuranceScreen')}
+        // onPress={() => navigation.navigate('BuyInsuranceScreen')}
+        onPress={() => navigation.navigate('InsuranceDocuments')}
       />
     </View>
   );

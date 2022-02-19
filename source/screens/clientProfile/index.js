@@ -29,15 +29,24 @@ import {
   AnalyzeDocumentCommand,
 } from '@aws-sdk/client-textract';
 import {t} from 'i18next';
-
+import colors, {
+  text,
+  primaryDark,
+  primaryLight,
+} from '../../common/constants/colors';
+import LocationIcon from '../../assets/svgs/LocationIconshort.svg';
+import Editicon from '../../assets/svgs/Editiconshort.svg';
+import CalIcon from '../../assets/svgs/calshorticon.svg';
+import BellIcon from '../../assets/svgs/WhiteBell.svg';
+import RedEditIcon from '../../assets/svgs/RedEditIcon.svg';
+import LinearGradientWrapper from '../../common/components/LinearGradientWrapper';
 export default function ClientProfile() {
   const [imgUrl, setImgUrl] = useState('');
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const params = useRoute().params;
   const {user, token} = useSelector(state => state.auth);
-
- 
+  const [profileinfo, setProfileinfo] = useState('Profile');
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
 
@@ -95,7 +104,7 @@ export default function ClientProfile() {
 
       setLoading(true);
       const res = await s3Client.send(new PutObjectCommand(options));
-      
+
       const params = {
         Document: {
           S3Object: {
@@ -153,7 +162,7 @@ export default function ClientProfile() {
       setLoading(false);
     } catch (error) {
       setLoading(false);
- 
+
       Alert.alert(
         'ERROR',
         error?.message || 'Error occured scanning document.',
@@ -163,8 +172,14 @@ export default function ClientProfile() {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      <Header menu title={t('myProfile')} />
-
+      <Header
+        title={'Profile'}
+        rightComponent={
+          <TouchableOpacity style={{marginTop: 10}}>
+            <BellIcon />
+          </TouchableOpacity>
+        }
+      />
       <View style={styles.contentContainer}>
         <View style={{marginTop: -120}}>
           <TouchableOpacity onPress={onPickImage} style={styles.imageContainer}>
@@ -176,6 +191,20 @@ export default function ClientProfile() {
               }
               style={styles.image}
             />
+            <View
+              style={{
+                position: 'absolute',
+                backgroundColor: '#fff',
+                alignSelf: 'flex-end',
+                width: 30,
+                height: 30,
+                justifyContent: 'center',
+                alignItems: 'center',
+                bottom: 0,
+                right: -10,
+              }}>
+              <RedEditIcon />
+            </View>
           </TouchableOpacity>
           <View style={styles.profileRatingContainer}>
             <CardView
@@ -187,9 +216,205 @@ export default function ClientProfile() {
                 style={
                   styles.profileName
                 }>{`${user?.firstName} ${user?.lastName}`}</Text>
+              <View style={{flexDirection: 'row'}}>
+                <YellowStar style={styles.star} />
+                <YellowStar style={styles.star} />
+                <YellowStar style={styles.star} />
+                <Text>(4.2k)</Text>
+              </View>
             </CardView>
           </View>
-          <View style={styles.buttonContainer}>
+          <Text style={{alignSelf: 'center', color: text}}>
+            Car Mechanic / Engine Specialist
+          </Text>
+          <View
+            style={{
+              width: '100%',
+              justifyContent: 'space-evenly',
+              flexDirection: 'row',
+            }}>
+            <View
+              style={{
+                width: '30%',
+                // justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Text style={{fontWeight: 'bold'}}>1000+</Text>
+              <Text>Projects Done</Text>
+            </View>
+            <View
+              style={{
+                width: '30%',
+                // justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Text style={{fontWeight: 'bold'}}>5000+</Text>
+              <Text>Working Hours</Text>
+            </View>
+            <View
+              style={{
+                width: '30%',
+                // justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Text style={{fontWeight: 'bold'}}>300+</Text>
+              <Text>Reviews</Text>
+            </View>
+          </View>
+          <View style={{height: 15}}></View>
+          <View
+            style={{
+              width: '100%',
+              justifyContent: 'space-evenly',
+              flexDirection: 'row',
+              height: 60,
+              borderRadius: 10,
+              shadowOffset: {width: 100, height: 50},
+              shadowColor: '#000',
+              shadowOpacity: 1,
+              elevation: 15,
+              backgroundColor: '#fff',
+            }}>
+            <TouchableOpacity
+              onPress={() => setProfileinfo('Profile')}
+              style={{
+                width: '30%',
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor:
+                  profileinfo === 'Profile' ? primaryLight : null,
+                borderRadius: 10,
+              }}>
+              <Text
+                style={{
+                  fontWeight: profileinfo === 'Profile' ? 'bold' : 'normal',
+                  color: profileinfo === 'Profile' ? 'white' : 'black',
+                }}>
+                Profile Info
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => setProfileinfo('Reviews')}
+              style={{
+                width: '30%',
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor:
+                  profileinfo === 'Reviews' ? primaryLight : null,
+                borderRadius: 10,
+              }}>
+              <Text
+                style={{
+                  fontWeight: profileinfo === 'Reviews' ? 'bold' : 'normal',
+                  color: profileinfo === 'Reviews' ? 'white' : 'black',
+                }}>
+                Reviews
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => setProfileinfo('Others')}
+              style={{
+                width: '30%',
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: profileinfo === 'Others' ? primaryLight : null,
+                borderRadius: 10,
+              }}>
+              <Text
+                style={{
+                  fontWeight: profileinfo === 'Others' ? 'bold' : 'normal',
+                  color: profileinfo === 'Others' ? 'white' : 'black',
+                }}>
+                Others
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={{height: 15}}></View>
+          <Text style={{alignSelf: 'center', color: text}}>
+            This is Dominic Charles, I have 12 years Experience, Lorem Ipsum is
+            simply dummy text of the printing and typesetting industry
+          </Text>
+          <View style={{height: 15}}></View>
+          <View
+            style={{
+              width: '100%',
+              justifyContent: 'space-evenly',
+              flexDirection: 'row',
+              alignItems: 'center',
+              // height: 60,
+              // backgroundColor: 'teal',
+            }}>
+            <View
+              style={{
+                height: 30,
+                width: 30,
+                borderRadius: 30,
+                shadowOffset: {width: 100, height: 50},
+                shadowColor: '#000',
+                shadowOpacity: 1,
+                elevation: 15,
+                backgroundColor: '#fff',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <LocationIcon />
+            </View>
+            <Text> 4152 Cessna Drive, United States</Text>
+            <TouchableOpacity>
+              <Editicon />
+            </TouchableOpacity>
+          </View>
+          <View style={{height: 15}}></View>
+          <View
+            style={{
+              width: '100%',
+              justifyContent: 'space-evenly',
+              flexDirection: 'row',
+              alignItems: 'center',
+              // height: 60,
+              // backgroundColor: 'teal',
+            }}>
+            <View
+              style={{
+                height: 30,
+                width: 30,
+                borderRadius: 30,
+                shadowOffset: {width: 100, height: 50},
+                shadowColor: '#000',
+                shadowOpacity: 1,
+                elevation: 15,
+                backgroundColor: '#fff',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <CalIcon />
+            </View>
+            <Text> +1 XXXXX YYYYY, +1 XXXXX YYYYY</Text>
+            <TouchableOpacity>
+              <Editicon />
+            </TouchableOpacity>
+          </View>
+          <View style={{height: 15}}></View>
+          <LinearGradientWrapper
+            style={{
+              width: '60%',
+              height: 40,
+              borderRadius: 15,
+              alignSelf: 'center',
+            }}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('CarDetails')}
+              style={{
+                height: '100%',
+                width: '100%',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Text style={{color: 'white'}}>Enter Your Car Details</Text>
+            </TouchableOpacity>
+          </LinearGradientWrapper>
+          <View style={{height: 15, marginTop: 30}}></View>
+          {/* <View style={styles.buttonContainer}>
             <RatingButton
               onPress={() => navigation.navigate('EditProfile')}
               title={t('edit')}
@@ -257,7 +482,7 @@ export default function ClientProfile() {
                   : 'No Mulkiya id found'}
               </Text>
             </View>
-          ) : null}
+          ) : null} */}
           {/* {loading ? (
             <RatingButton
               type="gradiant"

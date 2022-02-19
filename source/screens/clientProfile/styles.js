@@ -10,16 +10,20 @@ const {height} = Dimensions.get('window');
 
 export default StyleSheet.create({
   contentContainer: {
-    height,
+    height: '100%',
     backgroundColor: 'white',
     marginTop: -35,
     paddingHorizontal: 20,
     borderTopLeftRadius: 18,
     borderTopRightRadius: 18,
+    // backgroundColor: 'teal',
   },
   imageContainer: {
     marginTop: 50,
     alignItems: 'center',
+    width: '40%',
+    // backgroundColor: 'white',
+    alignSelf: 'center',
   },
   image: {
     width: 140,

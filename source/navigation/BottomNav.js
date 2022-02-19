@@ -84,6 +84,7 @@ import AccessoriesDetails from '../screens/accessoriesProducts/AccessoriesDetail
 import MultipleAccessories from '../screens/accessoriesProducts/MultipleAccessories';
 import AddNewAddress from '../screens/accessoriesProducts/AddNewAddress';
 import SelectServicePackages from '../screens/serviceDetail/SelectServicePackages';
+import CarDetails from '../screens/clientProfile/CarDetails';
 
 const HomeStack = createStackNavigator();
 const ChatStack = createStackNavigator();
@@ -128,6 +129,7 @@ const HomeNav = () => (
     <HomeStack.Screen name="RentCarDetail" component={RentCarDetail} />
     <HomeStack.Screen name="ThankYou" component={ThankYou} />
     <HomeStack.Screen name="ClientProfile" component={ClientProfile} />
+    <HomeStack.Screen name="CarDetails" component={CarDetails} />
     <HomeStack.Screen name="ClientProfile2" component={ClientProfile2} />
     <HomeStack.Screen name="ServiceDetails" component={ServiceDetails} />
     <HomeStack.Screen
