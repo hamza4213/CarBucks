@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   Alert,
+  TextInput,
 } from 'react-native';
 import CardView from 'react-native-cardview';
 import ImagePicker from 'react-native-image-crop-picker';
@@ -126,6 +127,43 @@ const CarDetails = ({navigation}) => {
             <ImagePickerForCar text={'Add/Scan Driving Licence'} />
             <ImagePickerForCar text={'Add/Scan Emirates id'} />
           </View>
+          <View style={{height: 15}}></View>
+          <Text style={{fontWeight: '600'}}>Write Your Overview</Text>
+          <View style={{height: 15}}></View>
+          <View
+            style={{
+              width: '100%',
+              height: 190,
+              borderWidth: 1,
+              borderRadius: 10,
+              borderColor: text,
+            }}>
+            <TextInput
+              placeholder="Write your review here"
+              placeholderTextColor={text}
+              color={text}
+              multiline={true}
+            />
+          </View>
+          <View style={{height: 15}}></View>
+          <LinearGradientWrapper
+            style={{
+              width: '90%',
+              height: 40,
+              alignSelf: 'center',
+              borderRadius: 10,
+            }}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('ClientProfile')}
+              style={{
+                width: '100%',
+                height: '100%',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Text style={{fontWeight: '600', color: '#fff'}}>Save</Text>
+            </TouchableOpacity>
+          </LinearGradientWrapper>
           <View style={{height: 15, marginTop: 30}}></View>
         </View>
       </View>
