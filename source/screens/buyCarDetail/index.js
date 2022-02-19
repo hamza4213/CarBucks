@@ -17,11 +17,12 @@ import {useSelector} from 'react-redux';
 import {callNumber, sendPhoneMessage} from '../../utils';
 import Car from '../../assets/pngs/carHomePage.png';
 import {SliderBox} from 'react-native-image-slider-box';
-
+import colors, {primaryDark, primaryLight} from '../../common/constants/colors';
+import LinearGradientWrapper from '../../common/components/LinearGradientWrapper';
 export default function BuyCarDetail() {
   const navigation = useNavigation();
   const [imgs, setimgs] = useState([{uri: car?.details?.image[0]}]);
-
+  const [paymentmethod, setPaymentmethod] = useState('Online');
   const [readMore, setReadMore] = useState(false);
   const {car} = useRoute().params;
   const {details} = car;
@@ -36,17 +37,18 @@ export default function BuyCarDetail() {
     <ScrollView style={styles.CarDetailContainer}>
       <Header small title="Car Details Page" />
       <View style={styles.contentContainer}>
-        {/* <Image
-          source={{uri: car?.details?.image}}
+        <Image
+          // source={{uri: car?.details?.image}}
+          source={{uri: 'https://i.ibb.co/mcBzrBx/yellowcar.png'}}
           style={{
             height: 100,
-            width: 200,
+            width: '100%',
             marginVertical: 10,
             marginLeft: 'auto',
             marginRight: 'auto',
             resizeMode: 'cover',
           }}
-        /> */}
+        />
         <SliderBox
           autoplay
           circleLoop
@@ -57,7 +59,7 @@ export default function BuyCarDetail() {
           ]}
         />
         <View style={styles.CarBody}>
-          <Text style={styles.carTitle}>{car?.title}</Text>
+          <Text style={styles.carTitle}>car?.title</Text>
 
           <Text style={styles.carPrice}>{`${details?.price} AED`}</Text>
         </View>
@@ -190,6 +192,89 @@ export default function BuyCarDetail() {
           style={{paddingVertical: 10, marginVertical: 20}}
           onPress={() => navigation.navigate('Checkout')}
         /> */}
+        <View style={{height: 15}}></View>
+        <Text>Choose Payment Method</Text>
+        <View style={{height: 15}}></View>
+        <TouchableOpacity
+          onPress={() => setPaymentmethod('Online')}
+          style={{
+            flexDirection: 'row',
+            width: '30%',
+            justifyContent: 'space-between',
+          }}>
+          <View
+            style={{
+              height: 20,
+              width: 20,
+              borderRadius: 60,
+              borderWidth: 1,
+              borderColor: primaryLight,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            {paymentmethod === 'Online' ? (
+              <View
+                style={{
+                  height: 15,
+                  width: 15,
+                  borderRadius: 20,
+                  backgroundColor: primaryLight,
+                }}></View>
+            ) : null}
+          </View>
+          <Text>Pay Online</Text>
+        </TouchableOpacity>
+        <View style={{height: 15}}></View>
+        <TouchableOpacity
+          onPress={() => setPaymentmethod('Cash')}
+          style={{
+            flexDirection: 'row',
+            width: '30%',
+            justifyContent: 'space-between',
+          }}>
+          <View
+            style={{
+              height: 20,
+              width: 20,
+              borderRadius: 60,
+              borderWidth: 1,
+              borderColor: primaryLight,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            {paymentmethod === 'Cash' ? (
+              <View
+                style={{
+                  height: 15,
+                  width: 15,
+                  borderRadius: 20,
+                  backgroundColor: primaryLight,
+                }}></View>
+            ) : null}
+          </View>
+          <Text>Pay Cash</Text>
+        </TouchableOpacity>
+        <View style={{height: 15}}></View>
+        <LinearGradientWrapper
+          style={{width: '100%', height: 50, borderRadius: 10}}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('Checkout', {
+                paramData: {
+                  qty: 1,
+                },
+                paramType: 'service',
+              })
+            }
+            style={{
+              width: '100%',
+              height: '100%',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Text style={{fontWeight: 'bold', color: 'white'}}>Book Now</Text>
+          </TouchableOpacity>
+        </LinearGradientWrapper>
       </View>
     </ScrollView>
   );

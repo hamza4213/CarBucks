@@ -104,7 +104,7 @@ export default function RentCar() {
 
   const handleFilter = () => {
     navigation.navigate('BuyFilterResult', {
-      lowPrice,
+      lowPrice: '200',
       highPrice,
       carCompanyName,
       carModalName,

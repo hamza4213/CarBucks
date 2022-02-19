@@ -16,9 +16,8 @@ export default function BuyFilterResult() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const {cars} = useSelector(state => state.products);
- 
+
   const params = useRoute().params;
- 
 
   useEffect(() => {
     dispatch(getCarToBuy(params));
@@ -36,21 +35,31 @@ export default function BuyFilterResult() {
           <Text style={styles.mainHeading}>Nearby You</Text>
           <Text style={styles.filter}>Filter</Text>
         </View>
-        {cars.map((car, index) => (
-          <TouchableOpacity
-            activeOpacity={1}
-            onPress={() => navigation.navigate('BuyCarDetail', {car})}>
-            <Car
-              key={index}
-              img={car.details.image}
-              distance="2km"
-              name={car.title}
-              rentPerHour={car.details.price}
-              numberOfReviews={4.8}
-              reviewsPercentage={56}
-            />
-          </TouchableOpacity>
-        ))}
+        {/* {cars.map((car, index) => ( */}
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={() =>
+            navigation.navigate('BuyCarDetail', {
+              car: {
+                distance: '2km',
+                name: 'car.title',
+                rentPerHour: 'car.details.price',
+                numberOfReviews: 4.8,
+                reviewsPercentage: 56,
+              },
+            })
+          }>
+          <Car
+            // key={index}
+            // img={car.details.image}
+            distance="2km"
+            name={'car.title'}
+            rentPerHour={'car.details.price'}
+            numberOfReviews={4.8}
+            reviewsPercentage={56}
+          />
+        </TouchableOpacity>
+        {/* ))} */}
       </View>
     </ScrollView>
   );
