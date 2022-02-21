@@ -31,14 +31,16 @@ import {t} from 'i18next';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {text, primaryLight, primaryDark} from '../../common/constants/colors';
 import HorizontalServiceDetails from '../home/HorizontalServiceDetails';
-
+import MicroCar from '../../assets/svgs/MicroCarSvg.svg';
+import AntiqueCarSvg from '../../assets/svgs/AntiqueCarSvg.svg';
+import SedancarSvg from '../../assets/svgs/SedancarSvg.svg';
 const bodyTypeData = [
-  {name: 'Sedan', id: 1},
-  {name: 'Micro', id: 2},
-  {name: 'Coupe', id: 3},
-  {name: 'Sports Car', id: 4},
-  {name: 'Station Wagon', id: 5},
-  {name: 'Hatchback ', id: 6},
+  {name: 'Sedan', id: 1, svg: <SedancarSvg />},
+  {name: 'Micro', id: 2, svg: <MicroCar />},
+  {name: 'Coupe', id: 3, svg: <AntiqueCarSvg />},
+  {name: 'Sports Car', id: 4, svg: <SedancarSvg />},
+  {name: 'Station Wagon', id: 5, svg: <SedancarSvg />},
+  {name: 'Hatchback ', id: 6, svg: <SedancarSvg />},
 ];
 
 const transmissionTypeData = [
@@ -189,7 +191,7 @@ export default function RentCar() {
           activeTab={activeTab}
           setActiveTab={setActiveTab}
         />
-        <View style={{height: 15}}></View>
+        <View style={{height: 30}}></View>
 
         <Tag
           carData={carMakes}
@@ -213,6 +215,7 @@ export default function RentCar() {
           }}
           style={{borderColor: text}}
         /> */}
+        <View style={{height: 25}}></View>
         {carCompanyName.length > 0 && carModals.length > 0 && (
           <Tag
             carData={carModals}
@@ -262,8 +265,9 @@ export default function RentCar() {
         /> */}
 
         {/* <Text style={styles.headingTxt}>{t('bodyType')}</Text> */}
+        <View style={{height: 25}}></View>
         <View style={{flexDirection: 'row'}}>
-          <Text>Price Range</Text>
+          <Text style={{fontWeight: '600'}}>Price Range</Text>
           <Text style={{color: text}}>(hourly)</Text>
         </View>
         <RangeSlider
@@ -281,14 +285,16 @@ export default function RentCar() {
           renderRailSelected={renderRailSelected}
           onValueChanged={handleMilageChange}
         />
-        <View style={{height: 15}}></View>
+        <View style={{height: 30}}></View>
         <Tag carData={bodyTypeData} setName={setBodyType} title={'Body Type'} />
-        <View style={{height: 15}}></View>
+        <View style={{height: 30}}></View>
         <Tag
           carData={transmissionTypeData}
           setName={setTransmissionType}
           title={'Transmission Type'}
         />
+        <View style={{height: 30}}></View>
+
         <Tag title={'Fuel Type'} carData={fuelTypes} setName={setFuelType} />
 
         {/* <Text style={styles.headingTxt}>{t('carColor')}</Text>

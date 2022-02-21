@@ -13,12 +13,17 @@ export default function Tag({carData, setName, title}) {
   console.log('carData', carData);
   return (
     <>
-      <Text>{title}</Text>
+      <Text style={{fontWeight: '600'}}>{title}</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {carData.map((item, index) => (
           <TouchableOpacity
             style={{
               borderRadius: 10,
+              // height: 80,
+              // width: 100,
+              marginBottom: 15,
+              justifyContent: 'center',
+              alignItems: 'center',
               marginVertical: 10,
               marginRight: 20,
               marginLeft: 5,
@@ -34,6 +39,7 @@ export default function Tag({carData, setName, title}) {
             }}
             activeOpacity={1}
             onPress={() => clickhandler(item, index)}>
+            {item.svg ? item.svg : null}
             <Text style={styles.tagText}>
               {item.name ? item.name : item.label ? item.label : '-'}
             </Text>
