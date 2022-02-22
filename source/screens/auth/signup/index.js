@@ -26,6 +26,7 @@ import SeePassword from '../../../assets/svgs/seePassword.svg';
 import SeePasswordActive from '../../../assets/svgs/seePasswordGrad.svg';
 import HidePassword from '../../../assets/svgs/hidePasswordWhite.svg';
 import HidePasswordActive from '../../../assets/svgs/hidePasswordGrad.svg';
+import PhoneRed from '../../../assets/svgs/PhoneInputSvg.svg';
 import Phone from '../../../assets/svgs/phone.svg';
 import Eidt from '../../../assets/svgs/edit.svg';
 import EidtActive from '../../../assets/svgs/editActive.svg';
@@ -33,18 +34,21 @@ import CountryPicker from 'react-native-country-picker-modal';
 import Header from '../../../common/components/header';
 import AuthInput from '../../../common/components/input/authInput';
 import RatingButton from '../../../common/components/button/ratingButton';
+import TextInputSignup from '../../../common/components/input/TextInputSignup';
+import HearInput from '../../../common/components/input/HearInput';
 
 export default function Signup() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [isChecked, setChecked] = useState(false);
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
+  // const [firstName, setFirstName] = useState('');
+  // const [lastName, setLastName] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [phone, setPhone] = useState('');
   const [loader, setLoader] = useState(null);
-  const [country, setCountry] = useState('Pakistan');
-  const [password, setPassword] = useState('');
+  // const [country, setCountry] = useState('Pakistan');
+  // const [password, setPassword] = useState('');
+  const [userdata, setUserdata] = useState({});
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [show, setShow] = useState(false);
   const [show2, setShow2] = useState(false);
@@ -58,27 +62,28 @@ export default function Signup() {
   };
 
   const onSubmit = () => {
-    setLoader(true);
-    const data = {
-      firstName,
-      lastName,
-      email,
-      phone,
-      password,
-      passwordConfirm,
-      country,
-    };
+    console.log('userData', userdata);
+    // setLoader(true);
+    // const data = {
+    //   firstName,
+    //   lastName,
+    //   email,
+    //   phone,
+    //   password,
+    //   passwordConfirm,
+    //   country,
+    // };
 
-    if (isVerified(data)) {
-      if (isChecked) {
-        dispatch(register({...data, promoCode}, stopLoader));
-      } else {
-        ShowToast(`Please Confirm Term and Conditions!`);
-        stopLoader();
-      }
-    } else {
-      stopLoader();
-    }
+    // if (isVerified(data)) {
+    //   if (isChecked) {
+    //     dispatch(register({...data, promoCode}, stopLoader));
+    //   } else {
+    //     ShowToast(`Please Confirm Term and Conditions!`);
+    //     stopLoader();
+    //   }
+    // } else {
+    //   stopLoader();
+    // }
   };
   const stopLoader = isSend => {
     setLoader(false);
@@ -119,7 +124,18 @@ export default function Signup() {
           <GradiantLogo />
         </View>
         <View style={styles.inputContainer}>
-          <AuthInput
+          <TextInputSignup
+            placeholder="First Name"
+            RightIcon={<Eidt />}
+            RightIconActive={<EidtActive />}
+            // value={firstName}
+            onChangeText={setUserdata}
+            state={userdata}
+            name="firstName"
+            style={styles.inputStyle}
+            keyboardType="default"
+          />
+          {/* <AuthInput
             placeholder="First Name"
             RightIcon={<Eidt />}
             RightIconActive={<EidtActive />}
@@ -127,8 +143,19 @@ export default function Signup() {
             onChangeText={setFirstName}
             style={styles.inputStyle}
             keyboardType="default"
+          /> */}
+          <TextInputSignup
+            placeholder="Last Name"
+            RightIcon={<Eidt />}
+            RightIconActive={<EidtActive />}
+            // value={lastName}
+            onChangeText={setUserdata}
+            state={userdata}
+            name="lastName"
+            style={styles.inputStyle}
+            keyboardType="default"
           />
-          <AuthInput
+          {/* <AuthInput
             placeholder="Last Name"
             RightIcon={<Eidt />}
             RightIconActive={<EidtActive />}
@@ -136,8 +163,19 @@ export default function Signup() {
             onChangeText={setLastName}
             style={styles.inputStyle}
             keyboardType="default"
+          /> */}
+          <TextInputSignup
+            placeholder="Email"
+            // value={email}
+            RightIcon={<Email />}
+            RightIconActive={<EmailActive />}
+            onChangeText={setUserdata}
+            state={userdata}
+            name="email"
+            style={styles.inputStyle}
+            keyboardType="email-address"
           />
-          <AuthInput
+          {/* <AuthInput
             placeholder="Email"
             value={email}
             RightIcon={<Email />}
@@ -145,8 +183,21 @@ export default function Signup() {
             onChangeText={setEmail}
             style={styles.inputStyle}
             keyboardType="email-address"
+          /> */}
+          <TextInputSignup
+            placeholder="Phone"
+            maxLength={15}
+            // value={phone}
+            onChangeText={setUserdata}
+            state={userdata}
+            name="phone"
+            style={styles.inputStyle}
+            keyboardType="phone-pad"
+            placeholder="Phone here"
+            RightIconActive={<PhoneRed />}
+            RightIcon={<Phone />}
           />
-          <AuthInput
+          {/* <AuthInput
             placeholder="Phone"
             phone
             maxLength={10}
@@ -173,12 +224,15 @@ export default function Signup() {
             style={styles.inputStyle}
             keyboardType="phone-pad"
             placeholder="Phone here"
-          />
-          <AuthInput
+          /> */}
+          <HearInput />
+          <TextInputSignup
             placeholder="Password"
-            value={password}
+            // value={password}
             style={styles.inputStyle}
-            onChangeText={setPassword}
+            onChangeText={setUserdata}
+            state={userdata}
+            name="password"
             inputType={show ? 'text' : 'password'}
             RightIcon={
               show ? (
@@ -203,7 +257,7 @@ export default function Signup() {
               )
             }
           />
-          <AuthInput
+          {/* <AuthInput
             placeholder="Confirm Password"
             style={styles.inputStyle}
             value={passwordConfirm}
@@ -231,8 +285,8 @@ export default function Signup() {
                 </TouchableOpacity>
               )
             }
-          />
-          <AuthInput
+          /> */}
+          {/* <AuthInput
             placeholder="Promo Code"
             RightIcon={<Eidt />}
             RightIconActive={<EidtActive />}
@@ -240,16 +294,16 @@ export default function Signup() {
             onChangeText={setPromoCode}
             style={styles.inputStyle}
             keyboardType="default"
-          />
+          /> */}
         </View>
-        <View style={styles.termsAndConditionsTextWrapper}>
+        {/* <View style={styles.termsAndConditionsTextWrapper}>
           <Checkbox isChecked={isChecked} setChecked={setChecked} />
 
           <Text style={styles.yesIAgree}>Yes ! Agree all </Text>
           <TouchableOpacity>
             <Text style={styles.termsAndConditions}>Terms & Conditions</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
         <RatingButton
           textStyle={styles.authTxt}
           title={loader ? <ActivityIndicator color="white" /> : 'Register'}
@@ -259,7 +313,6 @@ export default function Signup() {
         />
         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
           <Text style={styles.createAccountTxt}>
-            {' '}
             Already have account? Login
           </Text>
         </TouchableOpacity>
