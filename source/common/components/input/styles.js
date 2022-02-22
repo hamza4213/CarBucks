@@ -4,9 +4,14 @@ import {primary} from '../../constants/colors';
 export default StyleSheet.create({
   textInputContainer: {
     paddingHorizontal: 10,
-    borderRadius: 20,
+    borderRadius: 12,
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: '#fff',
+    shadowOffset: {width: 100, height: 50},
+    shadowColor: '#000',
+    shadowOpacity: 1,
+    elevation: 15,
   },
 
   container: {
