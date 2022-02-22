@@ -1,5 +1,11 @@
 import React from 'react';
-import {View, ScrollView, Text, ActivityIndicator} from 'react-native';
+import {
+  View,
+  ScrollView,
+  Text,
+  ActivityIndicator,
+  TouchableOpacity,
+} from 'react-native';
 import GradiantLogo from '../../../assets/svgs/gradiantLogo.svg';
 
 import {useState} from 'react';
@@ -14,7 +20,11 @@ import {
   useBlurOnFulfill,
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
-import {primaryDark, text} from '../../../common/constants/colors';
+import colors, {
+  primaryDark,
+  text,
+  primaryLight,
+} from '../../../common/constants/colors';
 import Button from '../../../common/components/button';
 import {verifyEmail} from '../../../redux/actions';
 import ShowToast from '../../../common/components/toast/simpleToast';
@@ -93,7 +103,10 @@ export default function EmailVerify() {
           style={styles.authBtn}
           textStyle={styles.authTxt}
         />
-
+        <View style={{height: 15}}></View>
+        <TouchableOpacity style={{alignSelf: 'center'}}>
+          <Text style={{color: primaryLight}}>Resend Verification OTP</Text>
+        </TouchableOpacity>
         {/* <Button
             disabled={value.length < 6}
             title={loader ? <ActivityIndicator color="red" /> : 'Verify'}
