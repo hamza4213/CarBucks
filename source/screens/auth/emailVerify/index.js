@@ -14,14 +14,14 @@ import {
   useBlurOnFulfill,
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
-import {primaryDark} from '../../../common/constants/colors';
+import {primaryDark, text} from '../../../common/constants/colors';
 import Button from '../../../common/components/button';
 import {verifyEmail} from '../../../redux/actions';
 import ShowToast from '../../../common/components/toast/simpleToast';
 import RatingButton from '../../../common/components/button/ratingButton';
 import Header from '../../../common/components/header';
-
-const CELL_COUNT = 6;
+import VerifyEmailIcon from '../../../assets/svgs/VerifyEmailSvg.svg';
+const CELL_COUNT = 4;
 export default function EmailVerify() {
   const params = useRoute().params;
   const [value, setValue] = useState('');
@@ -52,15 +52,20 @@ export default function EmailVerify() {
   return (
     <ScrollView style={styles.fullScreen}>
       <Header>
-        <Text style={styles.authTitle}>Verify Email</Text>
+        <Text style={styles.authTitle}>One Time Password</Text>
       </Header>
       {/* <ImageBackground source={authBackground} style={styles.container}> */}
       <View style={styles.contentContainer}>
         <View style={styles.logoContainer}>
-          <GradiantLogo />
+          <VerifyEmailIcon />
         </View>
         {/* <Text style={styles.heading}>Verify Email</Text> */}
-
+        <Text style={{alignSelf: 'center', fontSize: 18, color: text}}>
+          Please enter the verification code we sent to your email address
+        </Text>
+        <Text style={{fontWeight: '600', alignSelf: 'center'}}>
+          davidanderson@gmail.com
+        </Text>
         <View style={styles.codeInputWrapper}>
           <CodeField
             {...codeInputProps}
@@ -82,7 +87,7 @@ export default function EmailVerify() {
           />
         </View>
         <RatingButton
-          title={loader ? <ActivityIndicator color="red" /> : 'Verify'}
+          title={loader ? <ActivityIndicator color="red" /> : 'SUBMIT'}
           onPress={onSubmit}
           type="gradiant"
           style={styles.authBtn}
