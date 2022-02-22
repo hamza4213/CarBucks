@@ -21,7 +21,7 @@ import ShowToast from '../../../common/components/toast/simpleToast';
 import RatingButton from '../../../common/components/button/ratingButton';
 import Header from '../../../common/components/header';
 import VerifyEmailIcon from '../../../assets/svgs/VerifyEmailSvg.svg';
-const CELL_COUNT = 4;
+const CELL_COUNT = 6;
 export default function EmailVerify() {
   const params = useRoute().params;
   const [value, setValue] = useState('');

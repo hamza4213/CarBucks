@@ -70,14 +70,14 @@ export default StyleSheet.create({
   },
   codeInputWrapper: {
     alignSelf: 'center',
-    width: '80%',
+    width: '100%',
     marginTop: responsiveHeight(5),
     marginBottom: responsiveHeight(5),
   },
   codeFieldRoot: {},
   cell: {
-    width: responsiveWidth(15),
-    height: responsiveHeight(8),
+    width: responsiveWidth(12),
+    height: responsiveHeight(6),
     fontSize: responsiveFontSize(2),
     // borderWidth: StyleSheet.hairlineWidth,
     // borderColor: Colors.form,

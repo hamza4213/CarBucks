@@ -192,8 +192,8 @@ export default function Signup() {
                 countryCode,
                 withCountryNameButton: true,
                 withFilter: true,
-                withCallingCode: true,
-                withCallingCodeButton: true,
+                // withCallingCode: true,
+                // withCallingCodeButton: true,
                 withModal: true,
                 theme: {
                   backgroundColor: 'white',
@@ -216,7 +216,24 @@ export default function Signup() {
             placeholder="Phone here"
             RightIconActive={<PhoneRed />}
             RightIcon={<Phone />}
-            LeftIcon={<Text>{country ? country.callingCode : null}</Text>}
+            LeftIcon={
+              <CountryPicker
+                {...{
+                  countryCode,
+                  withFilter: true,
+                  withCallingCode: true,
+                  withCallingCodeButton: true,
+                  withModal: true,
+                  theme: {
+                    backgroundColor: 'white',
+                    onBackgroundTextColor: textDark,
+                    fontSize: 15,
+                  },
+
+                  onSelect,
+                }}
+              />
+            }
           />
           {/* <AuthInput
             placeholder="Phone"
