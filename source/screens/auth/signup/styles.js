@@ -1,5 +1,5 @@
 import {StyleSheet, Dimensions} from 'react-native';
-import {primary, primaryDark} from '../../../common/constants/colors';
+import {primary, primaryDark, text} from '../../../common/constants/colors';
 
 const {height, width} = Dimensions.get('window');
 
@@ -126,5 +126,18 @@ export default StyleSheet.create({
   },
   optionsDivider: {
     borderBottomWidth: 1,
+  },
+  CountryPicker: {
+    width: '100%',
+    // backgroundColor: 'teal',
+    height: 50,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 15,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: text,
+    marginBottom: 20,
   },
 });

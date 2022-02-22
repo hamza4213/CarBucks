@@ -14,8 +14,9 @@ import Whatsapp from '../../../assets/svgs/WhatsappIconSmall.svg';
 import DownIcon from '../../../assets/svgs/DownIconGreyColor.svg';
 import UpIcon from '../../../assets/svgs/UpIconGreyColor.svg';
 import colors, {text} from '../../constants/colors';
-const HearInput = () => {
+const HearInput = props => {
   const [show, setShow] = useState(false);
+  const {heared, setHeared} = props;
   const Data = [
     {title: 'Facebook', icon: <Facebook />},
     {title: 'Instagram', icon: <Instagram />},
@@ -26,19 +27,27 @@ const HearInput = () => {
   return (
     <>
       <TouchableOpacity onPress={() => setShow(!show)} style={styles.container}>
-        <Text style={{color: text}}>How did you hear About us</Text>
+        <Text style={{color: text}}>
+          {heared ? heared : 'How did you hear about us'}
+        </Text>
         {show ? <UpIcon /> : <DownIcon />}
       </TouchableOpacity>
       {show ? (
         <View style={styles.secondContainer}>
           {Data.map((item, index) => (
-            <TouchableOpacity style={styles.innertouch}>
+            <TouchableOpacity
+              onPress={() => {
+                setHeared(item.title), setShow(false);
+              }}
+              style={styles.innertouch}>
               {item.icon}
               <View style={{width: 20}}></View>
               <Text>{item.title}</Text>
             </TouchableOpacity>
           ))}
           <TextInput
+            //   onPress={() =>setHeared}
+            onChangeText={text => setHeared(text)}
             placeholderTextColor={text}
             placeholder={'Other'}
             style={styles.input}
@@ -92,6 +101,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     borderColor: text,
+    color: text,
     paddingHorizontal: 10,
   },
 });

@@ -46,23 +46,25 @@ export default function Signup() {
   // const [email, setEmail] = useState('');
   // const [phone, setPhone] = useState('');
   const [loader, setLoader] = useState(null);
-  // const [country, setCountry] = useState('Pakistan');
+  const [country, setCountry] = useState(null);
   // const [password, setPassword] = useState('');
   const [userdata, setUserdata] = useState({});
+  const [heared, setHeared] = useState();
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [show, setShow] = useState(false);
   const [show2, setShow2] = useState(false);
   const [promoCode, setPromoCode] = useState(null);
-
   const [countryCode, setCountryCode] = useState('PK');
 
   const onSelect = country => {
-    setCountry(country.name);
+    console.log('countyr', country);
+    setCountry(country);
     setCountryCode(country.cca2);
   };
 
   const onSubmit = () => {
     console.log('userData', userdata);
+    console.log('Heared', heared);
     // setLoader(true);
     // const data = {
     //   firstName,
@@ -184,9 +186,27 @@ export default function Signup() {
             style={styles.inputStyle}
             keyboardType="email-address"
           /> */}
+          <View style={styles.CountryPicker}>
+            <CountryPicker
+              {...{
+                countryCode,
+                withCountryNameButton: true,
+                withFilter: true,
+                withCallingCode: true,
+                withCallingCodeButton: true,
+                withModal: true,
+                theme: {
+                  backgroundColor: 'white',
+                  onBackgroundTextColor: textDark,
+                  fontSize: 15,
+                },
+                onSelect,
+              }}
+            />
+          </View>
           <TextInputSignup
             placeholder="Phone"
-            maxLength={15}
+            maxLength={10}
             // value={phone}
             onChangeText={setUserdata}
             state={userdata}
@@ -196,6 +216,7 @@ export default function Signup() {
             placeholder="Phone here"
             RightIconActive={<PhoneRed />}
             RightIcon={<Phone />}
+            LeftIcon={<Text>{country ? country.callingCode : null}</Text>}
           />
           {/* <AuthInput
             placeholder="Phone"
@@ -225,7 +246,7 @@ export default function Signup() {
             keyboardType="phone-pad"
             placeholder="Phone here"
           /> */}
-          <HearInput />
+          <HearInput heared={heared} setHeared={setHeared} />
           <TextInputSignup
             placeholder="Password"
             // value={password}

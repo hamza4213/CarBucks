@@ -9,6 +9,7 @@ const TextInputSignup = props => {
     style,
     RightIcon,
     RightIconActive,
+    LeftIcon,
     inputType,
     phone,
     name,
@@ -20,6 +21,7 @@ const TextInputSignup = props => {
   };
   return (
     <View style={styles.container}>
+      {LeftIcon ? LeftIcon : null}
       <TextInput
         onChangeText={text => setText(text)}
         placeholder={placeholder}
@@ -41,7 +43,6 @@ const styles = StyleSheet.create({
     // backgroundColor: 'teal',
     height: 50,
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 15,
     borderRadius: 10,
