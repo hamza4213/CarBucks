@@ -9,23 +9,27 @@ const HorizontalServiceDetails = props => {
   const FileCaetagories = [
     'Services',
     'Accessories',
-    'Products',
     'RentCar',
     'BuyCar',
     'Insurance',
   ];
-  useEffect(() => {
-    setActiveTab(activeTab);
-  }, [activeTab]);
-
   const onCategoryPress = useCallback(
     item => {
+      console.log('item in onCatoagry press', item);
       if (item === 'BuyCar' || item === 'RentCar') {
-        setActiveTab(item);
-        console.log('activeTabis', activeTab);
+        const setstatefunction = async item => {
+          console.log('item in function ', item);
+          await setActiveTab(item);
+        };
+        setstatefunction(item);
+        console.log('active Tab is', activeTab);
         navigation.navigate(item);
       } else {
-        setActiveTab(item);
+        const setstatefunction = async item => {
+          console.log('item in function ', item);
+          await setActiveTab(item);
+        };
+        setstatefunction(item);
         navigation.navigate('Home');
         console.log('activeTabis', activeTab);
       }

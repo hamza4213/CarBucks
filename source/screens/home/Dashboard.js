@@ -23,6 +23,7 @@ import NotificationWhite from '../../assets/svgs/notificationWhite.svg';
 import Button from '../../common/components/button';
 import AccessoryCard from '../../common/components/cards/accessoryCard';
 import AccessoriesComponent from '../../common/components/cards/accessoryCard/AccessoriesComponent';
+import AccessorySearchResults from '../../common/components/cards/accessoryCard/AccessorySearchResults';
 import InsuranceComponent from '../../common/components/InsuranceComponent/InsuranceComponent';
 import LatoText from '../../common/components/LatoText';
 import LinearGradientWrapper from '../../common/components/LinearGradientWrapper';
@@ -60,6 +61,7 @@ export default function Home() {
   const {promotions} = useSelector(state => state.promotions);
   const {t, i18n} = useTranslation();
   const [activeTab = 'Services', setActiveTab] = useState();
+  const [search, setSearch] = useState(null);
   const pickerItems = [
     {label: 'Stuck In acc', value: 'stuck-in-traffic'},
     {label: 'Vehicle Crashed', value: 'vehicle-crashed'},
@@ -141,7 +143,7 @@ export default function Home() {
       </LinearGradient>
 
       <View style={[styles.contentContainer]}>
-        <SearchInput />
+        <SearchInput search={search} setSearch={setSearch} />
 
         <HorizontalServiceDetails
           activeTab={activeTab}
@@ -151,6 +153,8 @@ export default function Home() {
           <LatoText padding={10} />
           {activeTab === 'Insurance' ? (
             <InsuranceComponent />
+          ) : activeTab === 'Accessories' && search ? (
+            <AccessorySearchResults search={search} />
           ) : activeTab === 'Accessories' ? (
             <AccessoriesComponent />
           ) : activeTab === 'Products' ? (

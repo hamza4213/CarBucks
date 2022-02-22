@@ -5,7 +5,7 @@ import Search from '../../../assets/svgs/searchGradiant.svg';
 import CardView from 'react-native-cardview';
 import {useTranslation} from 'react-i18next';
 import colors, {text} from '../../constants/colors';
-export default function SearchInput({small}) {
+export default function SearchInput({small, search, setSearch}) {
   const {t} = useTranslation();
   return (
     <CardView
@@ -18,6 +18,7 @@ export default function SearchInput({small}) {
         style={styles.input}
         color={text}
         placeholderTextColor={text}
+        onChangeText={text => setSearch(text)}
       />
       <Search style={styles.searchIcon} />
     </CardView>

@@ -55,7 +55,7 @@ const fuelTypes = [
 
 export default function RentCar() {
   const dispatch = useDispatch();
-  const [activeTab, setActiveTab] = useState('RentCar');
+  const [activeTab, setActiveTab] = useState('BuyCar');
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [openYear, setOpenYear] = useState(false);
@@ -179,6 +179,13 @@ export default function RentCar() {
   const handleMilageChange = useCallback((low, high) => {
     setLowMilage(low);
     setHighMilage(high);
+  }, []);
+  useEffect(() => {
+    return () => {
+      console.log('Buy Car Return of useEffect');
+      setActiveTab(activeTab);
+      console.log(activeTab);
+    };
   }, []);
 
   return (

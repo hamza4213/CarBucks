@@ -55,7 +55,7 @@ const fuelTypes = [
 
 export default function RentCar() {
   const dispatch = useDispatch();
-  const [activeTab, setActiveTab] = useState('RentCar');
+  const [activetab, setActivetab] = useState('RentCar');
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [openYear, setOpenYear] = useState(false);
@@ -188,8 +188,8 @@ export default function RentCar() {
         style={styles.ScrollView}
         showsVerticalScrollIndicator={false}>
         <HorizontalServiceDetails
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
+          activeTab={activetab}
+          setActiveTab={setActivetab}
         />
         <View style={{height: 30}}></View>
         <View

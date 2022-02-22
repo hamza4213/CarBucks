@@ -35,17 +35,14 @@ const connectSocket = () => {
   return new Promise(resolve => {
     socket.on('connect', () => {
       resolve(socket);
-      
     });
 
     socket.on('disconnect', e => {
       // On connection end
-      
     });
 
     socket.on('connect_error', e => {
       // on error
-      
     });
   });
 };
@@ -83,7 +80,6 @@ export default function Navigation() {
 
     socketChannel.onAny((event, ...args) => {
       handler(event, args);
-
     });
 
     return () => {
@@ -103,5 +99,5 @@ export default function Navigation() {
     return <Splash setLoading={setLoading} />;
   }
 
-  return isAuth ? <DrawerApp /> : <Auth />;
+  return isAuth ? <Auth /> : <DrawerApp />;
 }
