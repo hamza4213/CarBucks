@@ -28,7 +28,7 @@ import InsuranceComponent from '../../common/components/InsuranceComponent/Insur
 import LatoText from '../../common/components/LatoText';
 import LinearGradientWrapper from '../../common/components/LinearGradientWrapper';
 import SearchInput from '../../common/components/searchInput';
-import {primaryDark, primaryLight} from '../../common/constants/colors';
+import {primaryDark, primaryLight, text} from '../../common/constants/colors';
 import {
   getCategories,
   getPromotions,
@@ -41,7 +41,9 @@ import HorizontalServiceDetails from './HorizontalServiceDetails';
 import ProductsCatagories from './Products';
 import ServicesCatagories from './Services';
 import styles from './style';
-
+import BellIcon from '../../assets/svgs/WhiteBell.svg';
+import SearchWhite from '../../assets/svgs/searchWhite.svg';
+import Cross from '../../assets/svgs/cross.svg';
 const catagories = [
   {title: 'Services', screen: 'ServicesCatagories', available: 60},
   {title: 'Accessories', screen: 'ProductsCatagories', available: 635},
@@ -62,6 +64,7 @@ export default function Home() {
   const {t, i18n} = useTranslation();
   const [activeTab = 'Services', setActiveTab] = useState();
   const [search, setSearch] = useState(null);
+  const [topsearchbar, setTopsearchbar] = useState(null);
   const pickerItems = [
     {label: 'Stuck In acc', value: 'stuck-in-traffic'},
     {label: 'Vehicle Crashed', value: 'vehicle-crashed'},
@@ -122,22 +125,53 @@ export default function Home() {
         <View style={styles.headerContent}>
           <Menu onPress={() => navigation.toggleDrawer()} />
           <View style={styles.emergencyContainer}>
-            <Button
-              bgColor="white"
-              color={primaryDark}
-              containerStyle={{height: 40}}
-              style={styles.emergencyButton}
-              title={t('emergency')}
-              onPress={() => setModalVisible(!modalVisible)}
-            />
-            <TouchableOpacity
-              style={styles.notificationWrapper}
-              onPress={() => navigation.navigate('Notifcations')}>
-              <NotificationWhite style={styles.notificationIcon} />
-              <View style={styles.badge}>
-                <Text style={styles.badgeTxt}>3</Text>
+            {topsearchbar ? (
+              <View
+                style={{
+                  flexDirection: 'row',
+                  width: '100%',
+                  justifyContent: 'space-evenly',
+                  alignItems: 'center',
+                }}>
+                <TextInput
+                  style={{
+                    backgroundColor: 'white',
+                    width: '80%',
+                    borderRadius: 10,
+                    paddingHorizontal: 15,
+                  }}
+                  placeholderTextColor={text}
+                  placeholder={'Search Here'}
+                  color={text}
+                />
+                <TouchableOpacity
+                  onPress={() => setTopsearchbar(null)}
+                  style={{
+                    backgroundColor: '#fff',
+                    height: 30,
+                    width: 30,
+                    borderRadius: 10,
+                  }}>
+                  <Cross />
+                </TouchableOpacity>
               </View>
-            </TouchableOpacity>
+            ) : (
+              <>
+                <TouchableOpacity
+                  style={styles.notificationWrapper}
+                  onPress={() => navigation.navigate('Notifcations')}>
+                  <BellIcon />
+                  <View style={styles.badge}>
+                    <Text style={styles.badgeTxt}>3</Text>
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.notificationWrapper}
+                  onPress={() => setTopsearchbar('text')}>
+                  <SearchWhite />
+                </TouchableOpacity>
+              </>
+            )}
           </View>
         </View>
       </LinearGradient>
