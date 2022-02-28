@@ -42,7 +42,15 @@ export default function Signup() {
   const dispatch = useDispatch();
   const [isChecked, setChecked] = useState(false);
   const [loader, setLoader] = useState(null);
-  const [country, setCountry] = useState(null);
+  const [country, setCountry] = useState({
+    callingCode: ['92'],
+    cca2: 'PK',
+    currency: ['PKR'],
+    flag: 'flag-pk',
+    name: 'Pakistan',
+    region: 'Asia',
+    subregion: 'Southern Asia',
+  });
   const [userdata, setUserdata] = useState({});
   const [heared, setHeared] = useState();
   const [show, setShow] = useState(false);
@@ -60,7 +68,7 @@ export default function Signup() {
     console.log('Heared', heared);
     console.log('country on submitt', country);
     setLoader(true);
-    const data = {...userdata};
+    const data = {...userdata, country: country.name, invite: heared};
     if (isVerified(data)) {
       if (isChecked) {
         dispatch(register({...data}, stopLoader));
