@@ -1,13 +1,14 @@
-import { AuthApi } from '../apis';
+import {AuthApi} from '../apis';
 import showToast from '../../common/components/toast/simpleToast';
 import * as constants from '../ActionTypes';
 const authApi = new AuthApi();
 
 export const register = (data, cb) => async dispatch => {
+  console.log('Data at signup is ', data);
+
   try {
     const res = await authApi.register(data);
-
-    const { status } = res.data;
+    const {status} = res.data;
 
     if (status === 'success') {
       const res = await authApi.sendEmailVerify(data?.email);
@@ -38,11 +39,11 @@ export const sendVerficationCode = (email, cb) => async dispatch => {
 export const login = (data, stopLoader) => async dispatch => {
   try {
     const res = await authApi.login(data);
-    
+
     if (res?.data?.status === 'success') {
       dispatch({
         type: constants.LOGIN,
-        payload: { user: res?.data?.data?.user, token: res?.data?.token },
+        payload: {user: res?.data?.data?.user, token: res?.data?.token},
       });
     } else {
       showToast(res?.data?.message || 'Something went wrong on server.');
@@ -50,12 +51,12 @@ export const login = (data, stopLoader) => async dispatch => {
   } catch (error) {
     showToast(error.response?.data?.message || error.message);
   }
-  stopLoader()
+  stopLoader();
 };
 
 export const forgetPassword = (email, cb) => async dispatch => {
   try {
-    const res = await authApi.forgetPassword({ data: email });
+    const res = await authApi.forgetPassword({data: email});
 
     cb?.(res.data.status === 'success' ? true : false);
   } catch (error) {
@@ -68,7 +69,7 @@ export const updatePassword = (data, cb) => async dispatch => {
   try {
     const res = await authApi.updatePassword(data);
     cb?.(res.data.status === 'success' ? true : false);
-    dispatch({ type: constants.UPDATE_PASSWORD, payload: res?.data?.token });
+    dispatch({type: constants.UPDATE_PASSWORD, payload: res?.data?.token});
   } catch (error) {
     cb?.(false);
     showToast(error.response?.data?.message || error.message);
@@ -77,15 +78,13 @@ export const updatePassword = (data, cb) => async dispatch => {
 
 export const editProfile = (data, stopLoader) => async dispatch => {
   try {
- 
     const res = await authApi.editProfile(data);
-    
+
     if (res.data.status === 'success') {
-      dispatch({ type: constants.UPDATE_PROFILE, payload: res?.data?.result });
+      dispatch({type: constants.UPDATE_PROFILE, payload: res?.data?.result});
       stopLoader(true);
     }
   } catch (error) {
-    
     showToast(error.response?.data?.message || error.message);
   }
 };
@@ -102,7 +101,7 @@ export const verifyEmail = (email, token, cb) => async dispatch => {
 };
 export const logout = () => async dispatch => {
   try {
-    dispatch({ type: constants.LOGOUT });
+    dispatch({type: constants.LOGOUT});
   } catch (error) {
     showToast(error.response?.data?.message || error.message);
   }
@@ -121,10 +120,9 @@ export const resetPassword = (data, token, cb) => async dispatch => {
 export const getCurrentUser = cb => async dispatch => {
   try {
     const res = await authApi.currentUser();
-    dispatch({ type: constants.FETCH_USER, payload: res?.data?.result });
+    dispatch({type: constants.FETCH_USER, payload: res?.data?.result});
     cb(false);
   } catch (error) {
     cb(false);
-
   }
 };

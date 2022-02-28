@@ -41,21 +41,14 @@ export default function Signup() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [isChecked, setChecked] = useState(false);
-  // const [firstName, setFirstName] = useState('');
-  // const [lastName, setLastName] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [phone, setPhone] = useState('');
   const [loader, setLoader] = useState(null);
   const [country, setCountry] = useState(null);
-  // const [password, setPassword] = useState('');
   const [userdata, setUserdata] = useState({});
   const [heared, setHeared] = useState();
-  const [passwordConfirm, setPasswordConfirm] = useState('');
   const [show, setShow] = useState(false);
   const [show2, setShow2] = useState(false);
   const [promoCode, setPromoCode] = useState(null);
   const [countryCode, setCountryCode] = useState('PK');
-
   const onSelect = country => {
     console.log('countyr', country);
     setCountry(country);
@@ -65,27 +58,19 @@ export default function Signup() {
   const onSubmit = () => {
     console.log('userData', userdata);
     console.log('Heared', heared);
-    // setLoader(true);
-    // const data = {
-    //   firstName,
-    //   lastName,
-    //   email,
-    //   phone,
-    //   password,
-    //   passwordConfirm,
-    //   country,
-    // };
-
-    // if (isVerified(data)) {
-    //   if (isChecked) {
-    //     dispatch(register({...data, promoCode}, stopLoader));
-    //   } else {
-    //     ShowToast(`Please Confirm Term and Conditions!`);
-    //     stopLoader();
-    //   }
-    // } else {
-    //   stopLoader();
-    // }
+    console.log('country on submitt', country);
+    setLoader(true);
+    const data = {...userdata};
+    if (isVerified(data)) {
+      if (isChecked) {
+        dispatch(register({...data}, stopLoader));
+      } else {
+        ShowToast(`Please Confirm Term and Conditions!`);
+        stopLoader();
+      }
+    } else {
+      stopLoader();
+    }
   };
   const stopLoader = isSend => {
     setLoader(false);
@@ -95,25 +80,60 @@ export default function Signup() {
     }
   };
   const isVerified = data => {
-    return Object.keys(data).every(key => {
-      if (data[key] === '' || data[key] === null) {
-        ShowToast(`${key} required!`);
+    if (data.hasOwnProperty('firstName')) {
+      if (data.hasOwnProperty('lastName')) {
+        if (data.hasOwnProperty('email')) {
+          let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+          if (data.email.match(regexEmail)) {
+            if (data.hasOwnProperty('phone') && data.phone.length === 10) {
+              if (heared != undefined) {
+                if (data.hasOwnProperty('password')) {
+                  if (data.password.length >= 8) {
+                    if (data.hasOwnProperty('passwordConfirm')) {
+                      if (data.passwordConfirm.length >= 8) {
+                        if (data.password != data.passwordConfirm) {
+                          ShowToast(
+                            `Password and confirm password doesn't match`,
+                          );
+                        } else {
+                          return true;
+                        }
+                      } else {
+                        ShowToast(`Confirm Password must be 8 characters!`);
+                      }
+                    } else {
+                      ShowToast(`Enter Confirm Password!`);
+                    }
+                  } else {
+                    ShowToast(`Password must be 8 characters!`);
+                  }
+                } else {
+                  ShowToast(`Enter Password`);
+                  return false;
+                }
+              } else {
+                ShowToast(`Please Choose How did you hear about us!`);
+              }
+            } else {
+              ShowToast(`Enter a valid Phone`);
+              return false;
+            }
+          } else {
+            ShowToast(`Enter Valid Email!`);
+            return false;
+          }
+        } else {
+          ShowToast(`Email required!`);
+          return false;
+        }
+      } else {
+        ShowToast(`Enter last Name!`);
         return false;
       }
-      if (key === 'password' && data[key].length < 8) {
-        ShowToast(`${key} must be 8 characters!`);
-        return false;
-      }
-      if (
-        key === 'email' &&
-        data[key].length > 0 &&
-        !validateEmail(data[key])
-      ) {
-        ShowToast(`${key} invalid!`);
-        return false;
-      }
-      return true;
-    });
+    } else {
+      ShowToast(`Enter First Name!`);
+      return false;
+    }
   };
 
   return (
@@ -295,6 +315,37 @@ export default function Signup() {
               )
             }
           />
+          <TextInputSignup
+            placeholder="Confirm Password"
+            // value={password}
+            style={styles.inputStyle}
+            onChangeText={setUserdata}
+            state={userdata}
+            name="passwordConfirm"
+            inputType={show2 ? 'text' : 'password'}
+            RightIcon={
+              show2 ? (
+                <TouchableOpacity onPress={() => setShow2(prev => !prev)}>
+                  <HidePassword />
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity onPress={() => setShow2(prev => !prev)}>
+                  <SeePassword />
+                </TouchableOpacity>
+              )
+            }
+            RightIconActive={
+              show2 ? (
+                <TouchableOpacity onPress={() => setShow2(prev => !prev)}>
+                  <HidePasswordActive />
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity onPress={() => setShow2(prev => !prev)}>
+                  <SeePasswordActive />
+                </TouchableOpacity>
+              )
+            }
+          />
           {/* <AuthInput
             placeholder="Confirm Password"
             style={styles.inputStyle}
@@ -334,14 +385,15 @@ export default function Signup() {
             keyboardType="default"
           /> */}
         </View>
-        {/* <View style={styles.termsAndConditionsTextWrapper}>
+        <View style={styles.termsAndConditionsTextWrapper}>
           <Checkbox isChecked={isChecked} setChecked={setChecked} />
 
           <Text style={styles.yesIAgree}>Yes ! Agree all </Text>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('TermsAndConditions')}>
             <Text style={styles.termsAndConditions}>Terms & Conditions</Text>
           </TouchableOpacity>
-        </View> */}
+        </View>
         <RatingButton
           textStyle={styles.authTxt}
           title={loader ? <ActivityIndicator color="white" /> : 'Register'}

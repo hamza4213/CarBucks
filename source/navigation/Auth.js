@@ -6,6 +6,7 @@ import Signup from '../screens/auth/signup';
 import VerifyEmail from '../screens/auth/emailVerify';
 import ForgetPassword from '../screens/auth/forgetPassword';
 import NewPassword from '../screens/auth/newPassword';
+import TermsAndConditions from '../screens/termsAndConditions';
 
 export default function Auth() {
   const AuthStack = createNativeStackNavigator();
@@ -20,6 +21,10 @@ export default function Auth() {
       <AuthStack.Screen name="emailVerify" component={VerifyEmail} />
       <AuthStack.Screen name="forgetPassword" component={ForgetPassword} />
       <AuthStack.Screen name="newPassword" component={NewPassword} />
+      <AuthStack.Screen
+        name="TermsAndConditions"
+        component={TermsAndConditions}
+      />
     </AuthStack.Navigator>
   );
 }

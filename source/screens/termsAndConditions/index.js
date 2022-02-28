@@ -10,13 +10,13 @@ export default function TermsAndConditions() {
   // const [tAndC, setTAndC] = useState('');
   const dispatch = useDispatch();
   const {tAndC} = useSelector(state => state.tAndC);
-  console.log('tAndC:', tAndC[0]);
+  // console.log('tAndC:', tAndC[0]);
   useEffect(() => {
     dispatch(getTermsAndConditions(() => {}));
   }, []);
   return (
     <View>
-      <Header menu title="Terms & Conditions" style={styles.header} />
+      <Header title="Terms & Conditions" style={styles.header} />
       <ScrollView style={styles.contentContainer}>
         {/* {t_c.map((item, index) => ( */}
         <TermsSection item={tAndC[0]} />

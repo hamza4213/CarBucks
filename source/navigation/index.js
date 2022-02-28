@@ -99,5 +99,5 @@ export default function Navigation() {
     return <Splash setLoading={setLoading} />;
   }
 
-  return isAuth ? <Auth /> : <DrawerApp />;
+  return isAuth ? <DrawerApp /> : <Auth />;
 }
