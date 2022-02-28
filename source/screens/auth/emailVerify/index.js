@@ -59,6 +59,9 @@ export default function EmailVerify() {
       navigation.navigate('Login');
     }
   };
+  const resendToken = () => {
+    dispatch(sendVerficationCode(params?.email));
+  };
   return (
     <ScrollView style={styles.fullScreen}>
       <Header>
@@ -74,7 +77,7 @@ export default function EmailVerify() {
           Please enter the verification code we sent to your email address
         </Text>
         <Text style={{fontWeight: '600', alignSelf: 'center'}}>
-          davidanderson@gmail.com
+          {params?.email}
         </Text>
         <View style={styles.codeInputWrapper}>
           <CodeField
@@ -104,7 +107,9 @@ export default function EmailVerify() {
           textStyle={styles.authTxt}
         />
         <View style={{height: 15}}></View>
-        <TouchableOpacity style={{alignSelf: 'center'}}>
+        <TouchableOpacity
+          onPress={() => resendToken()}
+          style={{alignSelf: 'center'}}>
           <Text style={{color: primaryLight}}>Resend Verification OTP</Text>
         </TouchableOpacity>
         {/* <Button
