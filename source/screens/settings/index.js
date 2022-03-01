@@ -6,12 +6,14 @@ import styles from './styles';
 import DownArrowRed from '../../assets/svgs/downArrowRed.svg';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {t} from 'i18next';
-import {useTranslation} from 'react-i18next';
+import {useTranslation, I18nextProvider} from 'react-i18next';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
+// import {withTranslation} from 'react-i18next';
+import i18n from '../../../languages/i18n';
 
 const Settings = () => {
-  const {t, i18n} = useTranslation();
+  const {t} = useTranslation();
   const navigation = useNavigation();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
@@ -42,8 +44,8 @@ const Settings = () => {
               setItems={setItems}
               placeholder={t('languages')}
               onChangeValue={language => {
-                // changeLanguage(language);
-                console.log(language);
+                i18n.changeLanguage(language);
+                // console.log(language);
               }}
               style={{
                 borderWidth: 0,
