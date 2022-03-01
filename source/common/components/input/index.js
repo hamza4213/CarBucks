@@ -6,9 +6,12 @@ import EyeOnW from '../../../assets/svgs/showPasswordWhite.svg';
 
 import EyeOff from '../../../assets/svgs/hidePassword.svg';
 import EyeOffW from '../../../assets/svgs/hidePasswordWhite.svg';
-import {placeholder as colorA, placeholderBlack} from '../../constants/colors';
+import colors, {
+  placeholder as colorA,
+  placeholderBlack,
+  text,
+} from '../../constants/colors';
 import {useState} from 'react';
-
 export default function Input({
   type,
   label,
@@ -42,11 +45,13 @@ export default function Input({
         onChange={onChange}
         value={value}
         onChangeText={onChangeText}
+        placeholderTextColor={text}
+        color={text}
         placeholder={placeholder || ''}
         keyboardType={keyboardType || 'default'}
         secureTextEntry={inputType === 'password' ? show : false}
-        placeholderTextColor={type === 'a' ? placeholderBlack : colorA}
-        style={[{color: type === 'b' ? 'white' : ''}, {...inputStyle}]}
+        // placeholderTextColor={type === 'a' ? placeholderBlack : colorA}
+        style={[{...inputStyle}]}
         {...rest}
       />
 

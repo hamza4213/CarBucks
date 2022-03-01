@@ -4,10 +4,11 @@ import * as constants from '../ActionTypes';
 const authApi = new AuthApi();
 
 export const register = (data, cb) => async dispatch => {
-  console.log('Data at signup is ', data);
+  console.log('Data at Register APi is ', data);
 
   try {
     const res = await authApi.register(data);
+    console.log('response');
     const {status} = res.data;
 
     if (status === 'success') {

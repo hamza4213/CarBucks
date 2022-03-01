@@ -83,8 +83,11 @@ export default function Home() {
   const loadInitialData = async () => {
     let res = await dispatch(getCategories());
     // if (!!res?.length) onCategoryPress(res[0]);
-    dispatch(getSubCategoryById());
-    dispatch(getPromotions());
+    console.log('RESPONSE AT DASHBOARD', res);
+    let subCategories = await dispatch(getSubCategoryById());
+    console.log('SUB CAETAGORIES BY ID ', subCategories);
+    let promotions = await dispatch(getPromotions());
+    console.log('Promotions', promotions);
   };
 
   const getImage = () => {

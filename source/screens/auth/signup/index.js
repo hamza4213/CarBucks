@@ -58,18 +58,23 @@ export default function Signup() {
   const [promoCode, setPromoCode] = useState(null);
   const [countryCode, setCountryCode] = useState('PK');
   const onSelect = country => {
-    console.log('countyr', country);
+    if (userdata.hasOwnProperty('phone')) {
+      setUserdata({...userdata, phone: ''});
+    }
+    console.log('country', country);
     setCountry(country);
     setCountryCode(country.cca2);
   };
 
   const onSubmit = () => {
-    console.log('userData', userdata);
-    console.log('Heared', heared);
-    console.log('country on submitt', country);
+    // console.log('userData', userdata);
+    // console.log('Heared', heared);
+    // console.log('country on submitt', country);
     setLoader(true);
-    const data = {...userdata, country: country.name, invite: heared};
+    const data = {...userdata, country: country.name};
+    console.log('UserData is ', data);
     if (isVerified(data)) {
+      console.log('verified');
       if (isChecked) {
         dispatch(register({...data}, stopLoader));
       } else {
@@ -93,7 +98,7 @@ export default function Signup() {
         if (data.hasOwnProperty('email')) {
           let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
           if (data.email.match(regexEmail)) {
-            if (data.hasOwnProperty('phone') && data.phone.length === 10) {
+            if (data.hasOwnProperty('phone') && data.phone.length > 10) {
               if (heared != undefined) {
                 if (data.hasOwnProperty('password')) {
                   if (data.password.length >= 8) {
@@ -233,9 +238,9 @@ export default function Signup() {
             />
           </View>
           <TextInputSignup
-            placeholder="Phone"
             maxLength={10}
-            // value={phone}
+            // value={usphone}
+            callingCode={country.callingCode}
             onChangeText={setUserdata}
             state={userdata}
             name="phone"

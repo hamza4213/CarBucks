@@ -9,6 +9,7 @@ const TextInputSignup = props => {
     style,
     RightIcon,
     RightIconActive,
+    callingCode,
     LeftIcon,
     inputType,
     phone,
@@ -17,7 +18,10 @@ const TextInputSignup = props => {
   } = props;
   const [active, setActive] = useState(false);
   const setText = text => {
-    onChangeText({...state, [name]: text});
+    onChangeText({
+      ...state,
+      [name]: callingCode ? '+' + callingCode + text : text,
+    });
   };
   return (
     <View style={styles.container}>
