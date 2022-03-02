@@ -77,7 +77,7 @@ export default function Home() {
 
   useEffect(() => {
     loadInitialData();
-    // console.log('caetagories', categories);
+    console.log('caetagories', categories);
   }, []);
 
   const loadInitialData = async () => {
