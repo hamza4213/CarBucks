@@ -43,7 +43,8 @@ export default function NewPassword() {
   const stopLoader = isSend => {
     setLoader(false);
     if (isSend) {
-      ShowToast(`Reset Email Successfully Send!`);
+      ShowToast(`Please Login again`);
+      navigation.navigate('Login');
     }
   };
 

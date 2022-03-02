@@ -4,18 +4,18 @@ import * as constants from '../ActionTypes';
 const authApi = new AuthApi();
 
 export const register = (data, cb) => async dispatch => {
-  console.log('Data at Register APi is ', data);
+  // console.log('Data at Register APi is ', data);
 
   try {
     const res = await authApi.register(data);
-    console.log('response', res.data);
+    // console.log('response', res.data);
     const status = res.data.status;
-    console.log('Status is ', status);
+    // console.log('Status is ', status);
     if (status === 'success') {
-      console.log('Say hi');
-      console.log('Email is ', res.data.result.email);
+      // console.log('Say hi');
+      // console.log('Email is ', res.data.result.email);
       const response = await authApi.sendEmailVerify(res.data.result.email);
-      console.log('Response from send verify token', response.data);
+      // console.log('Response from send verify token', response.data);
       cb?.(response.data.status === 'success' ? true : false);
     }
 
