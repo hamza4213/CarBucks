@@ -125,7 +125,7 @@ export default function Drawer() {
     {
       icon: UsersIcon,
       activeIcon: RatingWhite,
-      text: t('invite screen'),
+      text: t('friendsInvited'),
       route: 'invitescreen',
     },
     {

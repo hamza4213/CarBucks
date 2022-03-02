@@ -23,7 +23,7 @@ const Settings = () => {
   ]);
   return (
     <ScrollView>
-      <Header small title="Settings" />
+      <Header small title={t('settings')} />
       <View style={styles.contentContainer}>
         <Text style={styles.heading}>Account Settings</Text>
         <CardView

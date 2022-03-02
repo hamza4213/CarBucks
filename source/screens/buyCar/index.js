@@ -190,7 +190,7 @@ export default function RentCar() {
 
   return (
     <View>
-      <Header small title={'Buy Car'} menu />
+      <Header small title={t('buyACar')} menu />
       <ScrollView
         style={styles.ScrollView}
         showsVerticalScrollIndicator={false}>

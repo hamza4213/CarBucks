@@ -3,8 +3,10 @@ import React, {useState, useCallback, useEffect} from 'react';
 import LinearGradientWrapper from '../../common/components/LinearGradientWrapper';
 import styles from './style';
 import {useNavigation} from '@react-navigation/native';
+import {useTranslation, I18nextProvider} from 'react-i18next';
 const HorizontalServiceDetails = props => {
   const {activeTab, setActiveTab} = props;
+  const {t} = useTranslation();
   const navigation = useNavigation();
   const FileCaetagories = [
     'Services',
