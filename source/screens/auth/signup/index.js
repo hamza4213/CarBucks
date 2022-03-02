@@ -89,7 +89,7 @@ export default function Signup() {
     setLoader(false);
 
     if (isSend) {
-      navigation.navigate('emailVerify', {email: data.email});
+      navigation.navigate('emailVerify', {email: userdata.email});
     }
   };
   const isVerified = data => {

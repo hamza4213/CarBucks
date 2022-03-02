@@ -8,18 +8,21 @@ export const register = (data, cb) => async dispatch => {
 
   try {
     const res = await authApi.register(data);
-    console.log('response');
-    const {status} = res.data;
-
+    console.log('response', res.data);
+    const status = res.data.status;
+    console.log('Status is ', status);
     if (status === 'success') {
-      const res = await authApi.sendEmailVerify(data?.email);
-
-      cb?.(res.data?.status === 'success' ? true : false);
+      console.log('Say hi');
+      console.log('Email is ', res.data.result.email);
+      const response = await authApi.sendEmailVerify(res.data.result.email);
+      console.log('Response from send verify token', response.data);
+      cb?.(response.data.status === 'success' ? true : false);
     }
 
     cb?.(null);
   } catch (error) {
     cb?.(null);
+    console.log('Error', error);
     showToast(error.response?.data?.message || error.message);
   }
 };
